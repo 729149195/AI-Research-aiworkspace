@@ -1,0 +1,12 @@
+{
+  "target": "729149195/AI-Research-aiworkspace",
+  "repository_created_by": "owner",
+  "source": "standalone framework snapshot; no other application history imported",
+  "old_repository_modified": false,
+  "local_tests_passed": 77,
+  "fresh_wheel_install": true,
+  "synthetic_demo_passed": true,
+  "current_and_legacy_update_scenarios": "passed",
+  "github_ci": "Not verified as passing. Inspect Actions for the exact delivered commit.",
+  "live_model_evaluation": "not_run"
+}

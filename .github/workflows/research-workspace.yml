@@ -1,0 +1,74 @@
+name: Research Workspace
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'aiworkspace/**'
+      - 'update_aiworkspace.py'
+      - 'README.md'
+      - '.github/workflows/research-workspace.yml'
+  pull_request:
+    paths:
+      - 'aiworkspace/**'
+      - 'update_aiworkspace.py'
+      - 'README.md'
+      - '.github/workflows/research-workspace.yml'
+permissions:
+  contents: read
+concurrency:
+  group: research-workspace-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ['3.11', '3.13']
+    defaults:
+      run:
+        working-directory: aiworkspace
+        shell: bash
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Install build tools and package
+        run: |
+          python -m pip install --upgrade pip setuptools wheel
+          python -m pip install --no-deps --no-build-isolation -e .
+          mkdir -p "$RUNNER_TEMP/verification"
+      - name: Compile and validate Skill contracts
+        run: |
+          python -m compileall -q research_workspace scripts
+          rw doctor | tee "$RUNNER_TEMP/verification/doctor.json"
+      - name: Regression tests
+        run: python scripts/run_tests.py --output "$RUNNER_TEMP/verification/unit-tests.json"
+      - name: Used-study Git update and rollback
+        run: python scripts/smoke_root_update.py | tee "$RUNNER_TEMP/verification/git-update-install.json"
+      - name: Build distributable wheel
+        run: python -m pip wheel --no-deps --no-build-isolation . -w "$RUNNER_TEMP/rw-wheels"
+      - name: Clean installed end-to-end demonstration
+        run: |
+          python -m venv "$RUNNER_TEMP/rw-acceptance-venv"
+          "$RUNNER_TEMP/rw-acceptance-venv/bin/python" -m pip install --no-deps "$RUNNER_TEMP"/rw-wheels/ai_research_workspace-*.whl
+          cd "$RUNNER_TEMP"
+          "$RUNNER_TEMP/rw-acceptance-venv/bin/rw" doctor | tee "$RUNNER_TEMP/verification/installed-doctor.json"
+          "$RUNNER_TEMP/rw-acceptance-venv/bin/rw" demo "$RUNNER_TEMP/research-demo" | tee "$RUNNER_TEMP/verification/installed-demo.json"
+      - name: Documentation checks
+        run: python scripts/check_docs.py | tee "$RUNNER_TEMP/verification/docs.json"
+      - name: Package source and synthetic demonstration
+        run: python scripts/package_delivery.py --destination "$RUNNER_TEMP/delivery" --demo "$RUNNER_TEMP/research-demo" --wheel-dir "$RUNNER_TEMP/rw-wheels"
+      - name: Attach verification evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: research-workspace-python-${{ matrix.python }}
+          path: |
+            ${{ runner.temp }}/verification/
+            ${{ runner.temp }}/delivery/
+          if-no-files-found: warn
+          retention-days: 14
