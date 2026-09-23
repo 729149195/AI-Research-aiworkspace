@@ -47,6 +47,15 @@ def parser() -> argparse.ArgumentParser:
     q = sub.add_parser('ai'); ss = q.add_subparsers(dest='action', required=True)
     q = ss.add_parser('configure'); actor(q); note(q); q.add_argument('--enable', action='store_true'); q.add_argument('--host', action='append', default=[])
     q = ss.add_parser('run'); q.add_argument('skill'); q.add_argument('--task', required=True); q.add_argument('--model', required=True); q.add_argument('--endpoint', required=True); q.add_argument('--allow-network', action='store_true'); q.add_argument('--focus', action='append', default=[])
+    q = sub.add_parser('route', help='Capture edits and route Skills without approving scientific changes')
+    q.add_argument('action', nargs='?', choices=['capture', 'status', 'complete', 'install-hooks', 'remove-hooks'], default='capture')
+    q.add_argument('change_id', nargs='?')
+    q.add_argument('--actor', default='auto-route')
+    q.add_argument('--note', default='')
+    q.add_argument('--note-kind', choices=['discussion', 'preference', 'decision-candidate'], default='discussion')
+    q.add_argument('--check', action='store_true')
+    q.add_argument('--approve', action='store_true', help='Explicitly authorize local hook settings changes only')
+    q.add_argument('--hook', action='store_true', help='Read a bounded Claude hook event from stdin; never read transcripts')
     q = sub.add_parser('recover'); q.add_argument('--clear-lock', action='store_true')
     q = sub.add_parser('upgrade'); ss = q.add_subparsers(dest='action', required=True)
     for action in ('check', 'apply'):
@@ -88,7 +97,23 @@ def execute(a: argparse.Namespace) -> tuple[object, int]:
         if a.action in ('lint', 'show') and not (Path(a.project) / 'workspace/state.json').exists():
             result = skills.lint_skills() if a.action == 'lint' else skills.skill_text(None, a.name)
             return result, 0 if isinstance(result, str) or result['passed'] else 1
+    if c == 'route' and a.hook:
+        from .route_hooks import handle
+        require(a.action == 'capture' and not a.note, 'Hook mode only supports capture without conversation ingestion.')
+        return handle(a.project), 0
     s = Store(a.project)
+    if c == 'route':
+        from . import routing, route_hooks
+        if a.action in ('install-hooks', 'remove-hooks'):
+            return route_hooks.configure(s, approve=a.approve and not a.check, remove=a.action == 'remove-hooks'), 0
+        if a.action == 'complete':
+            require(a.change_id and not a.check, 'Complete requires CHANGE-ID and a concrete note.')
+            return routing.complete(s, a.change_id, a.actor, a.note), 0
+        if a.action == 'status':
+            return {'unobserved': routing.public(routing.inspect(s)),
+                    'tasks': [t for t in s.state['tasks'] if t.get('origin') == 'auto-route' and t['status'] == 'open']}, 0
+        if a.check: return routing.public(routing.inspect(s, a.note, a.note_kind)), 0
+        return routing.capture(s, a.actor, a.note, a.note_kind), 0
     if c == 'status':
         return {'project': s.state['project'], 'revision': s.state['revision'], 'node_count': len(s.state['nodes']), 'fingerprint': s.fingerprint(),
                 'pending_proposals': [p['id'] for p in s.state['proposals'].values() if p['status'] == 'pending'],

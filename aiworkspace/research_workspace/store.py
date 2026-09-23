@@ -96,7 +96,7 @@ class Store:
                 if not path.is_file():
                     continue
                 name = path.relative_to(self.root).as_posix()
-                if name != STATE and not name.startswith('workspace/reports/'):
+                if name != STATE and name != 'workspace/sync/auto-route.json' and not name.startswith(('workspace/reports/', 'workspace/history/auto-route/')):
                     result[name] = file_hash(path)
         for name in ('AGENTS.md', 'CLAUDE.md', 'START_HERE.md'):
             path = safe_path(self.root, name, governed=False)

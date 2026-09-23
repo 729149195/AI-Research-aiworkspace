@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "from_version": "0.1.0",
+  "to_version": "0.2.0",
+  "real_git_fetch_and_venv_install": true,
+  "research_and_custom_skill_hashes_preserved": true,
+  "new_skill_added_to_registered_host": true,
+  "hooks_not_silently_enabled": true,
+  "legacy_observed_baseline_initialized": true,
+  "source": "Previous conversation 0.1.0 standalone package, current 0.2.0 source, disposable local Git remote. No user research or external model."
+}

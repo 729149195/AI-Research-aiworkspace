@@ -48,4 +48,6 @@ def initialize(destination: str | Path, name: str, author: str, *, mode: str = '
     store = Store(root)
     store.event('project.initialized', author, {'mode': mode, 'boundary': 'No sources, results or human approvals have been invented.'})
     store.commit()
-    return store
+    from .routing import capture
+    capture(store, 'auto-route:init')
+    return Store(root)

@@ -24,10 +24,11 @@ rw --project ../my-paper skills install --target .agents/skills
 |---|---|---|
 | 研究模型 | `research_workspace/model.py` | 稳定 ID、节点、依赖与影响传播 |
 | 事务与历史 | `store.py`、`workflow.py` | 提案、批准、哈希、并发保护与恢复 |
+| 无感入口 | `routing.py`、`route_hooks.py`、`skills/auto-route/` | 差异捕获、上下文沉淀、分组路由与可选本地 Hooks |
 | 稿件同步 | `sync.py` | Markdown 章节三方比较与语义复核任务 |
 | 来源与执行 | `adapters.py`、`analysis.py` | 显式授权的检索、模型调用、本地分析 |
 | 质量门 | `review.py` | 完整性检查、独立审查声明与导出 |
-| 可更新能力 | `assets/skills/`、`assets/templates/` | 8 个科研 Skills + Idea Evaluation |
+| 可更新能力 | `assets/skills/`、`assets/templates/` | 8 个科研 Skills + Idea Evaluation + Auto-route |
 | 增量更新 | `upgrade.py`、根目录 `update_aiworkspace.py` | 已用项目的受管资产三方更新、冲突与回滚 |
 | 使用界面 | `cli.py`、`dashboard.py` | 命令行与离线只读状态页 |
 
@@ -44,3 +45,7 @@ rw --project ../my-paper skills install --target .agents/skills
 [整体架构](docs/ARCHITECTURE.md) · [数据协议](docs/SCHEMA.md) · [Skills 选型与接入](docs/SKILLS.md) · [增量更新](docs/UPDATING.md) · [English quickstart](docs/QUICKSTART_EN.md) · [开发与迭代](CONTRIBUTING.md) · [安全说明](SECURITY.md) · [实际验收记录](DELIVERY.md)
 
 PPT 已转换为 [逐页原文](research_workspace/assets/templates/idea-evaluation.original.md) 和 [可填写模板](research_workspace/assets/templates/idea-evaluation.md)，保留十部分与可视化设计要求。原附件不随仓库发布。
+
+## 默认 Auto-route
+
+在论文项目中启动 AI 后，每次自然改稿或研究讨论都由 auto-route 接入。普通捕获与待办维护无需反复要求作者选择 Skill。详见 [完整说明](docs/AUTO_ROUTE.md)，包含首次使用、Hook 安装、跨会话接续、重要决策确认和旧项目增量更新。

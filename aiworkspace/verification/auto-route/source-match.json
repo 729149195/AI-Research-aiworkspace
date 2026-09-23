@@ -1,0 +1,17 @@
+{
+  "verification": "Local Git object hashes compared to staged GitHub tree entries before publication",
+  "matched_trees": {
+    "aiworkspace/research_workspace": "59cf0950cbc156efc17b051e149da27d2574cb51",
+    "aiworkspace/tests": "c4417423a192c660e28890aa25cf7e767b02eaee",
+    "aiworkspace/scripts": "4653594a7d37a99fe6d9f7622fdf53d7368c66e4",
+    ".github": "7a921457d2dab5d16fd2431e3676c80ab37f86e8"
+  },
+  "matched_blobs": {
+    "README.md": "46cf486fd456cb26f47628f7a76ab5a3f04ee776",
+    "aiworkspace/README.md": "2b2073ac60fcb5aebfa5401686db6fbc81bf83a7",
+    "aiworkspace/DELIVERY.md": "39c95184e6eb805fe316db70a702c95e3f0c6f0c",
+    "aiworkspace/pyproject.toml": "e342f0cf0e09b80be71235c882362521f331e77d"
+  },
+  "tests_rerun_after_matching": 121,
+  "boundary": "Byte identity for listed paths and actual local tests; does not establish live host, model, or scientific validity."
+}

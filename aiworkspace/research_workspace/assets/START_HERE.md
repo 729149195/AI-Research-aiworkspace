@@ -27,3 +27,11 @@
 只更新项目默认资产时用 `rw upgrade check`，再 `rw upgrade apply --actor NAME --approve`。保留 `.rw/framework.json`；用 `rw upgrade history` 查看备份，`rw upgrade rollback UPDATE-ID` 回滚默认资产。更新不会覆盖稿件、数据、方法、证据或已填写工作表。完整冲突/恢复说明见框架 docs/UPDATING.md。
 
 默认没有模型调用或外部搜索。真实论文需要实际原文核验、独立领域审查和作者责任声明；机器检查、示例数据和 AI 意见都不等于科学有效性。不要将未发表稿件、个人数据或密钥上传公共仓库。
+
+## 自然改稿与自动沉淀（0.2.0）
+
+在本项目根目录打开已授权的 AI 宿主，让它先读 AGENTS.md。以后直接说“润色讨论”“导师改了这一段”“加上这篇文献”等即可。默认 auto-route Skill 在改稿前后捕获差异、沉淀简短讨论记录并分派对应 Skills；重要研究判断仍需你确认。
+
+Claude Code 可一次性预览 `rw route install-hooks`，授权后执行 `rw route install-hooks --approve`，重启宿主检查 Hook 生效。它只写本地捕获记录，不自动上传论文、不运行模型、不替你核验证据。其他文件型宿主由 AGENTS.md 驱动；普通网页聊天没有本地文件监听能力。无宿主运行时的手工修改会在下一次捕获发现。
+
+需要检查时执行 `rw route status`。完整操作见框架 docs/AUTO_ROUTE.md。旧项目先做增量更新，保留原工作表、稿件和更新基线。

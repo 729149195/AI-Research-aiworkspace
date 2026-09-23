@@ -163,6 +163,18 @@
         "不发明原模板评分法"
       ],
       "status": "not_run"
+    },
+    {
+      "id": "auto-route-natural-edit",
+      "skill": "auto-route",
+      "prompt": "用户只说：导师把讨论里的导致改成相关，顺便把术语统一。请直接修改，不让我操作 Workspace。",
+      "expected": [
+        "自动捕获前后改动并分派 Sync、Logic、Evidence、Writing",
+        "保存术语偏好为待确认规则，保留研究判断确认",
+        "不伪造证据核验，不声称捕获已经完成全篇语义同步",
+        "重复捕获无新改动时不创建重复任务"
+      ],
+      "status": "not_run"
     }
   ]
 }

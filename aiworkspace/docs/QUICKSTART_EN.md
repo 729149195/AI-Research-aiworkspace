@@ -1,6 +1,6 @@
 # English quickstart
 
-AI Research Workspace is a local-first, evidence-governed research framework. The engine, nine editable Agent Skills, templates, tests and documentation live under `aiworkspace/`; the public updater and main usage README sit at the repository root. This distribution is a standalone repository and has no frontend build dependency. Clone the repository below; no repository-creation step is needed.
+AI Research Workspace is a local-first, evidence-governed research framework. The engine, ten editable Agent Skills, templates, tests and documentation live under `aiworkspace/`; the public updater and main usage README sit at the repository root. This distribution is a standalone repository and has no frontend build dependency.
 
 ## Install and run a real software demonstration
 
@@ -74,3 +74,7 @@ Rollback protects subsequent local edits and restores managed assets only. Engin
 Run `python aiworkspace/scripts/run_tests.py`, `python aiworkspace/scripts/smoke_root_update.py`, and `python aiworkspace/scripts/check_docs.py`. Read [Delivery](../DELIVERY.md) for actual results and limitations. Native sync is Markdown-only; full Word/LaTeX/Overleaf round trips, authenticated approvals and real-time collaborative storage are not implemented. External API mode is opt-in and was tested with mocks, not a paid live provider. Machine integrity checks do not certify scientific validity or publication readiness.
 
 See [Architecture](ARCHITECTURE.md), [Schema](SCHEMA.md), [Skills](SKILLS.md), [Contributing](../CONTRIBUTING.md) and [Security](../SECURITY.md).
+
+## Default auto-route (0.2.0)
+
+Open the study root in an authorized file-capable agent and read AGENTS.md. Ordinary paper edits implicitly invoke auto-route before and after changes. It captures actual diffs and optional concise discussion notes, coalesces specialist tasks, and preserves unresolved scientific decisions. Optional Claude hooks: preview `rw route install-hooks`, then authorize with `--approve`. Restart the host and check its configuration. Capture never verifies evidence, resolves conflicts or signs human review automatically. See [the complete guide](AUTO_ROUTE.md).

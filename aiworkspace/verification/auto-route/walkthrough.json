@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "engine": "0.2.0",
+  "actual_isolated_python_hook_process": true,
+  "manuscript_change_captured": true,
+  "capture_did_not_overwrite_nodes_or_manuscript": true,
+  "repeated_hook_silent_and_idempotent": true,
+  "specialist_tasks_persisted": true,
+  "explicit_sync_proposal_applied": true,
+  "context_note_remained_unconfirmed": true,
+  "reconciled_tasks_completed": true,
+  "stop_did_not_restart": true,
+  "synthetic_computation": {
+    "n": 12,
+    "baseline_mean": 22.5,
+    "candidate_mean": 18.0,
+    "paired_mean_difference": -4.5,
+    "synthetic": true
+  },
+  "boundary": "Actual installed-engine/CLI/hook-payload execution with synthetic material and simulated author/reviewer declarations. No live host, model or scientific review."
+}

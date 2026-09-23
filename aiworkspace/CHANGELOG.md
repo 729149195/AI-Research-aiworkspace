@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.2.0 — Auto-route / 2026-09-24
+
+- Add the tenth built-in Skill, auto-route, as the default paper-session entry.
+- Capture actual manuscript/file/node changes transactionally; retain bounded diffs, hashes, attributed unconfirmed notes, impact and persistent grouped specialist tasks.
+- Preserve pending route tasks across review cycles; require issue/sync reconciliation before completing a record.
+- Add optional explicitly authorized local Claude lifecycle hooks with settings preservation, isolated Python invocation and nonblocking Stop/failure handling.
+- Preserve user research and local customizations through the existing Schema 1 incremental updater; bootstrap old observed baselines lazily.
+- Add route/hook/upgrade regression tests and a reproducible synthetic walkthrough. Live host/model quality is not certified by these software tests.
+
+
 ## 0.1.0 — initial public workspace delivery, 2026-09-23
 
 - Packaged the framework as a standalone repository with aiworkspace/, update_aiworkspace.py and README.md; unrelated application files and history are excluded.

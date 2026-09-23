@@ -58,6 +58,8 @@ jobs:
           cd "$RUNNER_TEMP"
           "$RUNNER_TEMP/rw-acceptance-venv/bin/rw" doctor | tee "$RUNNER_TEMP/verification/installed-doctor.json"
           "$RUNNER_TEMP/rw-acceptance-venv/bin/rw" demo "$RUNNER_TEMP/research-demo" | tee "$RUNNER_TEMP/verification/installed-demo.json"
+      - name: Installed auto-route and hook CLI walkthrough
+        run: '"$RUNNER_TEMP/rw-acceptance-venv/bin/python" scripts/smoke_auto_route.py --output "$RUNNER_TEMP/verification/auto-route.json"'
       - name: Documentation checks
         run: python scripts/check_docs.py | tee "$RUNNER_TEMP/verification/docs.json"
       - name: Package source and synthetic demonstration
