@@ -1,0 +1,29 @@
+name: Import reviewed framework snapshot
+on:
+  push:
+    paths: ['.github/workflows/import-snapshot.yml']
+permissions:
+  contents: write
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - name: Copy only the reviewed framework, without source repository history
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${GITHUB_REPOSITORY}" = '729149195/AI-Research-aiworkspace'
+          test ! -e aiworkspace
+          source_dir=$(mktemp -d)
+          git -C "$source_dir" init
+          git -C "$source_dir" -c core.hooksPath=/dev/null fetch --depth=1 https://github.com/729149195/AI_Research_Journey.git fe834694c9221b26b8e90c1714bec7e25ffccabe
+          test "$(git -C "$source_dir" rev-parse FETCH_HEAD:aiworkspace)" = '6c717674a794d2e1cd51cce46fee005744280235'
+          test "$(git -C "$source_dir" rev-parse FETCH_HEAD:update_aiworkspace.py)" = 'e2093c7b049eaec66c168999b33c538c42c56a03'
+          git -C "$source_dir" archive FETCH_HEAD aiworkspace update_aiworkspace.py | tar -x -C "$GITHUB_WORKSPACE"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- aiworkspace update_aiworkspace.py
+          git -c core.hooksPath=/dev/null commit -m 'feat: import reviewed workspace files into independent repository'
+          git -c core.hooksPath=/dev/null push origin HEAD:main
