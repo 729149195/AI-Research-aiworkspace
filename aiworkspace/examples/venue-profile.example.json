@@ -1,0 +1,25 @@
+{
+  "profile_version": 1,
+  "id": "replace-venue-2027-full-review",
+  "name": "REPLACE with the actual venue name",
+  "year": 2027,
+  "submission_year": 2026,
+  "track": "REPLACE with the exact track or article type",
+  "stage": "review",
+  "anonymous": true,
+  "sources": [
+    {"id": "authors", "role": "venue", "url": "https://example.org/replace-with-official-edition-authors-page"},
+    {"id": "publisher", "role": "publisher", "url": "https://example.org/replace-with-official-template-instructions"}
+  ],
+  "template": {
+    "url": "https://example.org/replace-with-actual-template.zip",
+    "overleaf_url": "https://www.overleaf.com/latex/templates/replace-with-actual-official-gallery-page",
+    "main": "main.tex",
+    "license_note": "REPLACE with original license and redistribution conditions, or mark unresolved",
+    "class_options": "REPLACE with explicitly verified track/stage options; empty string is valid",
+    "bibliography_style": "REPLACE-with-verified-style"
+  },
+  "allowed_hosts": [],
+  "requirements": [],
+  "deadlines": []
+}

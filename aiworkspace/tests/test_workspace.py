@@ -253,8 +253,8 @@ class ProjectCase(unittest.TestCase):
         a = skills.cycle(self.s(), 'router'); b = skills.cycle(self.s(), 'router')
         self.assertTrue(a['tasks']); self.assertEqual(b['tasks'], [])
 
-    def test_all_ten_skill_contracts(self):
-        self.assertEqual(len(skills.SKILLS), 10); self.assertTrue(skills.lint_skills(self.s())['passed'])
+    def test_all_nine_skill_contracts(self):
+        self.assertEqual(len(skills.SKILLS), 13); self.assertTrue(skills.lint_skills(self.s())['passed'])
 
 
 class DemonstrationCase(unittest.TestCase):

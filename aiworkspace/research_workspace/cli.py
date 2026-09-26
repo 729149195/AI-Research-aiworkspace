@@ -63,12 +63,17 @@ def parser() -> argparse.ArgumentParser:
         if action == 'apply': actor(q); q.add_argument('--approve', action='store_true')
     q = ss.add_parser('rollback'); q.add_argument('id')
     ss.add_parser('recover'); ss.add_parser('history')
+    from .publication_cli import add_commands
+    add_commands(sub)
     return p
 
 
 def execute(a: argparse.Namespace) -> tuple[object, int]:
     from . import skills, workflow, sync, review, upgrade
     c = a.command
+    if c in ('venue', 'latex', 'overleaf'):
+        from .publication_cli import execute_publication
+        return execute_publication(a)
     if c == 'init':
         from .scaffold import initialize
         s = initialize(a.path, a.name, a.author)

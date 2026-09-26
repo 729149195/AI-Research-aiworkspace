@@ -3,7 +3,7 @@ name: auto-route
 description: Default entry for every paper-editing or research conversation. Automatically capture observed manuscript, evidence, data, methods, rules and idea changes; preserve concise discussion context and route work to specialist Skills. Trigger before and after edits, feedback, new results, literature, decisions, session handover or resuming a study. Users need not mention Workspace or choose Skills.
 compatibility: Research Workspace 0.2.0+; authorized file-capable agent. Optional local Claude hooks require explicit installation. Plain chat alone cannot watch files.
 metadata:
-  version: "0.2.0"
+  version: "0.3.0"
 ---
 
 # auto-route
@@ -35,3 +35,7 @@ Administrative capture/routing is automatic; scientific confirmation and indepen
 ## Evaluation
 
 A user saying only “polish the discussion” should not have to invoke Workspace commands. Changing “causes” to “is associated with” must preserve the actual diff and route Claim/evidence checks plus affected sections. Repeating an unchanged capture creates no duplicate record/tasks. Repeated edits coalesce open tasks per Skill without losing their change records. Conflict/unsupported formats stay pending. Discussion cannot become verified evidence. Stop hooks never restart themselves. Upgrading a used 0.1.0 study adds this Skill without overwriting research, user policy, original manuscript or custom Skills.
+
+## Publication routing (0.3.0)
+
+For a new journal/conference paper or current-year submission rules, invoke venue-setup: discover official pages and Overleaf/publisher source ZIP, initialize a new relative template directory and versioned rules. For self-hosted Overleaf setup, local replicas, Git tokens or sync conflicts invoke overleaf-sync. For resubmission invoke venue-transfer, which reuses venue-setup and preserves the original version. The user need not choose these Skills manually. Native LaTeX section edits participate in the same capture and sync loop as Markdown. Do not overwrite an old remote binding when changing the active template.

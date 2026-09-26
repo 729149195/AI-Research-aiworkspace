@@ -26,6 +26,9 @@ def parse(text: str) -> tuple[dict[str, str], str]:
 
 
 def plan(store: Store) -> dict:
+    if store.state["project"].get("latex"):
+        from .latex_project import plan as latex_plan
+        return latex_plan(store)
     text = read_text(safe_path(store.root, 'manuscript/main.md'))
     manuscript, outside = parse(text)
     active = {i: n for i, n in store.state['nodes'].items() if n['kind'] == 'section' and n['status'] != 'retired'}
@@ -51,6 +54,9 @@ def plan(store: Store) -> dict:
 
 
 def propose_sync(store: Store, actor: str, resolutions: dict[str, str] | None = None, acknowledge_outside: bool = False) -> dict:
+    if store.state["project"].get("latex"):
+        from .latex_project import propose_sync as latex_sync
+        return latex_sync(store, actor, resolutions, acknowledge_outside)
     result = plan(store)
     choices = resolutions or {}
     conflict_ids = {c['section'] for c in result['conflicts']}

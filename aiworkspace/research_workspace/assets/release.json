@@ -1,6 +1,6 @@
 {
   "manifest_version": 1,
-  "version": "0.2.0",
+  "version": "0.3.0",
   "schema_version": 1,
   "files": {
     "AGENTS.md": "AGENTS.md",
@@ -20,6 +20,9 @@
     "workspace/skills/reviewer/SKILL.md": "skills/reviewer/SKILL.md",
     "workspace/skills/rules-compliance/SKILL.md": "skills/rules-compliance/SKILL.md",
     "workspace/skills/idea-evaluation/SKILL.md": "skills/idea-evaluation/SKILL.md",
-    "workspace/skills/auto-route/SKILL.md": "skills/auto-route/SKILL.md"
+    "workspace/skills/auto-route/SKILL.md": "skills/auto-route/SKILL.md",
+    "workspace/skills/venue-setup/SKILL.md": "skills/venue-setup/SKILL.md",
+    "workspace/skills/overleaf-sync/SKILL.md": "skills/overleaf-sync/SKILL.md",
+    "workspace/skills/venue-transfer/SKILL.md": "skills/venue-transfer/SKILL.md"
   }
 }

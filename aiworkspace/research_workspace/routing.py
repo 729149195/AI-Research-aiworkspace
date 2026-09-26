@@ -62,7 +62,8 @@ def snapshot(store: Store) -> dict:
             require(not path.is_symlink(), 'Auto-route refuses a symlink: ' + relative)
             if path.is_file(): files[relative] = file_hash(safe_path(store.root, relative))
     require(len(files) <= 10000, 'Auto-route file limit exceeded; split the study or review the capture scope.')
-    text = read_text(safe_path(store.root, 'manuscript/main.md'))
+    from .latex_project import route_text
+    text = route_text(store)
     require(len(text.encode('utf-8')) <= TEXT_LIMIT, 'Manuscript exceeds auto-route 512 KB limit; no baseline advanced.')
     return {'format': 1, 'files': files, 'manuscript': text,
             'nodes': {key: {'hash': digest(node), 'kind': node['kind'], 'depends_on': node['depends_on'],

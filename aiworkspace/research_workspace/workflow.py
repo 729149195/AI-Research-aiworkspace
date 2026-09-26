@@ -33,7 +33,7 @@ def propose(store: Store, operations: list[dict], actor: str, summary: str) -> d
             require(set(op) == {'op', 'path', 'text', 'expected_sha256'}, 'write needs path, text and expected_sha256.')
             path = op['path']
             target = safe_path(store.root, path)
-            require(path.endswith('.md') and not path.startswith('workspace/reports/'), 'Proposal file writes are Markdown only; reports and executable code cannot be written here.')
+            require((path.endswith('.md') or (path.startswith('manuscript/') and path.endswith(('.tex', '.bib')))) and not path.startswith('workspace/reports/'), 'Proposals allow Markdown and manuscript LaTeX/BibTeX text only; no executable scripts or reports.')
             require(path not in paths and isinstance(op['text'], str), 'Duplicate path or invalid text.')
             require(file_hash(target) == op['expected_sha256'], 'File changed before proposal: ' + path)
             paths.add(path)

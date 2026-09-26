@@ -1,0 +1,142 @@
+{
+  "at": "2026-09-26T13:44:56+00:00",
+  "authenticated_self_hosted_sync": "not_tested_no_credentials",
+  "boundary": "Actual source migration and TeX compilation when available; no real submission or human-review claim.",
+  "cases": [
+    {
+      "build": {
+        "at": "2026-09-26T13:44:48+00:00",
+        "boundary": "Actual local TeX compile; inspect PDF, scientific meaning and venue rules separately.",
+        "build_id": "BUILD-00C80C0925D3",
+        "compiled": true,
+        "directory": "manuscript/latex/target-article-transfer-9062633bdb5a",
+        "engine": "pdflatex",
+        "main": "main.tex",
+        "pdf": ".rw/builds/BUILD-00C80C0925D3/main.pdf",
+        "pdf_sha256": "9790fc59289a65d982ac2bd7547380d55c8c6b31ef05379463fbfcd5d2a04ac4",
+        "sources": {
+          "main.tex": "34618b4349581e87ce858ea6f5eeb9392c1ade0330d7207e7fec0a7725f0aac6",
+          "refs.bib": "34f7f318bd0563dd178fac605f3ed6dc6882d50e6f5cf75d972b8c6d902d25b1",
+          "rw-transfer-body.tex": "5734a07f8040d5367bc72ab844c612af8aad97212f7e751be7450bf18277ba51"
+        },
+        "unresolved_references": false
+      },
+      "directory": "manuscript/latex/target-article-transfer-9062633bdb5a",
+      "family": "article",
+      "inventories_preserved": true,
+      "source_bytes_unchanged": true
+    },
+    {
+      "build": {
+        "at": "2026-09-26T13:44:51+00:00",
+        "boundary": "Actual local TeX compile; inspect PDF, scientific meaning and venue rules separately.",
+        "build_id": "BUILD-B0529E6F9BB9",
+        "compiled": true,
+        "directory": "manuscript/latex/target-acmart-transfer-537c6f4018e2",
+        "engine": "pdflatex",
+        "main": "main.tex",
+        "pdf": ".rw/builds/BUILD-B0529E6F9BB9/main.pdf",
+        "pdf_sha256": "844092a2e32612d6eea7d65bdbe969d4ee9e1cb49f2a7a9adec022ffbd5c2af3",
+        "sources": {
+          "main.tex": "28790a813f4636f465694fc30df3a4622418683ad0216a4ab232e43c4b7ebd43",
+          "refs.bib": "34f7f318bd0563dd178fac605f3ed6dc6882d50e6f5cf75d972b8c6d902d25b1",
+          "rw-transfer-body.tex": "5734a07f8040d5367bc72ab844c612af8aad97212f7e751be7450bf18277ba51"
+        },
+        "unresolved_references": false
+      },
+      "directory": "manuscript/latex/target-acmart-transfer-537c6f4018e2",
+      "family": "acmart",
+      "inventories_preserved": true,
+      "source_bytes_unchanged": true
+    },
+    {
+      "build": {
+        "at": "2026-09-26T13:44:53+00:00",
+        "boundary": "Actual local TeX compile; inspect PDF, scientific meaning and venue rules separately.",
+        "build_id": "BUILD-05FD327E354E",
+        "compiled": true,
+        "directory": "manuscript/latex/target-ieeetran-transfer-f58d175042e7",
+        "engine": "pdflatex",
+        "main": "main.tex",
+        "pdf": ".rw/builds/BUILD-05FD327E354E/main.pdf",
+        "pdf_sha256": "82037fc1f9955e5121e6f83d1d5ea36dfe1c60feac6bd46487ede7ea060dff9f",
+        "sources": {
+          "main.tex": "19be29447b9a18aeff85f4fdf4b6965bf9fbbccabec7ae8948b4598d259b4176",
+          "refs.bib": "34f7f318bd0563dd178fac605f3ed6dc6882d50e6f5cf75d972b8c6d902d25b1",
+          "rw-transfer-body.tex": "5734a07f8040d5367bc72ab844c612af8aad97212f7e751be7450bf18277ba51"
+        },
+        "unresolved_references": false
+      },
+      "directory": "manuscript/latex/target-ieeetran-transfer-f58d175042e7",
+      "family": "IEEEtran",
+      "inventories_preserved": true,
+      "source_bytes_unchanged": true
+    },
+    {
+      "build": {
+        "at": "2026-09-26T13:44:54+00:00",
+        "boundary": "Actual local TeX compile; inspect PDF, scientific meaning and venue rules separately.",
+        "build_id": "BUILD-8F3DB6A403F4",
+        "compiled": true,
+        "directory": "manuscript/latex/target-llncs-transfer-56e1da5d9fc4",
+        "engine": "pdflatex",
+        "main": "main.tex",
+        "pdf": ".rw/builds/BUILD-8F3DB6A403F4/main.pdf",
+        "pdf_sha256": "b465c8b20350a9dc879aac61bae878e2087fcf9a7ce52eb0089008b1b348240f",
+        "sources": {
+          "main.tex": "cd8716397eab28ee29e40db851653dbbc99c84c729b0ff4a0dd2da12f4c93bf1",
+          "refs.bib": "34f7f318bd0563dd178fac605f3ed6dc6882d50e6f5cf75d972b8c6d902d25b1",
+          "rw-transfer-body.tex": "5734a07f8040d5367bc72ab844c612af8aad97212f7e751be7450bf18277ba51"
+        },
+        "unresolved_references": false
+      },
+      "directory": "manuscript/latex/target-llncs-transfer-56e1da5d9fc4",
+      "family": "llncs",
+      "inventories_preserved": true,
+      "source_bytes_unchanged": true
+    },
+    {
+      "build": {
+        "at": "2026-09-26T13:44:56+00:00",
+        "boundary": "Actual local TeX compile; inspect PDF, scientific meaning and venue rules separately.",
+        "build_id": "BUILD-030DF41F9E73",
+        "compiled": true,
+        "directory": "manuscript/latex/target-elsarticle-transfer-356d98f7d734",
+        "engine": "pdflatex",
+        "main": "main.tex",
+        "pdf": ".rw/builds/BUILD-030DF41F9E73/main.pdf",
+        "pdf_sha256": "307db78cdc2931f3b9c1bcc1e42f0981838bc3a2bfb2b6f23d20265c0adcbb80",
+        "sources": {
+          "main.tex": "a6b2aa76e16bfbd55a4587ad1b0fb3ef6c9b001da5372e546039eba8b1fb5605",
+          "refs.bib": "34f7f318bd0563dd178fac605f3ed6dc6882d50e6f5cf75d972b8c6d902d25b1",
+          "rw-transfer-body.tex": "5734a07f8040d5367bc72ab844c612af8aad97212f7e751be7450bf18277ba51"
+        },
+        "unresolved_references": false
+      },
+      "directory": "manuscript/latex/target-elsarticle-transfer-356d98f7d734",
+      "family": "elsarticle",
+      "inventories_preserved": true,
+      "source_bytes_unchanged": true
+    }
+  ],
+  "custom_host_configuration": "https://nankaivisoverleaf.asia",
+  "manuscript_only_packaging": true,
+  "native_latex_auto_route": true,
+  "plugin_host_session": "not_tested",
+  "template_network_download": "transport-contract-tests_only; smoke uses synthetic local ZIPs",
+  "pdf_inspection": {
+    "rendered_families": [
+      "article",
+      "acmart",
+      "IEEEtran",
+      "llncs",
+      "elsarticle"
+    ],
+    "visually_inspected": [
+      "acmart",
+      "IEEEtran"
+    ],
+    "placeholder_acm_doi_absent": true,
+    "note": "Synthetic one-page compilation fixtures, not a real venue compliance or authenticated Overleaf acceptance test."
+  }
+}

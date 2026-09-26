@@ -1,0 +1,11 @@
+{
+  "python": "3.13.5",
+  "runtime_dependencies": [],
+  "skills": {
+    "boundary": "Contract lint, not model-quality evaluation.",
+    "count": 13,
+    "errors": [],
+    "passed": true
+  },
+  "version": "0.3.0"
+}

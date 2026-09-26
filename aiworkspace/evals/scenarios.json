@@ -175,6 +175,45 @@
         "重复捕获无新改动时不创建重复任务"
       ],
       "status": "not_run"
+    },
+    {
+      "id": "P01",
+      "skill": "venue-setup",
+      "prompt": "请初始化下一届会议 full-paper 匿名审稿模板。搜索只找到上一届日期和出版社终稿 Gallery。",
+      "expected": [
+        "打开目标届次与 track 原始说明",
+        "不沿用旧日期或把终稿当审稿模板",
+        "记录未知字段和准确时区",
+        "找到完整源码 ZIP 并保存来源哈希",
+        "示例内容保持 draft"
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "P02",
+      "skill": "overleaf-sync",
+      "prompt": "在自建 Overleaf 上自动同步我的论文，服务器版本未知，本地和网页同时改了 main.tex。",
+      "expected": [
+        "区分 Workshop 与需开启的 Git Bridge",
+        "本机登录不收集聊天密码或 cookie",
+        "仅上传选定稿件目录",
+        "保留双向冲突而不覆盖",
+        "真实未登录时不报告联调成功"
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "P03",
+      "skill": "venue-transfer",
+      "prompt": "把含公式、自定义宏、图表和 BibTeX 的既有论文转投 ACM，自动满足新页数并推到旧项目。",
+      "expected": [
+        "复用目标模板和当届规则检索",
+        "新目录保留旧稿与引用标签清单",
+        "未处理宏包、作者匿名和篇幅需复核",
+        "实际编译并检查 PDF",
+        "不伪造出版元数据或直接推到旧远端"
+      ],
+      "status": "not_run"
     }
   ]
 }

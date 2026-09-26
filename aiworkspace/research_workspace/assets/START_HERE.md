@@ -1,37 +1,29 @@
 # 从这里开始 / Start here
 
-这是一个论文项目实例。`workspace/` 管研究，`manuscript/` 管正式表达；框架程序位于另一个 Git checkout。第一次安装请看框架 README 与 docs/GETTING_STARTED.md，需要 Python 3.11+。
+这是论文项目，框架程序在另一个 Git checkout。`workspace/` 保存研究状态和证据，`manuscript/` 保存正式表达。需要 Python 3.11+ 和已安装的 rw；框架首页有 Windows／macOS／Linux 安装命令。
 
-## 第一次使用
+## 第一次
 
-在本目录执行 `rw status`、`rw sync status`、`rw review`。新项目显示 blocked 很正常，因为问题、证据和论文尚未完成。`rw --help` 查看命令。
+执行 `rw status`、`rw sync status`、`rw review`。新项目 blocked 正常。填写 `workspace/research/idea-evaluation.md`；实际导师、机构、期刊、伦理、AI、引用与术语规则写到 `workspace/rules/project-policy.md`。不要把研究写进可更新的 `workspace/templates/` 空表。
 
-填写 `workspace/research/idea-evaluation.md`，阅读 `workspace/rules/project-policy.md` 并填入实际核查过的规则。空模板位于 `workspace/templates/`，后续会增量更新；不要把研究成果填进空模板目录。
+使用有文件能力的 AI 宿主时让它读 AGENTS.md，并以 auto-route 默认接手。安装宿主 Skills：`rw skills install --target .agents/skills`，Claude 使用 `.claude/skills`。以后正常提出改稿、文献、方法或导师反馈，宿主负责捕获和维护；论文科学判断、外部传输和冲突按实际授权确认。可选 Claude Hooks 先 `rw route install-hooks` 预览，再加 `--approve` 并重启验证。
 
-使用 coding agent 时先让它读 AGENTS.md。`rw skills install --target .agents/skills` 或 `rw skills install --target .claude/skills` 安装宿主副本。生成初始任务包：`rw packet idea-evaluation --task "审查我已经填写的研究想法，指出证据缺口并比较可行方案"`。
+## 期刊／会议与 LaTeX
+
+直接告诉 AI 目标 venue、届次、稿件类型和投稿阶段，调用 venue-setup 找官方 Overleaf／出版社模板，保留完整 ZIP 和年度规则。工作副本在 `manuscript/latex/`，规则在 `workspace/rules/venues/`，不猜截止时分或时区。
+
+已有模板可用 `rw latex adopt --directory manuscript/latex/实际目录 --main main.tex` 预览，核对后加 `--approve --actor ai:session` 绑定原生 LaTeX。此后 rw sync 与 auto-route 使用活跃 .tex。构建 `rw latex build --allow-exec` 需要本地 TeX，禁用 shell escape 仍需可信源码。模板内示例事实不属于本文。
+
+Overleaf 默认自建网址 https://nankaivisoverleaf.asia/，由 overleaf-sync 引导本机插件登录或原生 Git token。不要给 AI 密码／cookie，不要把整个研究目录上传。转投由 venue-transfer 创建新版本并保留旧稿；旧远端绑定不会自动换成新格式。完整说明在框架 docs/PUBLICATION.md、OVERLEAF.md、RESUBMISSION.md。
 
 ## 日常循环
 
-研究/读原文 → 提出证据与逻辑改动 → 作者批准 → 方法/图表/写作 → 双向同步 → 独立复审 → 下一步任务。
+研究 → 原始证据 → 逻辑／方法 → 写作／图表 → 同步 → 独立复审 → 下一轮。`rw route` 捕获，`rw route status` 查看待办，`rw sync propose --actor ai:sync` 提出同步。提案先 show，再按授权 apply；双向冲突不能静默选边，含义变化须复核证据与所有受影响章节。
 
-用 `rw propose changes.json --actor ai-session` 导入 JSON 建议，`rw show PROP-ID` 检查实际提案，作者再执行 `rw apply PROP-ID --actor NAME --approve --note "具体说明核查了哪些改动和影响"`。所有占位 ID 替换成实际返回值。
+`rw packet SKILL --task "具体任务"` 生成任务包；只交给获得授权的模型。`rw review` 保存报告，`rw dashboard` 生成离线看板。捕获、提出、应用、核验、审核分别记录；模型不能替人签署 --human 或把建议当事实。
 
-`rw sync propose --actor sync-agent` 提出同步，也要检查和批准。稿件含义变化会留下语义复核问题。`rw review` 写 JSON/Markdown 报告，`rw cycle --actor coordinator` 生成下轮待办；它不会在后台自动执行。
+## 更新与交接
 
-`rw dashboard` 生成 workspace/reports/dashboard.html，可用浏览器离线打开；页面只读，需要重新生成来刷新。
+结束前捕获真实改动，保存简短且必要的交接说明，保留未完成任务。框架根目录用 `python update_aiworkspace.py --project 论文路径 --check` 预览，再按需要 --apply。保留 .rw/framework.json；查看备份 `rw upgrade history`，资产回滚 `rw upgrade rollback UPDATE-ID`。更新不覆盖稿件、数据、已写工作表、用户规则或已下载 venue 模板。
 
-## 更新已使用项目
-
-先结束正在写项目的编辑器/AI任务，并备份研究数据。在框架仓库根目录运行 `python update_aiworkspace.py --project 此项目路径 --check`，审查后使用 `--apply --actor 姓名`。可加 `--expected-commit 实际完整SHA` 锁定检查过的版本。脚本位于 aiworkspace/ 目录旁，默认跟踪 origin/main。
-
-只更新项目默认资产时用 `rw upgrade check`，再 `rw upgrade apply --actor NAME --approve`。保留 `.rw/framework.json`；用 `rw upgrade history` 查看备份，`rw upgrade rollback UPDATE-ID` 回滚默认资产。更新不会覆盖稿件、数据、方法、证据或已填写工作表。完整冲突/恢复说明见框架 docs/UPDATING.md。
-
-默认没有模型调用或外部搜索。真实论文需要实际原文核验、独立领域审查和作者责任声明；机器检查、示例数据和 AI 意见都不等于科学有效性。不要将未发表稿件、个人数据或密钥上传公共仓库。
-
-## 自然改稿与自动沉淀（0.2.0）
-
-在本项目根目录打开已授权的 AI 宿主，让它先读 AGENTS.md。以后直接说“润色讨论”“导师改了这一段”“加上这篇文献”等即可。默认 auto-route Skill 在改稿前后捕获差异、沉淀简短讨论记录并分派对应 Skills；重要研究判断仍需你确认。
-
-Claude Code 可一次性预览 `rw route install-hooks`，授权后执行 `rw route install-hooks --approve`，重启宿主检查 Hook 生效。它只写本地捕获记录，不自动上传论文、不运行模型、不替你核验证据。其他文件型宿主由 AGENTS.md 驱动；普通网页聊天没有本地文件监听能力。无宿主运行时的手工修改会在下一次捕获发现。
-
-需要检查时执行 `rw route status`。完整操作见框架 docs/AUTO_ROUTE.md。旧项目先做增量更新，保留原工作表、稿件和更新基线。
+真实论文需要原文核验、独立领域审查和作者责任声明，示例和机器检查不代表科研有效性或投稿合规。

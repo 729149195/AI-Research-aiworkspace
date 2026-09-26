@@ -1,42 +1,41 @@
-# 0.2.0 Auto-route 交付与验收
+# 0.3.0 交付与实际验收
 
-发布目标：[729149195/AI-Research-aiworkspace](https://github.com/729149195/AI-Research-aiworkspace)。版本 0.2.0，研究 Schema 仍为 1。验证日期：2026-09-24（Asia/Singapore）；机器记录时间为 UTC。
+仓库：729149195/AI-Research-aiworkspace。验证日期 2026-09-26；Linux / Python 3.13.5；研究 Schema 1。
 
-## 已完成
+## 实现
 
-新增第 10 个 Skill auto-route，设为自然改稿和研究讨论的默认入口。实现本地差异捕获、节点含义前后记录、跨章节影响分析、未确认讨论笔记、按 Skill 合并的持久待办，以及经过问题/同步检查的完成操作。捕获本身不修改稿件或科研节点，不签署核验与独立审核。
+新增 venue-setup、overleaf-sync、venue-transfer，内置 Skills 共 13 个。包括当前官方来源发现与整份模板 ZIP 归档、相对路径 LaTeX 项目、13 类投稿规则主题和有时区的候选日期、版本刷新、原生 LaTeX 研究节点绑定及三方同步、自建网址和插件／Git 两条同步通道、转投新版本和编译校验。更新沿用三方默认资产升级，不覆盖已写稿件或 venue 模板。
 
-AGENTS.md、CLAUDE.md、START_HERE.md 和受管资产清单已更新。可选 Claude 生命周期 Hook 需单独授权；配置合并保留已有设置，Stop 不循环触发新回复。现有论文通过原增量更新入口接入，研究数据无需 Schema 迁移。
+## 已实际运行
 
-## 实际本地验收
-
-环境：Linux / Python 3.13.5。软件执行与真实模型/宿主效果分别记录。
-
-| 检查 | 实际结果 | 记录 |
+| 验证 | 结果 | 记录 |
 |---|---|---|
-| 单元与回归测试 | 121 项通过，0 失败、0 错误、0 跳过；含 44 项新增路由、Hook、升级测试 | [tests.json](verification/auto-route/tests.json) |
-| 干净 wheel 安装与自动沉淀调用链 | 全新虚拟环境安装 0.2.0；实际执行隔离 Python Hook 进程、改稿捕获、重复静默、显式同步、任务收尾及 Stop | [walkthrough.json](verification/auto-route/walkthrough.json) |
-| 真实 0.1.0 → 0.2.0 本地升级 | 从旧分发包创建已用论文；实际 Git fetch、快进和安装；稿件、研究、用户规则及本地 Skill 定制哈希不变；新 Skill 进入已注册宿主 | [old-to-new-upgrade.json](verification/auto-route/old-to-new-upgrade.json) |
-| 当前/旧目录更新与回滚 | 两种布局的 Git 更新、冲突、回滚保护通过 | [root-update.json](verification/auto-route/root-update.json) |
-| 文档/分发检查 | 本地链接、18 项受管资产及 15 个行为场景定义检查 | [docs.json](verification/auto-route/docs.json) |
+| 完整回归 | 181 项，0 失败、0 错误、0 跳过；60 项新增出版相关用例 | [tests.json](verification/publication/tests.json) |
+| 干净 wheel 安装 | 新虚拟环境安装 0.3.0，从源码目录外运行 doctor，13 个 Skill 契约通过 | [installed-doctor.json](verification/publication/installed-doctor.json) |
+| 研究演示 | 实际合成分析、证据链、双向同步与演示质量门 | [installed-demo.json](verification/publication/installed-demo.json) |
+| LaTeX 迁移与实际编译 | article、acmart、IEEEtran、llncs、elsarticle 五种已安装文档类的合成迁移样例编译成功，引用和交叉引用解析；保留原稿字节 | [walkthrough.json](verification/publication/walkthrough.json) |
+| 更新／回滚 | 当前目录与旧目录两种布局实际 Git fetch、安装、冲突／回滚保护通过，研究哈希不变 | [root-update.json](verification/publication/root-update.json) |
+| 文档／分发 | 21 项受管资产、18 个行为场景定义、相对链接与无 PPT 检查 | [docs.json](verification/publication/docs.json) |
 
-合成示例实际计算 12 组人工数据，均值 22.5 和 18.0，配对均差 -4.5。示例中的作者与审核声明明确标注为模拟。它们不能用于真实研究或投稿。历史 0.1.0 报告保留在 verification/ 根目录，仅描述历史版本。
+Git 同步测试包含真实临时 bare repository 的 fetch／commit／push，以及带故障注入的双向合并、冲突、删除确认、推送结果不明恢复和新编辑保护。模板测试使用实际 ZIP 字节／文件系统和记录式 HTTPS transport，测试 HTML 登录页、错误引用原文、未知年份、时间与时区、归档越界等；没有把离线提取称为实时下载。
 
-## 尚未验证与边界
+实际编译中发现并修复 ACM 重复数学宏包冲突，迁移草稿避免默认示例 DOI／ISBN。五份 PDF 已渲染，人工查看了 ACM 和 IEEEtran 样例；样例并非完整真实长论文的视觉验收。额外回归核对图像字节、图引用、表格文字、公式与 BibTeX 保留。
 
-未运行完整 Claude/Codex/Windows 宿主会话或真实付费模型效果评测；15 个 Skill 行为场景保持 not_run。本地 Hook 输入和真实命令链测试不能替代完整宿主验证。论文语义检查由宿主调用 Skills 执行，CLI 不会自行调用模型、自动开展研究或替人签字。
+## 尚未验收的外部环节
 
-没有常驻文件监听进程；宿主关闭时的编辑在下一次捕获发现。原生正文同步仍为带稳定章节标记的 Markdown，Word/LaTeX/Overleaf 无损往返尚未实现。GitHub CI 以对应提交的 Actions 为准，不能由本地测试推断为通过。
+没有用户自建 Overleaf 的登录凭据，未执行该站的认证登录／真实双向同步／完整 VS Code Replica 会话。默认网址和配置已实现，凭据通过用户本机插件或 token 提示输入，不在聊天收集。
+
+交付运行环境未完成公开模板站点的实际下载；HTTPS 访问与下载接口通过隔离 transport 测试，浏览工具核查了官方界面／来源。实际模板 ZIP 可通过 --online 或用户合法取得的 --archive 导入。因本机缺少 vgtc 类包，该适配未做 vgtc 编译。其他五类的实际编译来自已安装 TeX 类包和合成文稿，不代表已经验证每个期刊当届模板和投稿合规。
+
+18 个模型行为场景保持 not_run；没有真实模型效果、专家审稿或科学正确性保证。GitHub CI 需查看当前提交的 Actions，不能由本地通过推断云端通过。
 
 ## 复测
-
-在框架仓库根目录、专用虚拟环境安装当前版本后：
 
 ```bash
 python aiworkspace/scripts/run_tests.py
 python aiworkspace/scripts/check_docs.py
 python aiworkspace/scripts/smoke_root_update.py
-python aiworkspace/scripts/smoke_auto_route.py
+python aiworkspace/scripts/smoke_publication.py --destination ../new-publication-smoke
 ```
 
-使用方式、首次 Hook 授权、冲突处理和旧论文升级见 [AUTO_ROUTE](docs/AUTO_ROUTE.md)。
+完整新操作见 [模板与规则](docs/PUBLICATION.md)、[Overleaf](docs/OVERLEAF.md)、[转投](docs/RESUBMISSION.md)。

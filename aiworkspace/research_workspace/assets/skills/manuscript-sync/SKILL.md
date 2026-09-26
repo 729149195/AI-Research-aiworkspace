@@ -1,9 +1,9 @@
 ---
 name: manuscript-sync
 description: Reconcile Workspace and Manuscript after author, supervisor, collaborator or reviewer edits. Use for changed text, research records, rules or conflicting versions. Preserve semantic meaning and explicit three-way conflict resolution.
-compatibility: Native Markdown section markers and rw sync; other manuscript formats need separate reviewed adapters.
+compatibility: Markdown or explicitly adopted native LaTeX section markers with rw sync (0.3.0+).
 metadata:
-  version: "0.1.0"
+  version: "0.3.0"
 ---
 
 # manuscript-sync
@@ -28,8 +28,12 @@ Base/local/remote differences, explicit conflict choices, synchronization propos
 
 ## Boundaries
 
-Only native Markdown synchronization is implemented in this release. Do not claim Word Track Changes, LaTeX or Overleaf round-trip synchronization. Do not remove section markers to hide conflicts, automatically discard reviewer edits, or mark semantic issues solved without actual evaluation.
+Native Markdown and adopted UTF-8 LaTeX use explicit section markers and three-way synchronization. Separate the research-state sync from the configured Overleaf transport. Word Track Changes and arbitrary dynamic TeX are not supported. Do not remove section markers to hide conflicts, automatically discard reviewer edits, or mark semantic issues solved without actual evaluation.
 
 ## Evaluation
 
 Changing “X causes Y” to “X is associated with Y” must open global scientific review. Divergent edits must pause rather than overwrite. An edit outside markers must remain visible. Synchronized paragraphs with an unchanged stronger Claim must not pass final semantic review.
+
+## Native LaTeX publication flow
+
+Use venue-setup to install the correct source template, then preview/approve rw latex adopt. Read the active project.latex directory instead of stale manuscript/main.md. Preserve percent-comment section IDs. Preamble, bibliography and asset changes require explicit outside acknowledgment and semantic review. Overleaf transport only moves selected manuscript files; after incoming edits run auto-route and native sync. Transfer to a new venue never silently changes remote bindings. Compile the actual selected source and inspect the resulting PDF before release.

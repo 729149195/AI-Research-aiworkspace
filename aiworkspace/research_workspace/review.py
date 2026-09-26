@@ -13,7 +13,8 @@ PLACEHOLDER = re.compile(r'\b(?:TODO|TBD|PLACEHOLDER)\b|待填写|尚未填写',
 
 
 def citation_ids(text: str) -> set[str]:
-    return {key.rstrip('.:') for key in re.findall(r'(?<![\w@])@([A-Za-z0-9][A-Za-z0-9_.:-]*)', text)}
+    from .latex_project import inventory
+    return {key.rstrip('.:') for key in re.findall(r'(?<![\w@])@([A-Za-z0-9][A-Za-z0-9_.:-]*)', text)} | set(inventory(text)['citations'])
 
 
 def review(store: Store) -> dict:
@@ -21,14 +22,16 @@ def review(store: Store) -> dict:
     def add(code: str, node: str, message: str, severity: str = 'major', domain: str = 'research_logic'):
         issues.append({'code': code, 'node': node, 'message': message, 'severity': severity, 'domain': domain})
     active = {k: n for k, n in store.state['nodes'].items() if n['status'] != 'retired'}
-    text = read_text(safe_path(store.root, 'manuscript/main.md'))
+    from .latex_project import read_manuscript, integrity_issues
+    text = read_manuscript(store)
+    issues.extend(integrity_issues(store))
     if PLACEHOLDER.search(text):
         add('MANUSCRIPT_PLACEHOLDER', 'MANUSCRIPT', 'Resolve placeholders; do not invent missing content.', domain='writing_language')
     for kind in ('question', 'hypothesis', 'argument', 'section', 'claim'):
         if not any(n['kind'] == kind for n in active.values()):
             add('MISSING_' + kind.upper(), 'PROJECT', 'Missing active ' + kind)
     for key in citation_ids(text):
-        node = active.get(key)
+        node = active.get(key) or next((n for n in active.values() if n['kind'] == 'source' and n['data'].get('citekey') == key), None)
         if not node or node['kind'] != 'source':
             add('CITATION_MISSING', key, 'Citation has no active source record.', 'critical', 'evidence_citations')
         else:
@@ -198,15 +201,28 @@ def export_bundle(store: Store, destination: str | Path, *, demonstration: bool 
     with project_lock(store.root):
         require(Store(store.root).fingerprint() == status['fingerprint'], 'Research changed before export.')
         target.mkdir(parents=True)
-        for path in (store.root / 'manuscript').rglob('*'):
-            require(not path.is_symlink(), 'Symlink in manuscript.')
-            if path.is_file():
-                name = path.relative_to(store.root / 'manuscript')
-                (target / name).parent.mkdir(parents=True, exist_ok=True)
-                shutil.copy2(path, target / name)
+        from .latex_project import active_dir, read_manuscript
+        from .publication_io import tree_bytes
+        paper_root = active_dir(store)
+        if paper_root:
+            # Only the active template, never previous submissions or private metadata.
+            from .overleaf import managed
+            for name, data in tree_bytes(paper_root).items():
+                require(managed(name), 'Potential credential file in active source: ' + name)
+                output = safe_path(target, name, governed=False)
+                output.parent.mkdir(parents=True, exist_ok=True)
+                output.write_bytes(data)
+        else:
+            for path in (store.root / 'manuscript').rglob('*'):
+                require(not path.is_symlink(), 'Symlink in manuscript.')
+                if path.is_file():
+                    name = path.relative_to(store.root / 'manuscript')
+                    if any(x.startswith('.') for x in name.parts): continue
+                    (target / name).parent.mkdir(parents=True, exist_ok=True)
+                    shutil.copy2(path, target / name)
         references = []
-        for key in sorted(citation_ids(read_text(store.root / 'manuscript/main.md'))):
-            node = store.node(key)
+        for key in sorted(citation_ids(read_manuscript(store))):
+            node = store.state['nodes'].get(key) or next(n for n in store.state['nodes'].values() if n['kind'] == 'source' and n['data'].get('citekey') == key)
             item = {'id': key, 'type': node['data'].get('csl_type', 'article'), 'title': node['title']}
             for src, dst in (('doi', 'DOI'), ('url', 'URL'), ('csl_author', 'author'), ('issued', 'issued')):
                 if node['data'].get(src):
