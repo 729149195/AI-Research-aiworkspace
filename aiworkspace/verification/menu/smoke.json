@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "actual_venv_install": true,
+  "isolated_menu_process": true,
+  "read_only_preview": true,
+  "numbered_selection": true,
+  "study_bytes_preserved": true,
+  "network_used": false,
+  "fixture": "Minimal menu module test package, not a complete 0.4.0 distribution",
+  "live_agent_session": "not_run"
+}

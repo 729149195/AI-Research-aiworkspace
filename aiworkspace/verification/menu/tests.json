@@ -1,0 +1,22 @@
+{
+  "tested_at": "2026-09-27T06:34:41.569237+00:00",
+  "python": "3.13.5",
+  "passed": true,
+  "tests_run": 41,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "suite": "tests/test_menu.py",
+  "base_commit": "578a5ff629b934e5be30ab7812123a49d36fd07d",
+  "source_sha256": {
+    "research_workspace/menu.py": "a657297aebd98ae42caaf360cc109c4ab5d617c3be20058bf655caf4cd3ed911",
+    "scripts/prepare_agent.py": "d549bc2ccbd28ba830ae6da91cf5d580821012a5f61cc0739089410314140bd7",
+    "scripts/smoke_menu.py": "a91acc4470aacda96ca3fb3cd684dd4d73d5c8d0091839121dfc757e305af66b",
+    "tests/test_menu.py": "fb1f825f4d51c602753d574fbc8dc7713616bc4f41b9c3e07ee5d4ba851a64ac",
+    "research_workspace/skills.py": "02e11bea72f58d29d13207c2777ccff50d0884426786c2f32152dd91b7dbf854",
+    "research_workspace/assets/skills/workspace-guide/SKILL.md": "c0873151d0d1a31b59a0aba7859b6971d13f652bab70593fa029441185951db1",
+    "research_workspace/assets/menu.json": "6b9a359e80c850288d48aa4211927f59dac93844d63b96a8730962818c717138",
+    "research_workspace/assets/release.json": "03cf68f6d0e61d7b80b440c46eeb9d5666bb2d0d4f10b7e0505a526ba11caf7e"
+  },
+  "scope": "Focused menu, context, setup authorization and scoped asset upgrade fixtures. No complete historical regression rerun or live-agent evaluation."
+}

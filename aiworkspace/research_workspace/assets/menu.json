@@ -1,0 +1,136 @@
+{
+  "menu_version": 1,
+  "title": "AI Workspace · 论文助手",
+  "description": "回复编号或直接说需求；无需输入命令，也无需选择 Skill。",
+  "items": [
+    {
+      "number": "1",
+      "id": "new-paper",
+      "title": "新建论文",
+      "description": "找目标期刊／会议模板，整理当届投稿规范，开始写作",
+      "aliases": ["新建论文", "新建", "开始一篇论文"],
+      "examples": ["我想投某会议，帮我建好论文项目"],
+      "skills": ["venue-setup", "idea-evaluation"],
+      "project_required": false,
+      "ask_only_if_missing": ["论文名称或主题", "作者称呼", "目标期刊／会议（尚未确定也可以）"],
+      "agent_documentation": "docs/PUBLICATION.md"
+    },
+    {
+      "number": "2",
+      "id": "write",
+      "title": "继续写／修改论文",
+      "description": "起草、润色、改摘要、处理导师意见，并沉淀改动",
+      "aliases": ["改论文", "修改论文", "改摘要", "润色", "写论文"],
+      "examples": ["把这段讨论改得更清楚，结论不要扩大"],
+      "skills": ["writing-language", "manuscript-sync"],
+      "project_required": true,
+      "ask_only_if_missing": ["要修改的内容或本轮目标"],
+      "agent_documentation": "docs/GETTING_STARTED.md"
+    },
+    {
+      "number": "3",
+      "id": "literature",
+      "title": "找文献／整理证据",
+      "description": "检索原始来源，整理引用、支持证据与反证",
+      "aliases": ["找文献", "查文献", "整理证据", "参考文献"],
+      "examples": ["找支持和反驳这个论点的研究"],
+      "skills": ["researcher", "knowledge-evidence"],
+      "project_required": true,
+      "ask_only_if_missing": ["研究问题、关键词或待核查论点"],
+      "agent_documentation": "docs/GETTING_STARTED.md"
+    },
+    {
+      "number": "4",
+      "id": "idea",
+      "title": "讨论想法／检查逻辑",
+      "description": "评估 Idea、比较方案，梳理贡献与全文论证",
+      "aliases": ["评估想法", "idea evaluation", "检查逻辑", "讨论想法", "比较方案"],
+      "examples": ["这两个研究方向哪个更值得做？先比较证据和风险"],
+      "skills": ["idea-evaluation", "logic-methodology"],
+      "project_required": true,
+      "ask_only_if_missing": ["研究想法或要讨论的问题"],
+      "agent_documentation": "docs/GETTING_STARTED.md"
+    },
+    {
+      "number": "5",
+      "id": "analysis",
+      "title": "方法、数据与图表",
+      "description": "检查研究设计、分析数据，生成与论点对应的图表",
+      "aliases": ["画图", "绘图", "数据分析", "实验设计", "统计分析"],
+      "examples": ["用这份数据画图，并检查分析方法是否合适"],
+      "skills": ["logic-methodology", "figure-visualization"],
+      "project_required": true,
+      "ask_only_if_missing": ["希望回答的问题", "数据、代码或图表位置（如有）"],
+      "agent_documentation": "docs/GETTING_STARTED.md"
+    },
+    {
+      "number": "6",
+      "id": "overleaf",
+      "title": "连接／同步 Overleaf",
+      "description": "连接自建服务器，让本地 LaTeX 与远端项目协作",
+      "aliases": ["连接overleaf", "同步overleaf", "overleaf", "连接自建overleaf"],
+      "examples": ["帮我连接实验室 Overleaf，沿用默认服务器"],
+      "skills": ["overleaf-sync"],
+      "project_required": true,
+      "ask_only_if_missing": ["远端项目链接（已有时）"],
+      "agent_documentation": "docs/OVERLEAF.md"
+    },
+    {
+      "number": "7",
+      "id": "transfer",
+      "title": "转投期刊／会议",
+      "description": "找到目标模板与规则，保留旧稿并迁移新版本",
+      "aliases": ["转投", "换期刊", "更换模板", "迁移模板"],
+      "examples": ["保留旧稿，把论文转投到另一个期刊"],
+      "skills": ["venue-setup", "venue-transfer"],
+      "project_required": true,
+      "ask_only_if_missing": ["目标期刊／会议", "目标届次、稿件类型和阶段（从现有资料补齐）"],
+      "agent_documentation": "docs/RESUBMISSION.md"
+    },
+    {
+      "number": "8",
+      "id": "review",
+      "title": "审查论文／准备投稿",
+      "description": "检查证据、逻辑、方法、规范和一致性，整理待修问题",
+      "aliases": ["审查", "审稿", "投稿检查", "准备投稿"],
+      "examples": ["投稿前全面检查，告诉我还缺什么"],
+      "skills": ["reviewer", "rules-compliance"],
+      "project_required": true,
+      "ask_only_if_missing": [],
+      "agent_documentation": "docs/GETTING_STARTED.md"
+    },
+    {
+      "number": "9",
+      "id": "progress",
+      "title": "查看进度／待办",
+      "description": "查看未完成事项、改动记录和下一步",
+      "aliases": ["进度", "待办", "查看进度", "改动记录", "项目状态"],
+      "examples": ["我上次做到哪里了？还有哪些问题没处理？"],
+      "skills": ["auto-route"],
+      "project_required": true,
+      "ask_only_if_missing": [],
+      "agent_documentation": "docs/AUTO_ROUTE.md"
+    },
+    {
+      "number": "0",
+      "id": "settings",
+      "title": "项目与设置",
+      "description": "打开已有论文、切换项目、更新 Workspace 或检查环境",
+      "aliases": ["设置", "更新", "更新workspace", "切换项目", "打开已有论文", "接入旧稿", "检查环境"],
+      "examples": ["帮我升级，保留已有论文和本地定制"],
+      "skills": ["workspace-guide"],
+      "project_required": false,
+      "ask_only_if_missing": [],
+      "agent_documentation": "docs/AGENT_PLAYBOOK.md"
+    }
+  ],
+  "settings": [
+    {"id":"open","label":"打开／接入已有论文","aliases":["打开","打开已有论文","接入旧稿"],"skills":["manuscript-sync","venue-setup"]},
+    {"id":"switch","label":"切换论文项目","aliases":["切换","切换项目"],"skills":["workspace-guide"]},
+    {"id":"update","label":"更新 AI Workspace","aliases":["更新","升级","更新workspace"],"skills":["workspace-guide"]},
+    {"id":"environment","label":"检查／准备运行环境","aliases":["环境","检查环境","安装"],"skills":["workspace-guide"]},
+    {"id":"capture","label":"设置自动沉淀","aliases":["自动沉淀","自动记录"],"skills":["auto-route"]},
+    {"id":"technical","label":"开发者说明（按需）","aliases":["开发者模式","显示命令","技术说明"],"skills":["workspace-guide"]}
+  ],
+  "contract": {"selection_is_execution":false,"show_menu_does_not_write":true,"free_text_understood_by":"user-authorized agent","credentials":"local_login_only"}
+}

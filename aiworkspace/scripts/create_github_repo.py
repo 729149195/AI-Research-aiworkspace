@@ -20,7 +20,9 @@ ROOT = Path(__file__).resolve().parents[2]
 OWNER = '729149195'
 NAME = 'AI-Research-aiworkspace'
 TARGET = OWNER + '/' + NAME
-ALLOWED_ROOT = {'aiworkspace', 'README.md', 'update_aiworkspace.py', '.gitignore', '.github'}
+ALLOWED_ROOT = {'aiworkspace', 'README.md', 'update_aiworkspace.py', '.gitignore', '.github', '.agents', '.claude'}
+AGENT_ENTRIES = {'.agents', '.agents/skills', '.agents/skills/workspace-guide',
+                 '.agents/skills/workspace-guide/SKILL.md', '.claude', '.claude/CLAUDE.md'}
 SKIP = {'.venv', '__pycache__', '.pytest_cache', 'build', 'dist'}
 
 
@@ -43,6 +45,8 @@ def payload(root: Path) -> list[str]:
         if any(x in SKIP or x.endswith('.egg-info') for x in rel.parts):
             continue
         require(not p.is_symlink(), 'Symlinks must not be published: ' + rel.as_posix())
+        if rel.parts[0] in ('.agents', '.claude'):
+            require(rel.as_posix() in AGENT_ENTRIES, 'Only public agent entry files may be distributed: ' + rel.as_posix())
         require(rel.parts[0] in ALLOWED_ROOT, 'Unexpected root entry: ' + rel.as_posix())
         require(not any(x in ('.git', '.rw', 'workspace', 'manuscript') for x in rel.parts),
                 'Research or nested Git data detected: ' + rel.as_posix())

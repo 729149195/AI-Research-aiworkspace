@@ -1,41 +1,35 @@
-# 0.3.0 交付与实际验收
+# 0.4.0：菜单与自然语言入口验收
 
-仓库：729149195/AI-Research-aiworkspace。验证日期 2026-09-26；Linux / Python 3.13.5；研究 Schema 1。
+仓库：729149195/AI-Research-aiworkspace。检查日期：2026-09-27。研究 Schema 仍为 1。
 
-## 实现
+## 本次交付
 
-新增 venue-setup、overleaf-sync、venue-transfer，内置 Skills 共 13 个。包括当前官方来源发现与整份模板 ZIP 归档、相对路径 LaTeX 项目、13 类投稿规则主题和有时区的候选日期、版本刷新、原生 LaTeX 研究节点绑定及三方同步、自建网址和插件／Git 两条同步通道、转投新版本和编译校验。更新沿用三方默认资产升级，不覆盖已写稿件或 venue 模板。
+增加第 14 个 Skill workspace-guide，统一首次使用、菜单／help、编号选择、自然语言需求、项目选择与设置。README 和项目 START_HERE 默认面向无需命令的用户；技术操作移到 Agent 手册。清楚的改稿需求直接进入 auto-route，不必经过菜单。
 
-## 已实际运行
+静态菜单在安装前可以读取；只读 menu.py 可提供真实本地名称和待办摘要。编号仅在菜单回复语境解析，任意自然语言由宿主理解，选择不会执行 shell。框架的隐藏宿主入口随源码包分发。新的项目菜单与 Skill 使用原有允许的资产路径，因此增量升级保持 Schema 兼容。
 
-| 验证 | 结果 | 记录 |
+## 实际执行的测试
+
+| 检查 | 结果 | 记录 |
 |---|---|---|
-| 完整回归 | 181 项，0 失败、0 错误、0 跳过；60 项新增出版相关用例 | [tests.json](verification/publication/tests.json) |
-| 干净 wheel 安装 | 新虚拟环境安装 0.3.0，从源码目录外运行 doctor，13 个 Skill 契约通过 | [installed-doctor.json](verification/publication/installed-doctor.json) |
-| 研究演示 | 实际合成分析、证据链、双向同步与演示质量门 | [installed-demo.json](verification/publication/installed-demo.json) |
-| LaTeX 迁移与实际编译 | article、acmart、IEEEtran、llncs、elsarticle 五种已安装文档类的合成迁移样例编译成功，引用和交叉引用解析；保留原稿字节 | [walkthrough.json](verification/publication/walkthrough.json) |
-| 更新／回滚 | 当前目录与旧目录两种布局实际 Git fetch、安装、冲突／回滚保护通过，研究哈希不变 | [root-update.json](verification/publication/root-update.json) |
-| 文档／分发 | 21 项受管资产、18 个行为场景定义、相对链接与无 PPT 检查 | [docs.json](verification/publication/docs.json) |
+| 本轮菜单／引导／授权／分发回归 | 41 项通过，0 失败、0 错误、0 跳过 | [tests.json](verification/menu/tests.json) |
+| 隔离环境安装与菜单子进程 | 实际创建 venv、离线安装最小菜单测试包、从源码目录外启动菜单、解析选择，原测试论文字节不变 | [smoke.json](verification/menu/smoke.json) |
+| 菜单资产增量更新 | 使用与 0.3.0 Git blob 一致的原升级器，以及有范围限制的旧／新测试清单，验证新增菜单与已登记宿主 Skill、定制保留、幂等和回滚 | 包含于上面 41 项测试 |
 
-Git 同步测试包含真实临时 bare repository 的 fetch／commit／push，以及带故障注入的双向合并、冲突、删除确认、推送结果不明恢复和新编辑保护。模板测试使用实际 ZIP 字节／文件系统和记录式 HTTPS transport，测试 HTML 登录页、错误引用原文、未知年份、时间与时区、归档越界等；没有把离线提取称为实时下载。
+测试环境为 Linux / Python 3.13.5。菜单测试不调用模型、不登录账户、不访问网络、不上传或审批任何真实论文。安装演练使用明确标注的最小测试包，仅验证新安装助手和菜单模块；不冒充完整 0.4.0 科研工作流重测。
 
-实际编译中发现并修复 ACM 重复数学宏包冲突，迁移草稿避免默认示例 DOI／ISBN。五份 PDF 已渲染，人工查看了 ACM 和 IEEEtran 样例；样例并非完整真实长论文的视觉验收。额外回归核对图像字节、图引用、表格文字、公式与 BibTeX 保留。
+本次在现有 0.3.0 源码上增量增加入口层；既有科研、LaTeX、Overleaf、同步和更新实现保留。新增功能测试和历史回归记录分开：**本轮没有重新运行之前的全部 181 项科研测试**，历史结果仍保留在 verification/publication/，不能直接累加成新版本通过数。
 
-## 尚未验收的外部环节
+## 交互与宿主边界
 
-没有用户自建 Overleaf 的登录凭据，未执行该站的认证登录／真实双向同步／完整 VS Code Replica 会话。默认网址和配置已实现，凭据通过用户本机插件或 token 提示输入，不在聊天收集。
+41 项测试验证程序行为、菜单契约和资产保护；完整 Claude/Codex/其他 agent 的真实多轮菜单会话尚未逐一实测。22 个模型行为场景仍标记 not_run。读取宿主入口、工具许可与本机环境必须由实际宿主支持。
 
-交付运行环境未完成公开模板站点的实际下载；HTTPS 访问与下载接口通过隔离 transport 测试，浏览工具核查了官方界面／来源。实际模板 ZIP 可通过 --online 或用户合法取得的 --archive 导入。因本机缺少 vgtc 类包，该适配未做 vgtc 编译。其他五类的实际编译来自已安装 TeX 类包和合成文稿，不代表已经验证每个期刊当届模板和投稿合规。
+普通聊天能显示文字菜单和讨论材料；文件修改、运行、模板检索和远端同步需要对应工具。登录和必要授权由用户完成，不收集聊天密码。菜单也不替代原文核验、独立审查或作者责任声明。
 
-18 个模型行为场景保持 not_run；没有真实模型效果、专家审稿或科学正确性保证。GitHub CI 需查看当前提交的 Actions，不能由本地通过推断云端通过。
+本次不声称修复先前的云端 CI 问题；当前提交的 Actions 状态与本地测试分别看待。此前 Overleaf 认证联调和外网模板下载的未验收事项不因新增菜单而自动完成。
 
-## 复测
+## 复测与使用
 
-```bash
-python aiworkspace/scripts/run_tests.py
-python aiworkspace/scripts/check_docs.py
-python aiworkspace/scripts/smoke_root_update.py
-python aiworkspace/scripts/smoke_publication.py --destination ../new-publication-smoke
-```
+用户直接对 agent 说“显示菜单”或“帮我升级并启用菜单，保留已有论文和本地定制”。操作细节由 agent 读取 [执行手册](docs/AGENT_PLAYBOOK.md)。
 
-完整新操作见 [模板与规则](docs/PUBLICATION.md)、[Overleaf](docs/OVERLEAF.md)、[转投](docs/RESUBMISSION.md)。
+开发者可在安装后的环境运行 `python -m unittest discover -s aiworkspace/tests -p test_menu.py -v` 与 `python aiworkspace/scripts/smoke_menu.py`；全套回归继续使用原 run_tests.py。独立 smoke 需要当前开发环境已有 setuptools 与 wheel（也可使用 setuptools 携带的 wheel 分发），不会自动联网下载。

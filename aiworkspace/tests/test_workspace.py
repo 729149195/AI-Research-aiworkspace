@@ -254,7 +254,7 @@ class ProjectCase(unittest.TestCase):
         self.assertTrue(a['tasks']); self.assertEqual(b['tasks'], [])
 
     def test_all_nine_skill_contracts(self):
-        self.assertEqual(len(skills.SKILLS), 13); self.assertTrue(skills.lint_skills(self.s())['passed'])
+        self.assertEqual(len(skills.SKILLS), 14); self.assertTrue(skills.lint_skills(self.s())['passed'])
 
 
 class DemonstrationCase(unittest.TestCase):

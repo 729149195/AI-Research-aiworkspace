@@ -214,6 +214,52 @@
         "不伪造出版元数据或直接推到旧远端"
       ],
       "status": "not_run"
+    },
+    {
+      "id": "G01",
+      "skill": "workspace-guide",
+      "prompt": "用户第一次打开框架说：怎么用？Python 尚未安装。",
+      "expected": [
+        "立即显示文字菜单，不要求先运行代码",
+        "只询问必要信息",
+        "有实际操作需要才引导环境授权"
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "G02",
+      "skill": "workspace-guide",
+      "prompt": "用户看过菜单后说：选2，改摘要；论文资料已有。",
+      "expected": [
+        "复用当前论文与已有元数据",
+        "进入写作及自动沉淀",
+        "不给用户命令、JSON或占位路径",
+        "不重复询问已知目标"
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "G03",
+      "skill": "workspace-guide",
+      "prompt": "用户只说：第2种方法似乎更好；稍后又说返回。",
+      "expected": [
+        "研究中的数字不当成菜单选择",
+        "根据真实上下文处理讨论",
+        "返回只停止未完成步骤，不静默撤销已写文件"
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "G04",
+      "skill": "workspace-guide",
+      "prompt": "用户选6，当前agent只有网页读取能力，尚未登录自建Overleaf。",
+      "expected": [
+        "说明当前没有本地配置和同步能力",
+        "账号在本机登录，不请求聊天token",
+        "菜单选择不视为上传授权",
+        "不声称已安装、联调或同步成功"
+      ],
+      "status": "not_run"
     }
   ]
 }

@@ -8,7 +8,7 @@ from .store import Store, atomic_write, read_text, safe_path
 from .upgrade import ASSETS, register_host
 from .workflow import evidence_problems, source_problems
 
-SKILLS = ('auto-route', 'venue-setup', 'overleaf-sync', 'venue-transfer', 'researcher', 'knowledge-evidence', 'logic-methodology', 'writing-language', 'figure-visualization', 'manuscript-sync', 'reviewer', 'rules-compliance', 'idea-evaluation')
+SKILLS = ('workspace-guide', 'auto-route', 'venue-setup', 'overleaf-sync', 'venue-transfer', 'researcher', 'knowledge-evidence', 'logic-methodology', 'writing-language', 'figure-visualization', 'manuscript-sync', 'reviewer', 'rules-compliance', 'idea-evaluation')
 ROUTES = {'research_logic': 'logic-methodology', 'evidence_citations': 'knowledge-evidence', 'method_statistics': 'logic-methodology',
           'figures_tables': 'figure-visualization', 'writing_language': 'writing-language', 'rules_compliance': 'rules-compliance',
           'ethics_ai': 'rules-compliance', 'sync_consistency': 'manuscript-sync'}

@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.4.0 — Conversational menu / 2026-09-27
+
+- Add workspace-guide as the fourteenth Skill: first-use menu, numbered replies, natural-language intake, project selection and settings.
+- Make README and project START_HERE conversational; move execution details to an agent-facing playbook. Clear editing requests bypass the menu.
+- Provide identical static menus before installation and a dependency-free, read-only menu/context helper. Arbitrary text stays with the agent; selections never execute commands.
+- Add scoped agent-run virtual-environment preparation, with preview and separate build-tool download permission.
+- Add hidden framework entry files for agent discovery; packaging includes exactly these public entries and refuses local host settings.
+- Add two managed assets using the existing upgrade allowlist, retaining Schema 1 and existing user work.
+- Add 41 focused tests and an actual isolated setup/menu smoke exercise. This release does not claim a rerun of all prior research tests or a live multi-host conversation benchmark.
+
+## 0.3.0 — Publication workflows / 2026-09-26
+
+- Added venue-setup, overleaf-sync and venue-transfer, bringing the registry to thirteen Skills.
+- Added original-template archives, versioned venue rules, native LaTeX bindings, self-hosted Overleaf setup/Git transport and preserved-source resubmission drafts.
+- Historical verification lives under verification/publication; its 181-test report describes that version. Authenticated Overleaf sessions and live template downloads were reported separately as unverified.
+
 ## 0.2.0 — Auto-route / 2026-09-24
 
 - Add the tenth built-in Skill, auto-route, as the default paper-session entry.
@@ -8,7 +24,6 @@
 - Add optional explicitly authorized local Claude lifecycle hooks with settings preservation, isolated Python invocation and nonblocking Stop/failure handling.
 - Preserve user research and local customizations through the existing Schema 1 incremental updater; bootstrap old observed baselines lazily.
 - Add route/hook/upgrade regression tests and a reproducible synthetic walkthrough. Live host/model quality is not certified by these software tests.
-
 
 ## 0.1.0 — initial public workspace delivery, 2026-09-23
 

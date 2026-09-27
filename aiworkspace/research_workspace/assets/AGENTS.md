@@ -1,6 +1,12 @@
-# AI Research Workspace — session entry (0.3.0)
+# AI Research Workspace — session entry (0.4.0)
 
 Read START_HERE.md, workspace/state.json, workspace/rules/framework-policy.md, workspace/rules/project-policy.md, and the relevant Skill. Never rely on an earlier chat as canonical state. Keep workspace/ and manuscript/ as siblings outside the framework checkout.
+
+## Conversation menu comes first for navigation
+
+Read workspace/skills/workspace-guide/SKILL.md for first use, help, menu replies and project/settings navigation. Show workspace/templates/workspace-menu.md in the conversation without asking the user to run code. Use only actual local facts in the status line. Concrete editing/research requests skip the menu and use auto-route below. Menu/status navigation is read-only: do not call capture, create tasks, initialize a paper or install anything just to show help.
+
+The agent handles paths, commands, JSON and returned IDs. Reuse known project metadata, ask only essential missing information, and group meaningful installation/upload/conflict confirmations. Do not turn a simple task into a configuration questionnaire. Read the framework docs/AGENT_PLAYBOOK.md for internal execution, and docs/START_WITH_AGENT.md for user-facing guidance. Never select a different paper without the user's choice.
 
 ## Default natural workflow
 
