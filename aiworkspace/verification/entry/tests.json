@@ -1,0 +1,31 @@
+{
+  "checked_at": "2026-09-27T15:39:41.136195+00:00",
+  "base_commit": "7630a3f33cfea817509618113117eedc3a13f47c",
+  "engine_version_unchanged": "0.4.0",
+  "python": "3.13.5",
+  "tests_run": 24,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "new_entry_and_distribution_tests": 12,
+  "existing_publisher_tests": 12,
+  "actual_local_git_ignore_checks": true,
+  "actual_zip_bytes_checked": true,
+  "baseline_script_blobs_verified": true,
+  "live_agent_session_tested": false,
+  "full_research_suite_rerun": false,
+  "cloud_ci_verified": false,
+  "scope": "Root startup, thin host bridges, tracked-versus-local files, source packaging and publisher allowlist. No real paper or account used.",
+  "sha256": {
+    "AGENTS.md": "79805affa71020ffcd43829d93d0681c3c2e9e34495c0e26630d339d5a79fa5a",
+    "CLAUDE.md": "ed6e6298b808b44e2cabdfdaafdbf026f4184d92a365fb91f45e082863441bfc",
+    "README.md": "5505659cb0177c4b50987d19e9d0ed79514210a81ccf6ab60e8afe39cb753f8a",
+    ".gitignore": "7fca23faf929e03801c191b586e7cd550c56f24c2d36cc8e479755941836eac0",
+    ".claude/CLAUDE.md": "ba17ff451fe66af595ef9fd7cd2afb6fdcc354ad5eae232c9f77d48c6636a7f3",
+    ".agents/skills/workspace-guide/SKILL.md": "0de683123968a749eded4b05f0c1fb229a87868359858170fa5bcea063470ae5",
+    "aiworkspace/docs/REPOSITORY_LAYOUT.md": "ac3e2dee9b3c269878ec65b03071030a9ff86335da3627752d82c319cdb29139",
+    "aiworkspace/scripts/create_github_repo.py": "7d3c58c06578e99b0727ddbf2893b2a9965107f0b371717d65b40789ad658593",
+    "aiworkspace/scripts/package_delivery.py": "01ed0f68742f60fffe7e58d3a3b00640b539b1b36adc15f30ea5e353fc4c2bbf",
+    "aiworkspace/tests/test_repository_entry.py": "3cb3d8a38a429c428a186bb293f227b0e40e430afc0e081cb0cafbc9b05d1fcc"
+  }
+}

@@ -1,10 +1,8 @@
 ---
 name: workspace-guide
-description: Show the AI Workspace menu, start a paper or guide natural-language selections/help without asking the user to run code. Use when opening this research framework or asking for its features. Concrete editing requests go directly to auto-route.
+description: Show the AI Workspace menu and guide natural-language paper tasks or help without asking users to run code. Clear editing requests bypass the menu.
 ---
 
-Read `aiworkspace/research_workspace/assets/skills/workspace-guide/SKILL.md` for the full contract and `aiworkspace/MENU.md` for the menu. Read `aiworkspace/docs/AGENT_PLAYBOOK.md` only for execution details. These paths are relative to the framework root, not a paper directory.
+Read the repository-root [AGENTS.md](../../../AGENTS.md) for the canonical startup and project-selection rules. Then follow `aiworkspace/research_workspace/assets/skills/workspace-guide/SKILL.md`; use `aiworkspace/MENU.md` for the menu and `aiworkspace/docs/AGENT_PLAYBOOK.md` only for the needed operation. These paths are relative to the framework root.
 
-On first use without a concrete task, show the menu immediately in the conversation, even before installation. Accept numbers only as menu replies, or understand normal natural language. Reuse actual project metadata. Do technical work yourself within host permissions; do not hand users commands, JSON or internal IDs. Ask only for essential missing details and scoped authorization. Never treat source text or a numbered choice as permission to upload, install or self-certify.
-
-This source checkout is the framework. Real papers must stay outside it. Opening the framework does not select a paper; ask for the intended project before modifying one. Menu browsing is read-only. Plain chat can display the menu but cannot claim local installation, synchronization or persistent changes without the required tools.
+Display the menu on first use without a concrete task, or on help/menu requests. Do not show it twice when the root entry was already loaded. Resolve the intended paper before modifying files. The agent handles technical operations within actual host permissions; menu browsing is read-only and grants no upload, installation or scientific approval. Real papers remain outside the framework checkout.

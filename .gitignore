@@ -7,3 +7,18 @@ dist/
 .env
 .env.*
 .DS_Store
+
+# Shared agent instructions remain tracked; personal settings and sessions do not.
+**/CLAUDE.local.md
+**/.claude/settings.local.json
+**/.claude/.credentials.json
+**/.claude/projects/
+**/.claude/history.jsonl
+**/.claude/debug/
+**/.claude/session-env/
+**/.agents/.credentials.json
+
+# Framework checkout only: actual papers and connection state live outside it.
+/.rw/
+/workspace/
+/manuscript/

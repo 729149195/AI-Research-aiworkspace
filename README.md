@@ -6,11 +6,13 @@
 
 ## 先这样开始
 
-在你使用的文件型 agent 中打开本仓库，或把仓库链接交给它，然后说：
+在你使用的文件型 agent 中打开本仓库文件夹。支持项目指令的宿主会读取根目录 [AGENTS.md](AGENTS.md)；Claude Code 通过 [CLAUDE.md](CLAUDE.md) 导入同一份规则。首次交互没有具体任务时显示菜单，有明确任务则直接办理。
+
+宿主未自动读取，或你只提供了仓库链接时，说：
 
 > 请阅读这个 AI Workspace，显示功能菜单，带我使用。操作由你完成，需要我确认的地方再问我。
 
-**给 agent：** 先读 [workspace-guide](aiworkspace/research_workspace/assets/skills/workspace-guide/SKILL.md)，显示下面的菜单；有具体需求时直接办理。技术执行细节见 [Agent 操作手册](aiworkspace/docs/AGENT_PLAYBOOK.md)。不要要求用户手动运行命令、填写 JSON 或替换路径占位符。
+**给 agent：** 先读根目录 [AGENTS.md](AGENTS.md)，再按需读取 [workspace-guide](aiworkspace/research_workspace/assets/skills/workspace-guide/SKILL.md)，显示下面的菜单；有具体需求时直接办理。技术执行细节见 [Agent 操作手册](aiworkspace/docs/AGENT_PLAYBOOK.md)。不要要求用户手动运行命令、填写 JSON 或替换路径占位符。
 
 菜单在安装前就能显示。真正需要创建／修改本地文件时，agent 会检查环境，并集中说明需要你确认的安装或权限。阅读了仓库链接不代表它已经取得本地文件权限。
 
@@ -53,7 +55,9 @@
 
 ## 文件怎么放
 
-本仓库只放框架，主要入口为 `aiworkspace/`、`update_aiworkspace.py` 和本说明。隐藏的 `.agents/`、`.claude/` 提供宿主入口；`.github/` 提供 CI。
+本仓库只放框架。根目录 `AGENTS.md` / `CLAUDE.md` 给 agent 提供启动指引；`aiworkspace/` 放实现，`update_aiworkspace.py` 提供更新，本说明面向用户。隐藏的 `.agents/`、`.claude/` 只共享公开的宿主指引；`.github/workflows/` 保留自动测试配置，本地菜单使用不依赖云端 CI。
+
+`.claude/settings.local.json`、个人记忆／会话、凭据与 `.rw` 运行状态保持本地，不提交、不打包。克隆文件不会自动安装、登录或启动监听。完整说明见 [仓库结构与共享范围](aiworkspace/docs/REPOSITORY_LAYOUT.md)。
 
 每篇真实论文使用仓库之外的独立目录，里面 `workspace/` 管逻辑、文献、证据、规则与历史，`manuscript/` 管正式正文、LaTeX 和图表。研究目录与稿件目录并列。不会把真实论文上传到本公共仓库。
 

@@ -10,7 +10,7 @@ import zipfile
 
 PACKAGE = Path(__file__).resolve().parents[1]
 ROOT = PACKAGE.parent
-EXCLUDED = {'.git', '.venv', '__pycache__', 'build', 'dist', '.pytest_cache'}
+EXCLUDED = {'.git', '.rw', '.venv', '__pycache__', 'build', 'dist', '.pytest_cache'}
 
 
 def archive(folder: Path, output: Path, prefix: str, *, extra: list[Path] | None = None) -> None:
@@ -23,7 +23,8 @@ def archive(folder: Path, output: Path, prefix: str, *, extra: list[Path] | None
             if path.is_symlink():
                 raise ValueError('Refusing to distribute a symlink: ' + str(path))
             if path.is_file():
-                if path.suffix.lower() in ('.ppt', '.pptx', '.pyc') or path.name.startswith('.env'):
+                if (path.suffix.lower() in ('.ppt', '.pptx', '.pyc') or path.name.startswith('.env')
+                        or path.name in {'CLAUDE.local.md', 'settings.local.json', '.credentials.json', 'credentials.json', 'secrets.json'}):
                     raise ValueError('Unexpected private/binary build material: ' + str(path))
                 target.write(path, prefix + '/' + relative.as_posix())
         for path in extra or []:
@@ -45,7 +46,7 @@ def main() -> int:
         raise ValueError('Delivery destination may not be inside the demo study.')
     destination.mkdir(parents=True)
     archive(PACKAGE, destination / 'aiworkspace-source.zip', 'aiworkspace',
-            extra=[ROOT / 'README.md', ROOT / 'update_aiworkspace.py', ROOT / '.gitignore',
+            extra=[ROOT / 'README.md', ROOT / 'AGENTS.md', ROOT / 'CLAUDE.md', ROOT / 'update_aiworkspace.py', ROOT / '.gitignore',
                    ROOT / '.github/workflows/research-workspace.yml',
                    ROOT / '.agents/skills/workspace-guide/SKILL.md', ROOT / '.claude/CLAUDE.md'])
     if a.demo:

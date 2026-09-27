@@ -20,7 +20,7 @@ ROOT = Path(__file__).resolve().parents[2]
 OWNER = '729149195'
 NAME = 'AI-Research-aiworkspace'
 TARGET = OWNER + '/' + NAME
-ALLOWED_ROOT = {'aiworkspace', 'README.md', 'update_aiworkspace.py', '.gitignore', '.github', '.agents', '.claude'}
+ALLOWED_ROOT = {'aiworkspace', 'AGENTS.md', 'CLAUDE.md', 'README.md', 'update_aiworkspace.py', '.gitignore', '.github', '.agents', '.claude'}
 AGENT_ENTRIES = {'.agents', '.agents/skills', '.agents/skills/workspace-guide',
                  '.agents/skills/workspace-guide/SKILL.md', '.claude', '.claude/CLAUDE.md'}
 SKIP = {'.venv', '__pycache__', '.pytest_cache', 'build', 'dist'}
@@ -52,6 +52,8 @@ def payload(root: Path) -> list[str]:
                 'Research or nested Git data detected: ' + rel.as_posix())
         require(not any(x.startswith('.env') for x in rel.parts), 'Environment files must not be published.')
         if p.is_file():
+            require(p.name not in {'CLAUDE.local.md', 'settings.local.json', '.credentials.json', 'credentials.json', 'secrets.json'},
+                    'Private agent settings must not be published: ' + rel.as_posix())
             require(p.suffix.lower() not in ('.ppt', '.pptx', '.pyc', '.pem', '.key'),
                     'Private/binary material detected: ' + rel.as_posix())
             files.append(rel.as_posix())
