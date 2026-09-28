@@ -6,7 +6,15 @@
 
 ## 先这样开始
 
-在你使用的文件型 agent 中打开本仓库文件夹。支持项目指令的宿主会读取根目录 [AGENTS.md](AGENTS.md)；Claude Code 通过 [CLAUDE.md](CLAUDE.md) 导入同一份规则。首次交互没有具体任务时显示菜单，有明确任务则直接办理。
+**Codex 和 Claude Code 都有对应入口：**
+
+| 使用的 agent | 仓库中的入口 | 如何开始 |
+|---|---|---|
+| **Codex** | [AGENTS.md](AGENTS.md) ＋ [.agents/skills/workspace-guide](.agents/skills/workspace-guide/SKILL.md) | 打开本仓库并说“显示菜单”；[Codex 专门指引](aiworkspace/docs/CODEX.md) |
+| **Claude Code** | [CLAUDE.md](CLAUDE.md) 导入同一份 AGENTS.md | 打开本仓库并说“显示菜单” |
+| **其他文件型 agent** | 手动指定 [AGENTS.md](AGENTS.md) | 让 agent 读取入口，按其实际权限办理 |
+
+首次交互没有具体任务时显示菜单，有明确任务则直接办理。Codex 的项目指令和 Skills 已放在标准位置；本仓库保留用户自己的模型、账号和权限配置。
 
 宿主未自动读取，或你只提供了仓库链接时，说：
 

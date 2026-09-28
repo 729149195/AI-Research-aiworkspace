@@ -1,0 +1,6 @@
+interface:
+  display_name: "AI Workspace · 论文助手"
+  short_description: "显示科研菜单，用自然语言新建、改稿、同步或转投论文"
+  default_prompt: "请使用 $workspace-guide 读取项目入口并显示 AI Workspace 功能菜单；操作由你完成，需要我确认时再问我。"
+policy:
+  allow_implicit_invocation: true

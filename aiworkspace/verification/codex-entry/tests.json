@@ -1,0 +1,26 @@
+{
+  "checked_at": "2026-09-28",
+  "base_commit": "93c571d34d4942b4517370eec1b6220f81322323",
+  "engine_version": "0.4.0 (unchanged)",
+  "python": "3.13.5",
+  "platform": "Linux",
+  "tests": {
+    "run": 22,
+    "new_codex_entry_tests": 10,
+    "existing_publisher_regressions": 12,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "additional_checks": {
+    "yaml_parsed_with_pyyaml": true,
+    "root_metadata_in_real_fixture_zip": true,
+    "private_codex_auth_excluded_from_fixture_zip": true
+  },
+  "commands": [
+    "python -m unittest discover -s aiworkspace/tests -p test_codex_entry.py -v",
+    "python -m unittest discover -s aiworkspace/tests -p test_publisher.py -v"
+  ],
+  "source_verification": "Restored touched existing files from connector reads and matched Git blob hashes before modification. Existing publisher regression blob also matched. Unchanged scientific engine was not restored or tested.",
+  "boundary": "Scoped local source/metadata/distribution tests. Packaging test uses a minimal synthetic fixture; no full release build, scientific workflow regression, live Codex app/CLI/model, Codex hook, Overleaf, network synchronization or cloud CI validation. No account or model configuration changed."
+}

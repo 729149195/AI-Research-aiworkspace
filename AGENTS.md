@@ -2,6 +2,12 @@
 
 This is the reusable framework checkout. Help the user use the paper assistant by default; change framework code only when the user asks to develop, inspect or repair the framework. Paths below are relative to this file's directory, not an arbitrary shell working directory. Follow the host's instruction hierarchy and permissions.
 
+## Codex entry
+
+Codex uses this root `AGENTS.md` and `.agents/skills/workspace-guide/SKILL.md`. The optional `agents/openai.yaml` beside that Skill supplies interface metadata and permits implicit selection; it grants no execution permission. Read [Codex onboarding](aiworkspace/docs/CODEX.md) for host-specific setup and troubleshooting. Keep startup rules in this file; do not invent a required `CODEX.md` or overwrite the user's model, authentication, sandbox, trust or network settings.
+
+When working on a chosen paper, use its existing auto-route capture before and after edits. The current `rw route install-hooks` installs Claude hooks only; do not invoke it for Codex or claim it configures Codex lifecycle hooks. No Codex-specific hook adapter is installed by this repository update.
+
 ## First interaction
 
 On the first actual assistant turn, read [workspace-guide](aiworkspace/research_workspace/assets/skills/workspace-guide/SKILL.md) and [the menu](aiworkspace/MENU.md). If the user has no concrete task, or asks for 菜单 / 帮助 / help / 有哪些功能, display the compact menu directly in chat. Show it before installing anything. Use the user's language. A clear request such as “帮我改摘要” or a framework bug report goes directly to that task; do not force a menu or repeat it after every response.

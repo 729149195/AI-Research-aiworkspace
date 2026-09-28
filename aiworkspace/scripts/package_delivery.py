@@ -48,7 +48,9 @@ def main() -> int:
     archive(PACKAGE, destination / 'aiworkspace-source.zip', 'aiworkspace',
             extra=[ROOT / 'README.md', ROOT / 'AGENTS.md', ROOT / 'CLAUDE.md', ROOT / 'update_aiworkspace.py', ROOT / '.gitignore',
                    ROOT / '.github/workflows/research-workspace.yml',
-                   ROOT / '.agents/skills/workspace-guide/SKILL.md', ROOT / '.claude/CLAUDE.md'])
+                   ROOT / '.agents/skills/workspace-guide/SKILL.md',
+                   ROOT / '.agents/skills/workspace-guide/agents/openai.yaml',
+                   ROOT / '.claude/CLAUDE.md'])
     if a.demo:
         demo = Path(a.demo).expanduser().resolve()
         state = json.loads((demo / 'workspace/state.json').read_text(encoding='utf-8'))

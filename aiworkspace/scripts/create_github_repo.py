@@ -22,7 +22,10 @@ NAME = 'AI-Research-aiworkspace'
 TARGET = OWNER + '/' + NAME
 ALLOWED_ROOT = {'aiworkspace', 'AGENTS.md', 'CLAUDE.md', 'README.md', 'update_aiworkspace.py', '.gitignore', '.github', '.agents', '.claude'}
 AGENT_ENTRIES = {'.agents', '.agents/skills', '.agents/skills/workspace-guide',
-                 '.agents/skills/workspace-guide/SKILL.md', '.claude', '.claude/CLAUDE.md'}
+                 '.agents/skills/workspace-guide/SKILL.md',
+                 '.agents/skills/workspace-guide/agents',
+                 '.agents/skills/workspace-guide/agents/openai.yaml',
+                 '.claude', '.claude/CLAUDE.md'}
 SKIP = {'.venv', '__pycache__', '.pytest_cache', 'build', 'dist'}
 
 
