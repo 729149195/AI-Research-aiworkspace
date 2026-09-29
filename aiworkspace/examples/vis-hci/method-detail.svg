@@ -1,0 +1,177 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 565" width="180mm" height="92.45454545454545mm"><title>method-detail</title><desc>Original illustrative figure using synthetic data. No reported experiment or product screenshot.</desc><rect x="0" y="0" width="1100" height="565" fill="white" stroke="none" stroke-width="1.2"></rect>
+<g id="panel-a">
+<text x="15" y="29" font-family="Liberation Sans" font-size="22" font-weight="bold" fill="#263238" text-anchor="start">(a) Brush the visible marks</text>
+<line x1="52" y1="80" x2="52" y2="235" stroke="#cdd3d7" stroke-width="1.2"></line>
+<line x1="52" y1="235" x2="287" y2="235" stroke="#cdd3d7" stroke-width="1.2"></line>
+<line x1="52.0" y1="235" x2="52.0" y2="239" stroke="#cdd3d7" stroke-width="1.2"></line>
+<text x="52.0" y="257" font-family="Liberation Sans" font-size="16" font-weight="normal" fill="#263238" text-anchor="middle">0</text>
+<line x1="48" y1="235.0" x2="52" y2="235.0" stroke="#cdd3d7" stroke-width="1.2"></line>
+<text x="43" y="240.0" font-family="Liberation Sans" font-size="16" font-weight="normal" fill="#263238" text-anchor="end">0</text>
+<line x1="169.5" y1="235" x2="169.5" y2="239" stroke="#cdd3d7" stroke-width="1.2"></line>
+<text x="169.5" y="257" font-family="Liberation Sans" font-size="16" font-weight="normal" fill="#263238" text-anchor="middle">5</text>
+<line x1="48" y1="157.5" x2="52" y2="157.5" stroke="#cdd3d7" stroke-width="1.2"></line>
+<text x="43" y="162.5" font-family="Liberation Sans" font-size="16" font-weight="normal" fill="#263238" text-anchor="end">5</text>
+<line x1="287.0" y1="235" x2="287.0" y2="239" stroke="#cdd3d7" stroke-width="1.2"></line>
+<text x="287.0" y="257" font-family="Liberation Sans" font-size="16" font-weight="normal" fill="#263238" text-anchor="middle">10</text>
+<line x1="48" y1="80.0" x2="52" y2="80.0" stroke="#cdd3d7" stroke-width="1.2"></line>
+<text x="43" y="85.0" font-family="Liberation Sans" font-size="16" font-weight="normal" fill="#263238" text-anchor="end">10</text>
+<text x="169.5" y="279" font-family="Liberation Sans" font-size="17" font-weight="normal" fill="#263238" text-anchor="middle">Attribute x</text>
+<text x="52" y="70" font-family="Liberation Sans" font-size="17" font-weight="normal" fill="#263238" text-anchor="start">Attribute y</text>
+<rect x="87.25" y="118.75" width="70.5" height="62.0" fill="#e7f0f5" stroke="#216b91" stroke-width="1.3"></rect>
+<circle cx="75.5" cy="204.0" r="5.2" fill="#b8c1c7" stroke="none" stroke-width="1.3"></circle>
+<text x="83.5" y="197.0" font-family="Liberation Sans" font-size="16" font-weight="normal" fill="#5e666d" text-anchor="start">a</text>
+<circle cx="99.0" cy="142.0" r="5.2" fill="#216b91" stroke="#216b91" stroke-width="1.3"></circle>
+<text x="107.0" y="135.0" font-family="Liberation Sans" font-size="16" font-weight="normal" fill="#216b91" text-anchor="start">b</text>
+<circle cx="122.5" cy="173.0" r="5.2" fill="#216b91" stroke="#216b91" stroke-width="1.3"></circle>
+<text x="130.5" y="166.0" font-family="Liberation Sans" font-size="16" font-weight="normal" fill="#216b91" text-anchor="start">c</text>
+<circle cx="146.0" cy="126.5" r="5.2" fill="#216b91" stroke="#216b91" stroke-width="1.3"></circle>
+<text x="154.0" y="119.5" font-family="Liberation Sans" font-size="16" font-weight="normal" fill="#216b91" text-anchor="start">d</text>
+<circle cx="193.0" cy="188.5" r="5.2" fill="#b8c1c7" stroke="none" stroke-width="1.3"></circle>
+<text x="201.0" y="181.5" font-family="Liberation Sans" font-size="16" font-weight="normal" fill="#5e666d" text-anchor="start">e</text>
+<circle cx="216.5" cy="111.0" r="5.2" fill="#b8c1c7" stroke="none" stroke-width="1.3"></circle>
+<text x="224.5" y="104.0" font-family="Liberation Sans" font-size="16" font-weight="normal" fill="#5e666d" text-anchor="start">f</text>
+<circle cx="240.0" cy="157.5" r="5.2" fill="#b8c1c7" stroke="none" stroke-width="1.3"></circle>
+<text x="248.0" y="150.5" font-family="Liberation Sans" font-size="16" font-weight="normal" fill="#5e666d" text-anchor="start">g</text>
+<circle cx="263.5" cy="95.5" r="5.2" fill="#b8c1c7" stroke="none" stroke-width="1.3"></circle>
+<text x="271.5" y="88.5" font-family="Liberation Sans" font-size="16" font-weight="normal" fill="#5e666d" text-anchor="start">h</text>
+<text x="26" y="318" font-family="Liberation Sans" font-size="17" font-weight="normal" fill="#5e666d" text-anchor="start">The same eight rows throughout</text>
+<text x="36" y="346" font-family="Liberation Sans" font-size="17" font-weight="bold" fill="#5e666d" text-anchor="start">ID</text>
+<text x="90" y="346" font-family="Liberation Sans" font-size="17" font-weight="bold" fill="#5e666d" text-anchor="start">x</text>
+<text x="142" y="346" font-family="Liberation Sans" font-size="17" font-weight="bold" fill="#5e666d" text-anchor="start">y</text>
+<text x="209" y="346" font-family="Liberation Sans" font-size="17" font-weight="bold" fill="#5e666d" text-anchor="start">Group</text>
+<line x1="26" y1="355" x2="304" y2="355" stroke="#5e666d" stroke-width="1.2"></line>
+<text x="36" y="377" font-family="Liberation Sans" font-size="17" font-weight="normal" fill="#263238" text-anchor="start">a</text>
+<text x="90" y="377" font-family="Liberation Sans" font-size="17" font-weight="normal" fill="#263238" text-anchor="start">1</text>
+<text x="142" y="377" font-family="Liberation Sans" font-size="17" font-weight="normal" fill="#263238" text-anchor="start">2</text>
+<text x="209" y="377" font-family="Liberation Sans" font-size="17" font-weight="normal" fill="#263238" text-anchor="start">A</text>
+<rect x="26" y="383" width="278" height="21" fill="#e7f0f5" stroke="none" stroke-width="1.2"></rect>
+<text x="36" y="398" font-family="Liberation Sans" font-size="17" font-weight="normal" fill="#216b91" text-anchor="start">b</text>
+<text x="90" y="398" font-family="Liberation Sans" font-size="17" font-weight="normal" fill="#216b91" text-anchor="start">2</text>
+<text x="142" y="398" font-family="Liberation Sans" font-size="17" font-weight="normal" fill="#216b91" text-anchor="start">6</text>
+<text x="209" y="398" font-family="Liberation Sans" font-size="17" font-weight="normal" fill="#216b91" text-anchor="start">B</text>
+<rect x="26" y="404" width="278" height="21" fill="#e7f0f5" stroke="none" stroke-width="1.2"></rect>
+<text x="36" y="419" font-family="Liberation Sans" font-size="17" font-weight="normal" fill="#216b91" text-anchor="start">c</text>
+<text x="90" y="419" font-family="Liberation Sans" font-size="17" font-weight="normal" fill="#216b91" text-anchor="start">3</text>
+<text x="142" y="419" font-family="Liberation Sans" font-size="17" font-weight="normal" fill="#216b91" text-anchor="start">4</text>
+<text x="209" y="419" font-family="Liberation Sans" font-size="17" font-weight="normal" fill="#216b91" text-anchor="start">A</text>
+<rect x="26" y="425" width="278" height="21" fill="#e7f0f5" stroke="none" stroke-width="1.2"></rect>
+<text x="36" y="440" font-family="Liberation Sans" font-size="17" font-weight="normal" fill="#216b91" text-anchor="start">d</text>
+<text x="90" y="440" font-family="Liberation Sans" font-size="17" font-weight="normal" fill="#216b91" text-anchor="start">4</text>
+<text x="142" y="440" font-family="Liberation Sans" font-size="17" font-weight="normal" fill="#216b91" text-anchor="start">7</text>
+<text x="209" y="440" font-family="Liberation Sans" font-size="17" font-weight="normal" fill="#216b91" text-anchor="start">B</text>
+<text x="36" y="461" font-family="Liberation Sans" font-size="17" font-weight="normal" fill="#263238" text-anchor="start">e</text>
+<text x="90" y="461" font-family="Liberation Sans" font-size="17" font-weight="normal" fill="#263238" text-anchor="start">6</text>
+<text x="142" y="461" font-family="Liberation Sans" font-size="17" font-weight="normal" fill="#263238" text-anchor="start">3</text>
+<text x="209" y="461" font-family="Liberation Sans" font-size="17" font-weight="normal" fill="#263238" text-anchor="start">A</text>
+<text x="36" y="482" font-family="Liberation Sans" font-size="17" font-weight="normal" fill="#263238" text-anchor="start">f</text>
+<text x="90" y="482" font-family="Liberation Sans" font-size="17" font-weight="normal" fill="#263238" text-anchor="start">7</text>
+<text x="142" y="482" font-family="Liberation Sans" font-size="17" font-weight="normal" fill="#263238" text-anchor="start">8</text>
+<text x="209" y="482" font-family="Liberation Sans" font-size="17" font-weight="normal" fill="#263238" text-anchor="start">B</text>
+<text x="36" y="503" font-family="Liberation Sans" font-size="17" font-weight="normal" fill="#263238" text-anchor="start">g</text>
+<text x="90" y="503" font-family="Liberation Sans" font-size="17" font-weight="normal" fill="#263238" text-anchor="start">8</text>
+<text x="142" y="503" font-family="Liberation Sans" font-size="17" font-weight="normal" fill="#263238" text-anchor="start">5</text>
+<text x="209" y="503" font-family="Liberation Sans" font-size="17" font-weight="normal" fill="#263238" text-anchor="start">A</text>
+<text x="36" y="524" font-family="Liberation Sans" font-size="17" font-weight="normal" fill="#263238" text-anchor="start">h</text>
+<text x="90" y="524" font-family="Liberation Sans" font-size="17" font-weight="normal" fill="#263238" text-anchor="start">9</text>
+<text x="142" y="524" font-family="Liberation Sans" font-size="17" font-weight="normal" fill="#263238" text-anchor="start">9</text>
+<text x="209" y="524" font-family="Liberation Sans" font-size="17" font-weight="normal" fill="#263238" text-anchor="start">B</text>
+<line x1="26" y1="535" x2="304" y2="535" stroke="#cdd3d7" stroke-width="1.2"></line>
+</g>
+<g id="panel-b">
+<text x="356" y="29" font-family="Liberation Sans" font-size="22" font-weight="bold" fill="#263238" text-anchor="start">(b) From geometry to row identity</text>
+<text x="363" y="70" font-family="Liberation Sans" font-size="19" font-weight="bold" fill="#216b91" text-anchor="start">Brush B</text>
+<text x="363" y="99" font-family="Liberation Sans" font-size="18" font-weight="normal" fill="#263238" text-anchor="start">1.5 &lt;= x &lt;= 4.5</text>
+<text x="363" y="126" font-family="Liberation Sans" font-size="18" font-weight="normal" fill="#263238" text-anchor="start">3.5 &lt;= y &lt;= 7.5</text>
+<line x1="510" y1="104" x2="558" y2="104" stroke="#5e666d" stroke-width="1.6"></line>
+<polygon points="558,104 551,100 551,108" fill="#5e666d"></polygon>
+<text x="582" y="71" font-family="Liberation Sans" font-size="19" font-weight="normal" fill="#263238" text-anchor="start">Hit-test each mark</text>
+<circle cx="576" cy="110" r="11" fill="#eef1f3" stroke="none" stroke-width="1.3"></circle>
+<text x="576" y="116" font-family="Liberation Sans" font-size="16" font-weight="normal" fill="#5e666d" text-anchor="middle">a</text>
+<circle cx="617" cy="110" r="11" fill="#216b91" stroke="none" stroke-width="1.3"></circle>
+<text x="617" y="116" font-family="Liberation Sans" font-size="16" font-weight="normal" fill="white" text-anchor="middle">b</text>
+<circle cx="658" cy="110" r="11" fill="#216b91" stroke="none" stroke-width="1.3"></circle>
+<text x="658" y="116" font-family="Liberation Sans" font-size="16" font-weight="normal" fill="white" text-anchor="middle">c</text>
+<circle cx="699" cy="110" r="11" fill="#216b91" stroke="none" stroke-width="1.3"></circle>
+<text x="699" y="116" font-family="Liberation Sans" font-size="16" font-weight="normal" fill="white" text-anchor="middle">d</text>
+<circle cx="576" cy="154" r="11" fill="#eef1f3" stroke="none" stroke-width="1.3"></circle>
+<text x="576" y="160" font-family="Liberation Sans" font-size="16" font-weight="normal" fill="#5e666d" text-anchor="middle">e</text>
+<circle cx="617" cy="154" r="11" fill="#eef1f3" stroke="none" stroke-width="1.3"></circle>
+<text x="617" y="160" font-family="Liberation Sans" font-size="16" font-weight="normal" fill="#5e666d" text-anchor="middle">f</text>
+<circle cx="658" cy="154" r="11" fill="#eef1f3" stroke="none" stroke-width="1.3"></circle>
+<text x="658" y="160" font-family="Liberation Sans" font-size="16" font-weight="normal" fill="#5e666d" text-anchor="middle">g</text>
+<circle cx="699" cy="154" r="11" fill="#eef1f3" stroke="none" stroke-width="1.3"></circle>
+<text x="699" y="160" font-family="Liberation Sans" font-size="16" font-weight="normal" fill="#5e666d" text-anchor="middle">h</text>
+<text x="363" y="207" font-family="Liberation Sans" font-size="22" font-weight="bold" fill="#216b91" text-anchor="start">S = {b, c, d}</text>
+<text x="363" y="239" font-family="Liberation Sans" font-size="17" font-weight="normal" fill="#263238" text-anchor="start">Selected identity survives the view change.</text>
+</g>
+<line x1="355" y1="261" x2="759" y2="261" stroke="#cdd3d7" stroke-width="1"></line>
+<g id="panel-c">
+<text x="356" y="294" font-family="Liberation Sans" font-size="22" font-weight="bold" fill="#263238" text-anchor="start">(c) Aggregate the selected rows</text>
+<text x="363" y="332" font-family="Liberation Sans" font-size="17" font-weight="normal" fill="#5e666d" text-anchor="start">Row IDs</text>
+<text x="379" y="362" font-family="Liberation Sans" font-size="18" font-weight="normal" fill="#263238" text-anchor="middle">a</text>
+<rect x="363" y="380" width="32" height="31" fill="#f1f3f4" stroke="none" stroke-width="1.2"></rect>
+<text x="379" y="402" font-family="Liberation Sans" font-size="17" font-weight="normal" fill="#5e666d" text-anchor="middle">0</text>
+<text x="426" y="362" font-family="Liberation Sans" font-size="18" font-weight="normal" fill="#263238" text-anchor="middle">b</text>
+<rect x="410" y="380" width="32" height="31" fill="#216b91" stroke="none" stroke-width="1.2"></rect>
+<text x="426" y="402" font-family="Liberation Sans" font-size="17" font-weight="normal" fill="white" text-anchor="middle">1</text>
+<text x="473" y="362" font-family="Liberation Sans" font-size="18" font-weight="normal" fill="#263238" text-anchor="middle">c</text>
+<rect x="457" y="380" width="32" height="31" fill="#216b91" stroke="none" stroke-width="1.2"></rect>
+<text x="473" y="402" font-family="Liberation Sans" font-size="17" font-weight="normal" fill="white" text-anchor="middle">1</text>
+<text x="520" y="362" font-family="Liberation Sans" font-size="18" font-weight="normal" fill="#263238" text-anchor="middle">d</text>
+<rect x="504" y="380" width="32" height="31" fill="#216b91" stroke="none" stroke-width="1.2"></rect>
+<text x="520" y="402" font-family="Liberation Sans" font-size="17" font-weight="normal" fill="white" text-anchor="middle">1</text>
+<text x="567" y="362" font-family="Liberation Sans" font-size="18" font-weight="normal" fill="#263238" text-anchor="middle">e</text>
+<rect x="551" y="380" width="32" height="31" fill="#f1f3f4" stroke="none" stroke-width="1.2"></rect>
+<text x="567" y="402" font-family="Liberation Sans" font-size="17" font-weight="normal" fill="#5e666d" text-anchor="middle">0</text>
+<text x="614" y="362" font-family="Liberation Sans" font-size="18" font-weight="normal" fill="#263238" text-anchor="middle">f</text>
+<rect x="598" y="380" width="32" height="31" fill="#f1f3f4" stroke="none" stroke-width="1.2"></rect>
+<text x="614" y="402" font-family="Liberation Sans" font-size="17" font-weight="normal" fill="#5e666d" text-anchor="middle">0</text>
+<text x="661" y="362" font-family="Liberation Sans" font-size="18" font-weight="normal" fill="#263238" text-anchor="middle">g</text>
+<rect x="645" y="380" width="32" height="31" fill="#f1f3f4" stroke="none" stroke-width="1.2"></rect>
+<text x="661" y="402" font-family="Liberation Sans" font-size="17" font-weight="normal" fill="#5e666d" text-anchor="middle">0</text>
+<text x="708" y="362" font-family="Liberation Sans" font-size="18" font-weight="normal" fill="#263238" text-anchor="middle">h</text>
+<rect x="692" y="380" width="32" height="31" fill="#f1f3f4" stroke="none" stroke-width="1.2"></rect>
+<text x="708" y="402" font-family="Liberation Sans" font-size="17" font-weight="normal" fill="#5e666d" text-anchor="middle">0</text>
+<text x="363" y="446" font-family="Liberation Sans" font-size="18" font-weight="normal" fill="#263238" text-anchor="start">Mask: membership in S</text>
+<text x="363" y="477" font-family="Liberation Sans" font-size="17" font-weight="normal" fill="#263238" text-anchor="start">Count selected rows within each group:</text>
+<text x="363" y="512" font-family="Liberation Sans" font-size="19" font-weight="bold" fill="#216b91" text-anchor="start">Group A: 1 of 4      Group B: 2 of 4</text>
+</g>
+<g id="panel-d">
+<text x="812" y="29" font-family="Liberation Sans" font-size="22" font-weight="bold" fill="#263238" text-anchor="start">(d) Inspect linked views</text>
+<text x="814" y="72" font-family="Liberation Sans" font-size="18" font-weight="normal" fill="#5e666d" text-anchor="start">Shared group-count scale</text>
+<text x="818" y="123" font-family="Liberation Sans" font-size="17" font-weight="normal" fill="#263238" text-anchor="start">Group A</text>
+<rect x="910" y="99" width="146" height="32" fill="#e5e9ec" stroke="none" stroke-width="1.2"></rect>
+<rect x="910" y="99" width="36.5" height="32" fill="#216b91" stroke="none" stroke-width="1.2"></rect>
+<text x="954.5" y="122" font-family="Liberation Sans" font-size="17" font-weight="bold" fill="#216b91" text-anchor="start">1</text>
+<text x="818" y="174" font-family="Liberation Sans" font-size="17" font-weight="normal" fill="#263238" text-anchor="start">Group B</text>
+<rect x="910" y="150" width="146" height="32" fill="#e5e9ec" stroke="none" stroke-width="1.2"></rect>
+<rect x="910" y="150" width="73.0" height="32" fill="#216b91" stroke="none" stroke-width="1.2"></rect>
+<text x="991.0" y="173" font-family="Liberation Sans" font-size="17" font-weight="bold" fill="#216b91" text-anchor="start">2</text>
+<line x1="910" y1="190" x2="1056" y2="190" stroke="#cdd3d7" stroke-width="1.2"></line>
+<text x="910.0" y="216" font-family="Liberation Sans" font-size="16" font-weight="normal" fill="#263238" text-anchor="middle">0</text>
+<text x="983.0" y="216" font-family="Liberation Sans" font-size="16" font-weight="normal" fill="#263238" text-anchor="middle">2</text>
+<text x="1056.0" y="216" font-family="Liberation Sans" font-size="16" font-weight="normal" fill="#263238" text-anchor="middle">4</text>
+<circle cx="822" cy="245" r="5" fill="#216b91" stroke="none" stroke-width="1.3"></circle>
+<text x="837" y="251" font-family="Liberation Sans" font-size="17" font-weight="normal" fill="#263238" text-anchor="start">Selected</text>
+<circle cx="944" cy="245" r="5" fill="#d9dfe3" stroke="none" stroke-width="1.3"></circle>
+<text x="959" y="251" font-family="Liberation Sans" font-size="17" font-weight="normal" fill="#263238" text-anchor="start">All rows</text>
+<text x="816" y="302" font-family="Liberation Sans" font-size="18" font-weight="normal" fill="#5e666d" text-anchor="start">Linked table: retained IDs</text>
+<line x1="815" y1="352" x2="1080" y2="352" stroke="#cdd3d7" stroke-width="1"></line>
+<text x="827" y="339" font-family="Liberation Sans" font-size="20" font-weight="bold" fill="#216b91" text-anchor="start">b</text>
+<text x="882" y="339" font-family="Liberation Sans" font-size="18" font-weight="normal" fill="#263238" text-anchor="start">Group B</text>
+<line x1="815" y1="391" x2="1080" y2="391" stroke="#cdd3d7" stroke-width="1"></line>
+<text x="827" y="378" font-family="Liberation Sans" font-size="20" font-weight="bold" fill="#216b91" text-anchor="start">c</text>
+<text x="882" y="378" font-family="Liberation Sans" font-size="18" font-weight="normal" fill="#263238" text-anchor="start">Group A</text>
+<line x1="815" y1="430" x2="1080" y2="430" stroke="#cdd3d7" stroke-width="1"></line>
+<text x="827" y="417" font-family="Liberation Sans" font-size="20" font-weight="bold" fill="#216b91" text-anchor="start">d</text>
+<text x="882" y="417" font-family="Liberation Sans" font-size="18" font-weight="normal" fill="#263238" text-anchor="start">Group B</text>
+<text x="816" y="485" font-family="Liberation Sans" font-size="17" font-weight="normal" fill="#263238" text-anchor="start">No new observations;</text>
+<text x="816" y="511" font-family="Liberation Sans" font-size="17" font-weight="normal" fill="#263238" text-anchor="start">only the selection changes.</text>
+</g>
+<line x1="311" y1="150" x2="343" y2="150" stroke="#5e666d" stroke-width="1.6"></line>
+<polygon points="343,150 336,146 336,154" fill="#5e666d"></polygon>
+<line x1="756" y1="390" x2="799" y2="390" stroke="#5e666d" stroke-width="1.6"></line>
+<polygon points="799,390 792,386 792,394" fill="#5e666d"></polygon>
+<line x1="744" y1="204" x2="744" y2="268" stroke="#5e666d" stroke-width="1.6"></line>
+<polygon points="744,268 740,261 748,261" fill="#5e666d"></polygon>
+<text x="16" y="555" font-family="Liberation Sans" font-size="16" font-weight="normal" fill="#5e666d" text-anchor="start">Illustrative worked example • synthetic rows • no experimental finding</text></svg>

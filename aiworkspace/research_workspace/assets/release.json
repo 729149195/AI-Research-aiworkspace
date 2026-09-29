@@ -1,6 +1,6 @@
 {
   "manifest_version": 1,
-  "version": "0.6.0",
+  "version": "0.6.1",
   "schema_version": 1,
   "files": {
     "AGENTS.md": "AGENTS.md",
@@ -30,6 +30,8 @@
     "workspace/templates/writing-brief.md": "templates/writing-brief.md",
     "workspace/templates/reviewer-response.md": "templates/reviewer-response.md",
     "workspace/templates/figure-brief.md": "templates/figure-brief.md",
-    "workspace/templates/diagram-brief.md": "templates/diagram-brief.md"
+    "workspace/templates/diagram-brief.md": "templates/diagram-brief.md",
+    "workspace/templates/vis-hci-figure-guide.md": "templates/vis-hci-figure-guide.md",
+    "workspace/templates/paper-figure-plan.md": "templates/paper-figure-plan.md"
   }
 }

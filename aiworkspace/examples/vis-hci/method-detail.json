@@ -1,0 +1,50 @@
+{
+  "kind": "paper-composite",
+  "id": "FIG-METHOD-DETAIL",
+  "title": "method detail",
+  "purpose": "Explain identity-preserving linked brushing with one fully specified synthetic example.",
+  "caption": "Illustrative linked-brushing example. Eight synthetic rows are kept fixed; the geometric brush selects b, c and d. The linked groups contain one selected A row and two selected B rows. This explains a familiar interaction mechanism and claims no research novelty, measured salience or user-study benefit.",
+  "alt_text": "Labeled panels trace eight synthetic observations through a brush, a selected identity set and coordinated displays. Selected rows remain blue and keep their letter IDs.",
+  "status": "illustrative",
+  "artwork": "method-detail.svg",
+  "claims": [],
+  "evidence": [],
+  "edges": [],
+  "width_mm": 180,
+  "min_font_pt": 7,
+  "dpi": 220,
+  "panels": [
+    {
+      "id": "panel-a",
+      "role": "input",
+      "object": "Eight labeled points and rows",
+      "shows": "Brush geometry on the input coordinates",
+      "source_status": "illustrative",
+      "source_note": "Synthetic worked-example.csv; known deterministic selection, not empirical evidence."
+    },
+    {
+      "id": "panel-b",
+      "role": "transformation",
+      "object": "Brush and selected row IDs",
+      "shows": "Actual hit-test produces S={b,c,d}",
+      "source_status": "illustrative",
+      "source_note": "Synthetic worked-example.csv; known deterministic selection, not empirical evidence."
+    },
+    {
+      "id": "panel-c",
+      "role": "encoding",
+      "object": "The same eight IDs and binary mask",
+      "shows": "One A and two B rows pass the predicate",
+      "source_status": "illustrative",
+      "source_note": "Synthetic worked-example.csv; known deterministic selection, not empirical evidence."
+    },
+    {
+      "id": "panel-d",
+      "role": "output",
+      "object": "Linked bars and filtered rows",
+      "shows": "Counts and identity remain consistent",
+      "source_status": "illustrative",
+      "source_note": "Synthetic worked-example.csv; known deterministic selection, not empirical evidence."
+    }
+  ]
+}

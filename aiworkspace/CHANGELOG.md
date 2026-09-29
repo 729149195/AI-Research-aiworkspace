@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.6.1 — Content-first VIS/HCI paper figures / 2026-09-30
+
+- Correct the academic-figure default: inspect real paper figures and captions, then show concrete objects, encodings, transformations and interaction feedback through a consistent worked example. Generic graph templates remain an optional route.
+- Add a strict inert-SVG paper-composite route to the existing diagrams lifecycle, preserving editable artwork, PDF/PNG, complete reproduction source, provenance and draft-only research proposals.
+- Add two original synthetic examples and a source-based reading/design guide; do not redistribute reference-paper or user-uploaded graphics.
+- Add two managed Markdown resources without changing Schema 1, the 15 Skills or the 10-menu interface.
+- Run 37 targeted source/Store/security/upgrade tests, two actual composition/reproduction exercises and seven legacy sample graph checks. Inspect both final PDFs. No full historical suite, release-wheel, live-agent, editor-GUI, Overleaf or CI pass is inferred. Scope: verification/paper-composition/README.md.
+
 ## 0.6.0 — Editable research diagrams / 2026-09-30
 
 - Add research-diagram as the fifteenth Skill, reached through the existing menu 5 and figure-visualization delegation.

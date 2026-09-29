@@ -1,0 +1,70 @@
+{
+  "version": "0.6.1",
+  "base_commit": "06c6444c07bb0dbe8dada1b7285b0c73d3a0d4f3",
+  "at": "2026-09-29T19:39:39.161879+00:00",
+  "python": "3.13.5",
+  "platform": "Linux",
+  "unit_tests": {
+    "run": 37,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "unchanged_core_blob_checks": {
+    "model.py": "5703ad702295c58985ec95e5f868cb0ded0fa29a",
+    "store.py": "fee842417439681acf4f0f1769177fe165834386",
+    "workflow.py": "fba42a320821585ef5bf4119ad19ebaf375ec2db",
+    "upgrade.py": "cd91ac9fd0846da6f04411e218b3d2e0f61d1d86",
+    "diagram_render.py": "4ee02ca89972a6aee409b87e2a3faefc68200917"
+  },
+  "legacy_graph_smoke": [
+    {
+      "kind": "conceptual",
+      "rendered": true,
+      "receipt_current": true,
+      "editable_drawio": true
+    },
+    {
+      "kind": "architecture",
+      "rendered": true,
+      "receipt_current": true,
+      "editable_drawio": true
+    },
+    {
+      "kind": "experiment",
+      "rendered": true,
+      "receipt_current": true,
+      "editable_drawio": true
+    },
+    {
+      "kind": "pipeline",
+      "rendered": true,
+      "receipt_current": true,
+      "editable_drawio": true
+    },
+    {
+      "kind": "response",
+      "rendered": true,
+      "receipt_current": true,
+      "editable_drawio": true
+    },
+    {
+      "kind": "mechanism",
+      "rendered": true,
+      "receipt_current": true,
+      "editable_drawio": true
+    },
+    {
+      "kind": "graphical-abstract",
+      "rendered": true,
+      "receipt_current": true,
+      "editable_drawio": true
+    }
+  ],
+  "visual_review": {
+    "method_detail_pdf": "inspected at 180mm page width after rendering",
+    "interaction_storyboard_pdf": "inspected after replacing repeated view with actual linked-count response",
+    "remaining": "manual evaluation on real paper still required"
+  },
+  "scope": "Targeted source-module tests with real hash-verified current core modules and explicit Schema 1 fixtures. Actual child-process reproduction and seven published legacy sample graphs. No full historical suite, release wheel, live-agent benchmark, editor GUI, Overleaf or cloud CI certification."
+}
