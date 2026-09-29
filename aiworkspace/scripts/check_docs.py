@@ -42,6 +42,8 @@ def main() -> int:
             errors.extend(str(e) for e in skill_lint['errors'])
         registry = json.loads((PACKAGE / 'evals/scenarios.json').read_text(encoding='utf-8'))
         scenarios = registry['scenarios']
+        for supplement in sorted((PACKAGE / 'evals').glob('*-scenarios.json')):
+            scenarios.extend(json.loads(supplement.read_text(encoding='utf-8'))['scenarios'])
         if {s['skill'] for s in scenarios} != set(SKILLS):
             errors.append('Behavior scenarios do not cover exactly the registered Skills.')
         if len({s['id'] for s in scenarios}) != len(scenarios):

@@ -1,6 +1,6 @@
 {
   "manifest_version": 1,
-  "version": "0.5.0",
+  "version": "0.6.0",
   "schema_version": 1,
   "files": {
     "AGENTS.md": "AGENTS.md",
@@ -16,8 +16,8 @@
     "workspace/skills/logic-methodology/SKILL.md": "skills/logic-methodology/SKILL.md",
     "workspace/skills/writing-language/SKILL.md": "skills/writing-language/SKILL.md",
     "workspace/skills/figure-visualization/SKILL.md": "skills/figure-visualization/SKILL.md",
-    "workspace/skills/manuscript-sync/SKILL.md": "skills/manuscript-sync/SKILL.md",
     "workspace/skills/reviewer/SKILL.md": "skills/reviewer/SKILL.md",
+    "workspace/skills/manuscript-sync/SKILL.md": "skills/manuscript-sync/SKILL.md",
     "workspace/skills/rules-compliance/SKILL.md": "skills/rules-compliance/SKILL.md",
     "workspace/skills/idea-evaluation/SKILL.md": "skills/idea-evaluation/SKILL.md",
     "workspace/skills/auto-route/SKILL.md": "skills/auto-route/SKILL.md",
@@ -25,9 +25,11 @@
     "workspace/skills/overleaf-sync/SKILL.md": "skills/overleaf-sync/SKILL.md",
     "workspace/skills/venue-transfer/SKILL.md": "skills/venue-transfer/SKILL.md",
     "workspace/skills/workspace-guide/SKILL.md": "skills/workspace-guide/SKILL.md",
+    "workspace/skills/research-diagram/SKILL.md": "skills/research-diagram/SKILL.md",
     "workspace/templates/workspace-menu.md": "templates/workspace-menu.md",
     "workspace/templates/writing-brief.md": "templates/writing-brief.md",
     "workspace/templates/reviewer-response.md": "templates/reviewer-response.md",
-    "workspace/templates/figure-brief.md": "templates/figure-brief.md"
+    "workspace/templates/figure-brief.md": "templates/figure-brief.md",
+    "workspace/templates/diagram-brief.md": "templates/diagram-brief.md"
   }
 }

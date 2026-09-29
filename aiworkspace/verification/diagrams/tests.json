@@ -1,0 +1,38 @@
+{
+  "checked_at": "2026-09-29T18:51:04.680257+00:00",
+  "base_commit": "b67d0ac782c7e3bb92db76a6a49118835aba5d6b",
+  "engine": "0.6.0",
+  "schema": 1,
+  "python": "3.13.5",
+  "platform": "Linux",
+  "tests": {
+    "run": 49,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "actual_execution": {
+    "seven_templates_all_formats": true,
+    "seven_independent_reproduction_processes": true,
+    "same_environment_png_bytes_equal": true,
+    "paper_and_mono_additional_styles": true,
+    "cjk_glyph_coverage_checked": true,
+    "pdfs_rendered": 10,
+    "scoped_incremental_upgrade_and_rollback": true
+  },
+  "verified_dependencies": {
+    "model.py": "5703ad702295c58985ec95e5f868cb0ded0fa29a",
+    "store.py": "fee842417439681acf4f0f1769177fe165834386",
+    "workflow.py": "fba42a320821585ef5bf4119ad19ebaf375ec2db",
+    "upgrade.py": "cd91ac9fd0846da6f04411e218b3d2e0f61d1d86",
+    "review.py_before_edit": "69cadf19fde87cb793a09b00d6c687a7155e8560",
+    "skills.py_before_edit": "3c73b7128d27c5c1c6ce6331c49b80f08983d5b1"
+  },
+  "boundaries": [
+    "Scoped Schema 1 fixtures with actual Store/workflow/upgrade integration, not the complete historical scientific regression suite.",
+    "The gate branch test isolates unchanged native LaTeX adapters; no complete publication or Overleaf retest.",
+    "drawio XML nodes and edges were parsed; the desktop/web editor GUI was not exercised.",
+    "No real Codex/Claude/model effect evaluation, authenticated remote sync, complete release-wheel acceptance or scientific/venue-compliance certification.",
+    "Reproduction across other software/fonts is not guaranteed."
+  ]
+}

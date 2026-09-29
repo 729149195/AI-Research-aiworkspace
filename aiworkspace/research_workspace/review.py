@@ -127,6 +127,16 @@ def review(store: Store) -> dict:
                 sha = None
             if not sha or sha != data.get('sha256'):
                 add('FIGURE_CHANGED', key, 'Figure file missing/changed. Recheck data, labeling and output.', 'critical', 'figures_tables')
+            if data.get('diagram_record'):
+                try:
+                    from .diagrams import check as check_diagram
+                    checked = check_diagram(store, data['diagram_record'])
+                    for problem in checked['issues']:
+                        add('DIAGRAM_STALE', key, problem, 'critical', 'figures_tables')
+                    if node['status'] != 'confirmed':
+                        add('DIAGRAM_REVIEW_PENDING', key, 'Review actual diagram semantics, glyphs and layout before confirming this Figure.', domain='figures_tables')
+                except (WorkspaceError, OSError, ValueError, TypeError, KeyError) as exc:
+                    add('DIAGRAM_INVALID', key, str(exc), 'critical', 'figures_tables')
         elif kind == 'rule':
             rule_type = data.get('type', 'human')
             if rule_type not in ('required_text', 'forbidden_text', 'human'):

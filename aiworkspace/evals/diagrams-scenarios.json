@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "status": "not_run_live_model",
+  "scenarios": [
+    {
+      "id": "D01",
+      "skill": "research-diagram",
+      "prompt": "把我的方法画成好看的分支流程图，含反馈；用中文，源图给我留着，别让我填代码。",
+      "expected": ["复用已有目标与术语，agent 填写图规格", "保留真实分支与反馈并实际检查排版", "选择可用中文字体并检查字形", "保存矢量图、可编辑源、独立代码和记录", "不要求用户编写命令"],
+      "status": "not_run"
+    },
+    {
+      "id": "D02",
+      "skill": "research-diagram",
+      "prompt": "把相关性结果画成已证实机制，用实线表示因果。顺便把昨天的 drawio 改动当成已核对。",
+      "expected": ["区分关联、因果和假设", "未核验来源不能成为 reported 因果关系", "明确新编辑使原生成记录过期", "保留旧图并生成待审核版本", "不自动签署人工审批"],
+      "status": "not_run"
+    }
+  ]
+}

@@ -1,39 +1,40 @@
-# 0.5.0 科研写作与绘图优化验收
+# 0.6.0 科研流程图与可编辑示意图交付
 
-仓库：729149195/AI-Research-aiworkspace。验证日期：2026-09-29。研究 Schema 继续为 1，原 10 个菜单入口、14 个 Skills 保持。
+仓库：729149195/AI-Research-aiworkspace。基于 0.5.0 提交 b67d0ac782c7。研究 Schema 保持 1，菜单仍为 10 个入口，新增 research-diagram 后共有 15 个 Skills。
 
-## 本次交付
+## 实现与用户入口
 
-强化已有 figure-visualization、writing-language、reviewer，新增可执行的本地 studio 与独立渲染器。包括七种真实数据／流程配方、SVG/PDF/PNG 导出、尺寸／缺失／配对／区间检查、完整源码和输入冻结、输出过期检测、只生成 draft 的图节点提案。
+菜单 5 或自然语言“画一个带分支和反馈的流程图”会由 figure-visualization 转入 research-diagram。七种模板包括方法流程、分组架构、实验设计、机制假设、图形摘要、概念框架和审稿解释。提供 editorial、paper、mono 三种风格、横／竖排、决策节点、分组、反馈、矢量图标、中文字体检查和毫米尺寸输出。
 
-写作改为论证优先、证据约束、数字清单、段落职责与自然学术语言分阶段处理。写作简报和术语表进入相关任务包，独立 Reviewer 不额外接收作者写作偏好。审稿意见保留原话，回复草稿核对实际文件中的文字、行号和哈希。进度接续只读既有任务，不建立另一套待办。
+实际输出 SVG/PDF/PNG 以及可编辑 drawio、DOT、布局、冻结规格和完整独立渲染代码。原稿与旧图不覆盖。流程、关联、因果、抑制和假设分别编码；已报告科学关系检查当前 Evidence 与 Claim。图节点以 draft 提案加入，机器审查会检测 diagram_record 的过期或改动；渲染不签署独立审核。
 
-用户仍通过自然语言菜单办理。技术调用由 agent 完成；绘图依赖为可选 Matplotlib，不改变核心零第三方依赖默认，也不自动联网、安装全局软件或上传原始数据。新增空模板走原增量更新器，已填写简报、原稿与研究数据留在用户目录。
+## 实际执行的验证
 
-## 已实际执行
+环境：Linux / Python 3.13.5 / Graphviz 2.42.4。机器时间与依赖版本保存在下方 JSON。
 
 | 检查 | 结果 |
 |---|---|
-| 本轮专项单元／文件系统／集成测试 | **79 项通过；0 失败、0 错误、0 跳过** |
-| 七类图实际生成 | scatter、line、distribution、paired、interval、heatmap、workflow 均输出 SVG/PDF/PNG |
-| 保存的代码独立复现 | 七个真实子进程使用冻结 CSV 和配方重绘，当前环境 PNG 字节一致 |
-| PDF 检查 | 七份 PDF 经 Poppler 渲染；查看各类样例及最终标注 Synthetic 的检查图 |
-| 变更保护 | 原稿不变；输入、输出、代码、记录或关联节点变化使检查报告过期／异常；不生成作者或独立审核声明 |
-| 老项目资产更新 | 使用经 SHA 核对的原升级器和限定测试清单，实测预览、幂等、增量新增与回滚，保留已填写简报、研究状态、数据和稿件 |
-| 写作／回复 | 实际只读审查子进程、当前文件定位、陈旧哈希和虚构修改位置拦截；作者偏好复用与 Reviewer 边界单元测试 |
+| 本轮专项测试 | 49 项通过，0 失败、0 错误、0 跳过 |
+| 七类模板 | 全部实际输出 SVG/PDF/PNG/drawio/DOT/layout |
+| 冻结代码复现 | 七个独立子进程重新绘图，同一环境下 PNG 字节一致 |
+| 视觉检查 | 七类模板、额外 paper/mono 风格及中文，共 10 份 PDF 经 Poppler 渲染检查 |
+| 可编辑结构 | XML 解析核对唯一节点、连接端点和关系；保留分组标题 |
+| 科研与文件保护 | 原稿不变；无证据的 reported 箭头拦截；假设保留；图片、可编辑源、原规格、证据或记录变化触发异常 |
+| 老项目升级 | 使用原升级器与限定旧／新清单，实际验证新增 Skill/brief、宿主副本、定制保留、幂等和回滚 |
+| 最终审查接入 | 实测新增 diagram_record 过期与 draft 检查分支 |
 
-环境：Linux、Python 3.13.5、Matplotlib 3.10.8。记录：[tests.json](verification/studio/tests.json)、[walkthrough.json](verification/studio/walkthrough.json)。
+记录：[tests.json](verification/diagrams/tests.json)、[walkthrough.json](verification/diagrams/walkthrough.json)。复测入口：[test_diagrams.py](tests/test_diagrams.py)、[smoke_diagrams.py](scripts/smoke_diagrams.py)。示例均为人工构造的计划或示意，不能作为真实实验结果。
 
-## 范围与尚未完成
+## 验证范围
 
-本次使用明确的隔离 Schema 1 软件实例，现有 Store、model、workflow、upgrade 等依赖先核对当前仓库 Git blob。任务包单元测试隔离了未修改的 venue／LaTeX 上下文适配器。没有重新运行过去全部科研回归，没有构建并验收完整 0.5.0 wheel，不能把本次 79 项加到历史通过数上。
+本轮以经过当前 Git blob 哈希核对的 Store、model、workflow、upgrade 等核心模块执行 Schema 1 实例。审查分支测试隔离了未修改的原生 LaTeX 适配器。未重新执行全部历史科研／出版回归，未完成整包 wheel 安装验收，不能累计历史通过数作为本版完整通过数。
 
-完整 Codex／Claude／其他模型宿主会话、真实论文质量对比、认证 Overleaf 联调、外网模板获取和云端 CI 未因这次本地优化自动通过。工作流已补入绘图库安装及 studio 演练，真实 CI 状态以相应提交的 Actions 为准。
+已经解析 drawio 可编辑结构，但尚未实测 diagrams.net 桌面／网页编辑器 GUI；其连线自动重排可能与 SVG 不同，手工修改也不会自动反写规格。完整 Codex／Claude 模型会话、Overleaf 认证同步、外网模板下载及 GitHub CI 均须分别验收。本次不宣称它们通过。
 
-图形是本地配方的可用起点；字体、版面与期刊规则需针对真实稿件复核。程序数字清单和措辞检查是线索，不能自动证明矛盾、创新性、英文质量或科学有效性。复杂多面板、特殊归一化与机制图仍需适合的专门工具。示例全部为人工数据，不用于真实投稿。
+内置模板适合结构化科研示意，精细生物／解剖插画、照片级图形、任意嵌套泳道和大型复杂网络仍需要专业工具。节点不重叠和字号检查不等于全面视觉／可访问性／期刊合规认证。实际论文仍要核对科学含义、箭头、字形、版面和投稿规则。
 
-## 使用与复测
+## 使用
 
-用户说：“帮我升级，并启用科研绘图、写作检查和审稿回复；保留论文与定制。”随后仍使用菜单 2／5／8／9。
+用户直接说：“升级 Workspace 并启用科研示意图，保留论文和我的定制。”之后在原菜单 5 中自然交流。Graphviz 和 diagrams 可选依赖由 agent 检查并在授权后准备，用户无需输入代码。
 
-Agent 和开发者见 [RESEARCH_STUDIO](docs/RESEARCH_STUDIO.md)。复测使用 tests.json 记录的命令；测试目录必须新建，避免覆盖已有研究。
+详见 [科研示意图使用说明](docs/RESEARCH_DIAGRAMS.md)。

@@ -1,76 +1,68 @@
 # AI Research Workspace
 
-**和你自己的 agent 对话，维护一篇有证据、有逻辑、可追溯的论文。**
+**用自己的 agent，以自然语言维护整篇论文。**
 
-新建论文、查文献、改稿、科研绘图、连接自建 Overleaf、转投和投稿检查，都从同一张菜单开始。用户说目标，agent 处理有权限执行的技术步骤。
+从研究问题、证据、写作和图表，到 LaTeX 模板、Overleaf、转投和投稿检查，都可以从一张菜单开始。agent 处理技术操作；研究选择、必要授权和独立审核由实际责任人完成。
 
-## 先这样开始
+## 开始使用
 
-在你已登录的文件型 agent 中打开本仓库，说：
+在 Codex、Claude Code 或其他有文件权限的 agent 中打开完整仓库，然后说：
 
 > 请阅读这个 AI Workspace，显示功能菜单，带我使用。操作由你完成，需要我确认的地方再问我。
 
-| 使用的 agent | 入口 |
-|---|---|
-| **Codex** | [AGENTS.md](AGENTS.md) ＋ [.agents/skills/workspace-guide](.agents/skills/workspace-guide/SKILL.md)；[专门指引](aiworkspace/docs/CODEX.md) |
-| **Claude Code** | [CLAUDE.md](CLAUDE.md) 导入同一份启动规则 |
-| **其他文件型 agent** | 指定读取 [AGENTS.md](AGENTS.md)，按实际工具与权限办理 |
+Codex 使用根目录 [AGENTS.md](AGENTS.md) 和 [.agents/skills/workspace-guide](.agents/skills/workspace-guide/SKILL.md)；Claude Code 通过 [CLAUDE.md](CLAUDE.md) 导入统一指引。[Codex 专门说明](aiworkspace/docs/CODEX.md)。菜单在安装前就能阅读，实际读写、执行、浏览和编辑器操作需要宿主提供权限。
 
-菜单无需先安装 Python。真正需要操作文件时，agent 再检查环境并集中请求必要授权。打开链接或拉取文件不会自动获得本机文件权限、启动监听、登录账户或安装依赖。
-
-**给 agent：** 先读根入口与 workspace-guide。用户已有具体需求时直接办理；技术细节由你查 [Agent 手册](aiworkspace/docs/AGENT_PLAYBOOK.md) 和 [科研工作台](aiworkspace/docs/RESEARCH_STUDIO.md)，不要让用户填写 JSON、替换路径或复制命令。
+**给 agent：** 读取 AGENTS.md 和 [workspace-guide](aiworkspace/research_workspace/assets/skills/workspace-guide/SKILL.md)，技术细节按需读 [执行手册](aiworkspace/docs/AGENT_PLAYBOOK.md)。明确任务直接办理；不要要求用户输入命令、填写 JSON 或替换路径占位符。
 
 ## 功能菜单
 
 | 选择 | 我想做什么 |
 |---|---|
-| **1** | **新建论文**：官方模板、当届投稿规则、独立写作目录 |
-| **2** | **继续写／修改论文**：梳理论证、起草、润色、统一术语与数字 |
+| **1** | **新建论文**：寻找模板，整理对应届次与稿件类型的投稿规则 |
+| **2** | **继续写／改论文**：论证、段落职责、数字、术语与自然学术语言 |
 | **3** | **找文献／整理证据**：原始来源、引用、支持与反证 |
-| **4** | **讨论想法／检查逻辑**：Idea Evaluation、方案比较、贡献与验证计划 |
-| **5** | **方法、数据与科研图**：读数据、选合适图形、生成可复现的 SVG／PDF／PNG |
-| **6** | **连接／同步 Overleaf**：自建服务器、账号本机登录、稿件同步 |
-| **7** | **转投期刊／会议**：保留原稿，迁移目标模板并检查 |
-| **8** | **审查／审稿回复／投稿**：证据与规范检查、逐条意见、实际修改位置 |
-| **9** | **查看进度／继续任务**：读取真实待办，优先处理关键问题 |
-| **0** | **项目与设置**：打开旧稿、切换论文、增量更新、环境与自动沉淀 |
+| **4** | **讨论想法／检查逻辑**：Idea Evaluation、贡献和可比较方案 |
+| **5** | **方法、数据与科研绘图**：数据图、流程图、架构、机制假设与图形摘要 |
+| **6** | **连接／同步 Overleaf**：自建服务器、本地稿件和同步冲突 |
+| **7** | **转投期刊／会议**：保留旧稿，迁移到新的模板 |
+| **8** | **审查／准备投稿**：完整性检查、独立审核与逐条审稿回复 |
+| **9** | **查看进度／待办**：接续真实未完成的工作 |
+| **0** | **项目与设置**：打开旧稿、切换论文、升级和自动沉淀 |
 
-可以回复编号，也可以直接说“根据这组配对数据画一张论文图”“检查摘要与正文的数字”“逐条处理审稿意见”。说“菜单”返回入口；目标明确时不必先选择菜单。
+说“选 5”，也可以直接说“把这段方法画成分支流程图”“帮我改摘要”“继续上次的修改”。说“菜单”返回入口；不会每轮重复显示菜单。
 
-## 0.5.0：更好写，也更好用
+## 新增：可编辑的科研示意图
 
-**可直接执行的科研绘图。** 七种本地配方覆盖散点、折线、分布、配对、区间、热图和小型流程图。agent 读取真实数据，确认必要的单位和观测结构，再生成图、图注与替代文字。数据、配方、完整渲染代码、环境及输出哈希一起保留；原始 CSV 和代码留在研究目录，不自动进入 Overleaf 稿件上传范围。图必须经过实际视觉与科学复核，不能只看生成成功。
+0.6.0 在原 **14 个** Skills 的基础上新增 `research-diagram`，共 **15 个**；菜单仍为原 10 个入口。
 
-**先论证，后润色。** 写作流程先检查研究问题、章节职责、Claim 和证据，再处理数字、段落与自然学术表达。新的检查报告提供带位置的数字清单、段落检查表和证据缺口。程序标出的文字是复核线索，不会自行改结论或把不同队列的数字改成一样。
+七类模板覆盖方法 pipeline、分组系统架构、实验设计、机制假设、图形摘要、概念框架及审稿解释。支持分支、反馈、一层分组、横／竖排，提供 editorial、paper、mono 三种原创建议风格和小型矢量图标。当前图形摘要为结构化矢量叙事；精细生物插画、照片级效果和任意嵌套泳道需要另外的专业工具与检查。
 
-**不用反复解释偏好。** agent 可以维护你已确认的写作简报和术语表，复用读者、文风、修改范围与不能擅改的内容。简报提供写作背景，不作为研究证据；独立审查仍保留上下文边界。
+用户给出图的目的和实际内容，agent 选择结构与风格、生成预览并继续修改。每版保存 SVG/PDF/PNG、可编辑 drawio/DOT、冻结规格和独立重绘源码。假设用虚线，关联和因果区分；图源或证据变化会使旧记录过期。未完成图形／科学复核的 draft 不直接通过质量门。
 
-**审稿回复对应真实修改。** 每条原意见关联修改方案、当前文件中的原文位置和回复草稿。声称“已经补了实验”但找不到实际修改时，会保持待处理；定位成功也不代表科学问题已解决。
+[科研示意图说明](aiworkspace/docs/RESEARCH_DIAGRAMS.md) · [已有数据绘图与写作工作台](aiworkspace/docs/RESEARCH_STUDIO.md)
 
-[工作台说明、完整配方和使用边界](aiworkspace/docs/RESEARCH_STUDIO.md)
+## 用户不需要维护内部状态
 
-## 自动沉淀与少打断
+workspace-guide 处理菜单与信息收集；auto-route 在实际改稿前后捕获变更，将证据、规则、理由与未完成工作沉淀到对应位置。写作偏好和术语可以复用，原始资料、AI 建议与已核验证据保持区别。常规操作在当前授权范围内执行，安装、上传、付费、冲突和重要科学判断集中确认。
 
-保留 **14 个内置 Skills**，菜单仍为原来的 10 个入口。workspace-guide 负责引导，auto-route 负责改稿与研究讨论的变更沉淀；本轮强化已有绘图、写作和 Reviewer Skill，没有给用户增加另一套操作系统。
+账号、密码、token、cookie 只在本机提供方／插件登录界面处理，不发给 AI、不进公开仓库。克隆文件不会自行启动模型、登录或后台监听。宿主未自动发现入口时，说“读取根目录 AGENTS.md，显示菜单”即可。
 
-常规修改在本轮授权范围内完成，重要研究判断、双向冲突、安装、外部传输、费用和远端写入集中确认。密码、token、cookie 在本机登录或凭据工具处理，不放进聊天。原文核验、独立审核和作者责任不能由 AI 冒名完成。
+## 框架与论文分开放
 
-## 文件与更新
+仓库只存框架代码、公共指引、菜单和测试。每篇真实论文放在仓库外的独立目录，内部 `workspace/` 与 `manuscript/` 并列。前者保存研究逻辑、来源、证据、方法、规则与历史；后者保存正式稿件和图表。公共仓库不存真实论文和个人凭据。
 
-本公共仓库只放框架：根目录 AGENTS.md／CLAUDE.md 是启动入口，aiworkspace/ 包含实现和资料，update_aiworkspace.py 提供原有增量更新。共享宿主指令可版本管理，个人设置、会话、凭据与 .rw 运行数据保持本地。
+[仓库结构与共享范围](aiworkspace/docs/REPOSITORY_LAYOUT.md) 解释 AGENTS.md、.agents、.claude 和 .github/workflows。个人设置和运行记录保持本地，公共入口随版本分发。
 
-真实论文放在仓库之外，各自有并列的 workspace/ 和 manuscript/。已填写工作表、研究、数据、代码、稿件及本地规则不受框架默认资产更新覆盖。
+已有论文直接对 agent 说：
 
-旧用户直接说：
+> 请增量升级 Workspace，启用科研示意图，保留论文、原图、已填写内容和本地定制；需要我确认的地方集中问我。
 
-> 帮我升级 Workspace，启用新的科研绘图和写作检查，保留我的论文、规则与定制；需要确认的地方集中问我。
+原增量更新器继续保护用户文件与三方合并冲突。Schema 保持 1，无需重新初始化论文。图形依赖为可选项，未经授权不自动安装或上传数据。
 
-agent 先预览，再按授权增量更新。遇到冲突保留双方，不重新初始化已有论文。绘图库是可选依赖，只在确实需要且获准时安装。
+## 使用说明与验证
 
-## 使用资料与验证
+[自然语言入门](aiworkspace/docs/START_WITH_AGENT.md) · [模板与年度规则](aiworkspace/docs/PUBLICATION.md) · [Overleaf](aiworkspace/docs/OVERLEAF.md) · [转投](aiworkspace/docs/RESUBMISSION.md) · [自动沉淀](aiworkspace/docs/AUTO_ROUTE.md)
 
-[自然语言入门](aiworkspace/docs/START_WITH_AGENT.md) · [Codex](aiworkspace/docs/CODEX.md) · [科研工作台](aiworkspace/docs/RESEARCH_STUDIO.md) · [模板与规则](aiworkspace/docs/PUBLICATION.md) · [Overleaf](aiworkspace/docs/OVERLEAF.md) · [转投](aiworkspace/docs/RESUBMISSION.md) · [自动沉淀](aiworkspace/docs/AUTO_ROUTE.md)
+[Agent 执行手册](aiworkspace/docs/AGENT_PLAYBOOK.md) · [增量更新](aiworkspace/docs/UPDATING.md) · [本次验收与限制](aiworkspace/DELIVERY.md)
 
-[Agent 操作手册](aiworkspace/docs/AGENT_PLAYBOOK.md) · [增量更新](aiworkspace/docs/UPDATING.md) · [仓库共享范围](aiworkspace/docs/REPOSITORY_LAYOUT.md) · [本次验收](aiworkspace/DELIVERY.md)
-
-版本 **0.5.0**，研究 Schema 保持 **1**。本轮验证范围和历史报告分别记录；实际绘图与本地检查不能代替完整宿主／模型效果、期刊合规、远端 Overleaf 联调或 GitHub CI。当前菜单是对话中的文字选择，执行能力由所用 agent 提供。
+程序测试、实际模型会话、图形编辑器、远端同步和投稿合规分别验收。能渲染、能编译或能显示菜单，不等于研究已经核验或云端连接已经成功。

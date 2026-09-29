@@ -1,0 +1,113 @@
+{
+  "passed": true,
+  "source": "Summary of the actual smoke_diagrams.py JSON; full per-template report retained with illustrative example bundle.",
+  "full_report_sha256": "bcbdb6d52635d34128c6fdcdd3e486dd128608fcb91f596c68842538ed081b32",
+  "templates": {
+    "pipeline": {
+      "rendered": true,
+      "independent_reproduction": true,
+      "same_environment_png_identical": true,
+      "nodes": 6,
+      "edges": 7,
+      "groups": 0,
+      "dimensions_mm": [
+        165,
+        162.533
+      ]
+    },
+    "architecture": {
+      "rendered": true,
+      "independent_reproduction": true,
+      "same_environment_png_identical": true,
+      "nodes": 6,
+      "edges": 6,
+      "groups": 3,
+      "dimensions_mm": [
+        130,
+        194.233
+      ]
+    },
+    "experiment": {
+      "rendered": true,
+      "independent_reproduction": true,
+      "same_environment_png_identical": true,
+      "nodes": 6,
+      "edges": 6,
+      "groups": 0,
+      "dimensions_mm": [
+        130,
+        221.11
+      ]
+    },
+    "mechanism": {
+      "rendered": true,
+      "independent_reproduction": true,
+      "same_environment_png_identical": true,
+      "nodes": 4,
+      "edges": 4,
+      "groups": 0,
+      "dimensions_mm": [
+        190,
+        82.681
+      ]
+    },
+    "graphical-abstract": {
+      "rendered": true,
+      "independent_reproduction": true,
+      "same_environment_png_identical": true,
+      "nodes": 6,
+      "edges": 4,
+      "groups": 3,
+      "dimensions_mm": [
+        190,
+        105.461
+      ]
+    },
+    "conceptual": {
+      "rendered": true,
+      "independent_reproduction": true,
+      "same_environment_png_identical": true,
+      "nodes": 4,
+      "edges": 3,
+      "groups": 2,
+      "dimensions_mm": [
+        180,
+        159.444
+      ]
+    },
+    "response": {
+      "rendered": true,
+      "independent_reproduction": true,
+      "same_environment_png_identical": true,
+      "nodes": 4,
+      "edges": 4,
+      "groups": 0,
+      "dimensions_mm": [
+        135,
+        200.224
+      ]
+    },
+    "cjk": {
+      "rendered": true,
+      "font": {
+        "coverage": "checked",
+        "resolved_family": "Noto Sans CJK SC"
+      },
+      "dimensions_mm": [
+        135,
+        174.189
+      ]
+    }
+  },
+  "environment": {
+    "python": "3.13.5",
+    "graphviz": "dot - graphviz version 2.42.4 (0)",
+    "cairosvg": "2.8.2"
+  },
+  "additional_styles": [
+    "paper",
+    "mono"
+  ],
+  "pdfs_rendered_with_poppler": 10,
+  "boundary": "Actual local rendering and subprocess reproduction. No live agent, remote editor, diagrams.net GUI or scientific validation."
+}

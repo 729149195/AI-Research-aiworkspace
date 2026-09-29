@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.6.0 — Editable research diagrams / 2026-09-30
+
+- Add research-diagram as the fifteenth Skill, reached through the existing menu 5 and figure-visualization delegation.
+- Add seven structured diagram templates, branching/feedback edges, grouped architectures, experimental designs, hypothesis mechanisms and vector graphical abstracts.
+- Add three original style presets, editable SVG/drawio/DOT, PDF/PNG, physical-size and glyph checks, and independent frozen rendering source.
+- Preserve scientific arrow meanings and source-bound reported relationships; track editable-source changes and require draft Figure review through the existing quality gate.
+- Add an optional diagrams dependency extra and two managed assets; keep Schema 1 and preserve old figures, filled briefs and local customizations through the existing updater.
+- Run 49 scoped tests, seven independent regeneration subprocesses and 10 PDF render checks, including two extra styles and Chinese text. No complete historical-suite, full wheel, live host, diagrams.net GUI, Overleaf or cloud-CI pass is claimed.
+
 ## 0.5.0 — Scientific figure and writing studio / 2026-09-29
 
 - Strengthen existing plotting, writing and reviewer Skills while keeping fourteen Skills and the same ten conversational menu entries.

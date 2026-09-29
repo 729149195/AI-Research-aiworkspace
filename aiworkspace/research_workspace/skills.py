@@ -8,7 +8,7 @@ from .store import Store, atomic_write, read_text, safe_path
 from .upgrade import ASSETS, register_host
 from .workflow import evidence_problems, source_problems
 
-SKILLS = ('workspace-guide', 'auto-route', 'venue-setup', 'overleaf-sync', 'venue-transfer', 'researcher', 'knowledge-evidence', 'logic-methodology', 'writing-language', 'figure-visualization', 'manuscript-sync', 'reviewer', 'rules-compliance', 'idea-evaluation')
+SKILLS = ('workspace-guide', 'auto-route', 'venue-setup', 'overleaf-sync', 'venue-transfer', 'researcher', 'knowledge-evidence', 'logic-methodology', 'writing-language', 'figure-visualization', 'research-diagram', 'manuscript-sync', 'reviewer', 'rules-compliance', 'idea-evaluation')
 ROUTES = {'research_logic': 'logic-methodology', 'evidence_citations': 'knowledge-evidence', 'method_statistics': 'logic-methodology',
           'figures_tables': 'figure-visualization', 'writing_language': 'writing-language', 'rules_compliance': 'rules-compliance',
           'ethics_ai': 'rules-compliance', 'sync_consistency': 'manuscript-sync'}
@@ -102,7 +102,7 @@ def task_packet(store: Store, skill: str, task: str, focus: list[str] | None = N
     if skill in ('venue-setup', 'venue-transfer', 'rules-compliance', 'reviewer', 'writing-language', 'auto-route'):
         from .venues import context as venue_context
         packet['venue_dossiers'] = venue_context(store)
-    if skill in ('workspace-guide', 'auto-route', 'writing-language', 'figure-visualization', 'logic-methodology'):
+    if skill in ('workspace-guide', 'auto-route', 'writing-language', 'figure-visualization', 'research-diagram', 'logic-methodology'):
         packet['non_evidentiary_writing_preferences'] = {}
         for name in ('workspace/research/writing-brief.md', 'workspace/rules/glossary.md'):
             path = safe_path(store.root, name)
