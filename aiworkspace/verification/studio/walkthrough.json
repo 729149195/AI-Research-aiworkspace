@@ -1,0 +1,87 @@
+{
+  "boundary": "Real drawing, file checks, provenance and standalone subprocesses; isolated synthetic Schema 1 fixture. No live model/agent, journal compliance, authenticated Overleaf or complete framework regression.",
+  "no_human_approvals_or_scientific_nodes_created": true,
+  "original_manuscript_unchanged": true,
+  "passed": true,
+  "python": "3.13.5",
+  "recipes": {
+    "distribution": {
+      "alt_text": "workspace/results/figures/FIG-DISTRIBUTION-0EC3C3F14BD1/alt-text.txt",
+      "caption": "workspace/results/figures/FIG-DISTRIBUTION-0EC3C3F14BD1/caption.md",
+      "exploratory": true,
+      "next": "Inspect actual output, then propose a linked Figure node. Rendering does not apply a research Claim.",
+      "pdf": "manuscript/figures/FIG-DISTRIBUTION-0EC3C3F14BD1/figure.pdf",
+      "preview": "manuscript/figures/FIG-DISTRIBUTION-0EC3C3F14BD1/figure.png",
+      "record": "workspace/history/figures/FGR-0EC3C3F14BD1.json",
+      "svg": "manuscript/figures/FIG-DISTRIBUTION-0EC3C3F14BD1/figure.svg",
+      "warnings": []
+    },
+    "heatmap": {
+      "alt_text": "workspace/results/figures/FIG-HEATMAP-66698DD52D43/alt-text.txt",
+      "caption": "workspace/results/figures/FIG-HEATMAP-66698DD52D43/caption.md",
+      "exploratory": true,
+      "next": "Inspect actual output, then propose a linked Figure node. Rendering does not apply a research Claim.",
+      "pdf": "manuscript/figures/FIG-HEATMAP-66698DD52D43/figure.pdf",
+      "preview": "manuscript/figures/FIG-HEATMAP-66698DD52D43/figure.png",
+      "record": "workspace/history/figures/FGR-66698DD52D43.json",
+      "svg": "manuscript/figures/FIG-HEATMAP-66698DD52D43/figure.svg",
+      "warnings": []
+    },
+    "interval": {
+      "alt_text": "workspace/results/figures/FIG-INTERVAL-57FF66DD77C5/alt-text.txt",
+      "caption": "workspace/results/figures/FIG-INTERVAL-57FF66DD77C5/caption.md",
+      "exploratory": true,
+      "next": "Inspect actual output, then propose a linked Figure node. Rendering does not apply a research Claim.",
+      "pdf": "manuscript/figures/FIG-INTERVAL-57FF66DD77C5/figure.pdf",
+      "preview": "manuscript/figures/FIG-INTERVAL-57FF66DD77C5/figure.png",
+      "record": "workspace/history/figures/FGR-57FF66DD77C5.json",
+      "svg": "manuscript/figures/FIG-INTERVAL-57FF66DD77C5/figure.svg",
+      "warnings": []
+    },
+    "line": {
+      "alt_text": "workspace/results/figures/FIG-LINE-F0D6B38586C5/alt-text.txt",
+      "caption": "workspace/results/figures/FIG-LINE-F0D6B38586C5/caption.md",
+      "exploratory": true,
+      "next": "Inspect actual output, then propose a linked Figure node. Rendering does not apply a research Claim.",
+      "pdf": "manuscript/figures/FIG-LINE-F0D6B38586C5/figure.pdf",
+      "preview": "manuscript/figures/FIG-LINE-F0D6B38586C5/figure.png",
+      "record": "workspace/history/figures/FGR-F0D6B38586C5.json",
+      "svg": "manuscript/figures/FIG-LINE-F0D6B38586C5/figure.svg",
+      "warnings": []
+    },
+    "paired": {
+      "alt_text": "workspace/results/figures/FIG-PAIRED-15D72D312400/alt-text.txt",
+      "caption": "workspace/results/figures/FIG-PAIRED-15D72D312400/caption.md",
+      "exploratory": true,
+      "next": "Inspect actual output, then propose a linked Figure node. Rendering does not apply a research Claim.",
+      "pdf": "manuscript/figures/FIG-PAIRED-15D72D312400/figure.pdf",
+      "preview": "manuscript/figures/FIG-PAIRED-15D72D312400/figure.png",
+      "record": "workspace/history/figures/FGR-15D72D312400.json",
+      "svg": "manuscript/figures/FIG-PAIRED-15D72D312400/figure.svg",
+      "warnings": []
+    },
+    "scatter": {
+      "alt_text": "workspace/results/figures/FIG-SCATTER-78156739A391/alt-text.txt",
+      "caption": "workspace/results/figures/FIG-SCATTER-78156739A391/caption.md",
+      "exploratory": true,
+      "next": "Inspect actual output, then propose a linked Figure node. Rendering does not apply a research Claim.",
+      "pdf": "manuscript/figures/FIG-SCATTER-78156739A391/figure.pdf",
+      "preview": "manuscript/figures/FIG-SCATTER-78156739A391/figure.png",
+      "record": "workspace/history/figures/FGR-78156739A391.json",
+      "svg": "manuscript/figures/FIG-SCATTER-78156739A391/figure.svg",
+      "warnings": []
+    },
+    "workflow": {
+      "alt_text": "workspace/results/figures/FIG-WORKFLOW-2C413A7DB7B5/alt-text.txt",
+      "caption": "workspace/results/figures/FIG-WORKFLOW-2C413A7DB7B5/caption.md",
+      "exploratory": true,
+      "next": "Inspect actual output, then propose a linked Figure node. Rendering does not apply a research Claim.",
+      "pdf": "manuscript/figures/FIG-WORKFLOW-2C413A7DB7B5/figure.pdf",
+      "preview": "manuscript/figures/FIG-WORKFLOW-2C413A7DB7B5/figure.png",
+      "record": "workspace/history/figures/FGR-2C413A7DB7B5.json",
+      "svg": "manuscript/figures/FIG-WORKFLOW-2C413A7DB7B5/figure.svg",
+      "warnings": []
+    }
+  },
+  "standalone_regeneration_count": 7
+}

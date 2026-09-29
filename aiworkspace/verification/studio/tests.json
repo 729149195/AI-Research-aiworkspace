@@ -1,0 +1,38 @@
+{
+  "checked_at": "2026-09-29",
+  "base_commit": "c5902797c411fb2b3cb971605292a1621c31882d",
+  "version": "0.5.0",
+  "schema_version": 1,
+  "python": "3.13.5",
+  "platform": "Linux",
+  "matplotlib": "3.10.8",
+  "tests": {
+    "run": 79,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "actual_checks": [
+    "Seven SVG/PDF/PNG recipes generated from synthetic input",
+    "Seven archived-renderer subprocesses reproduced identical PNG bytes in this environment",
+    "Seven PDFs rendered using Poppler; images inspected, final labeled contact sheet inspected",
+    "Data/output/receipt/code tamper detection",
+    "Current core Store/model/workflow/upgrader restored and matched Git blob hashes",
+    "Scoped asset upgrade/check/idempotency/rollback preserved filled brief, manuscript, data and state",
+    "Actual read-only audit subprocess and current-file reviewer-response locations",
+    "Writer packet brief/glossary reuse; unchanged venue/LaTeX context adapters isolated in these unit tests"
+  ],
+  "core_source_hashes": {
+    "model.py": "5703ad702295c58985ec95e5f868cb0ded0fa29a",
+    "store.py": "fee842417439681acf4f0f1769177fe165834386",
+    "workflow.py": "fba42a320821585ef5bf4119ad19ebaf375ec2db",
+    "upgrade.py": "cd91ac9fd0846da6f04411e218b3d2e0f61d1d86",
+    "skills.py": "90dc720e733c6f3ece6bf3747869e0f7d1409199"
+  },
+  "scope": "Targeted 79 tests and real synthetic figure/Store/regeneration walkthrough. Complete previous scientific suite, full release wheel, native LaTeX integration, live Codex/Claude/model, authenticated Overleaf, online template retrieval and GitHub CI have not been validated by this run.",
+  "commands": [
+    "PYTHONPATH=aiworkspace python -m unittest discover -s aiworkspace/tests -p test_studio.py -v",
+    "python aiworkspace/scripts/smoke_studio.py --destination NEW_SYNTHETIC_DIRECTORY",
+    "pdftoppm -png -singlefile -scale-to 1000 FIGURE.pdf OUTPUT_PREFIX"
+  ]
+}

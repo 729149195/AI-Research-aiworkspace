@@ -1,6 +1,6 @@
 {
   "manifest_version": 1,
-  "version": "0.4.0",
+  "version": "0.5.0",
   "schema_version": 1,
   "files": {
     "AGENTS.md": "AGENTS.md",
@@ -25,6 +25,9 @@
     "workspace/skills/overleaf-sync/SKILL.md": "skills/overleaf-sync/SKILL.md",
     "workspace/skills/venue-transfer/SKILL.md": "skills/venue-transfer/SKILL.md",
     "workspace/skills/workspace-guide/SKILL.md": "skills/workspace-guide/SKILL.md",
-    "workspace/templates/workspace-menu.md": "templates/workspace-menu.md"
+    "workspace/templates/workspace-menu.md": "templates/workspace-menu.md",
+    "workspace/templates/writing-brief.md": "templates/writing-brief.md",
+    "workspace/templates/reviewer-response.md": "templates/reviewer-response.md",
+    "workspace/templates/figure-brief.md": "templates/figure-brief.md"
   }
 }

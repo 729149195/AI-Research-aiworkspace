@@ -102,6 +102,12 @@ def task_packet(store: Store, skill: str, task: str, focus: list[str] | None = N
     if skill in ('venue-setup', 'venue-transfer', 'rules-compliance', 'reviewer', 'writing-language', 'auto-route'):
         from .venues import context as venue_context
         packet['venue_dossiers'] = venue_context(store)
+    if skill in ('workspace-guide', 'auto-route', 'writing-language', 'figure-visualization', 'logic-methodology'):
+        packet['non_evidentiary_writing_preferences'] = {}
+        for name in ('workspace/research/writing-brief.md', 'workspace/rules/glossary.md'):
+            path = safe_path(store.root, name)
+            if path.exists():
+                packet['non_evidentiary_writing_preferences'][name] = read_text(path)
     packet['routed_tasks'] = [copy.deepcopy(t) for t in store.state['tasks'] if t.get('origin') == 'auto-route' and t['status'] == 'open']
     require(len(pretty(packet).encode('utf-8')) <= 200000, 'Context exceeds 200 KB. Use --focus; never silently truncate an evidence chain.')
     return packet

@@ -1,0 +1,20 @@
+{
+  "id": "FIG-PAIRED",
+  "kind": "paired",
+  "input": "workspace/data/observations.csv",
+  "title": "Within-unit comparison",
+  "purpose": "Show the observed before/after values for each paired unit.",
+  "caption": "Replace with the actual study population, design and appropriately bounded interpretation.",
+  "alt_text": "Replace after inspecting the actual direction, spread and missingness of the paired observations.",
+  "x": "before",
+  "y": "after",
+  "pair_id": "participant_id",
+  "xlabel": "Condition",
+  "ylabel": "Measured response (actual unit)",
+  "unit": "actual unit",
+  "claims": [],
+  "evidence": [],
+  "width_mm": 90,
+  "height_mm": 80,
+  "missing": "error"
+}

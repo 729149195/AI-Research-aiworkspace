@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.5.0 — Scientific figure and writing studio / 2026-09-29
+
+- Strengthen existing plotting, writing and reviewer Skills while keeping fourteen Skills and the same ten conversational menu entries.
+- Add seven executable data/schematic recipes, SVG/PDF/PNG export, explicit physical dimensions, missingness and pairing checks, frozen data and complete standalone regeneration code.
+- Add figure provenance receipts, stale-artifact checks and draft-only linked Figure proposals; keep raw data and scripts outside the manuscript upload subtree.
+- Add read-only paragraph/numeric/evidence review leads, reusable author briefs and terminology, and original-reviewer-comment response drafts grounded in current file locations.
+- Add three updatable empty templates without migrating Schema 1 or overwriting filled research and local preferences. Matplotlib is an optional figures extra.
+- Run 79 targeted tests and seven actual synthetic recipe/regeneration subprocesses; render and inspect PDF outputs. Do not add these counts to historical suite results or infer a full release, live-model, Overleaf or cloud-CI pass.
+
 ## 0.4.0 — Conversational menu / 2026-09-27
 
 - Add workspace-guide as the fourteenth Skill: first-use menu, numbered replies, natural-language intake, project selection and settings.
