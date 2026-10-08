@@ -1,0 +1,11 @@
+flowchart LR
+    TASK["任务 / 新材料<br/>写作 · 分析 · 反馈"]
+    ROUTE["改前检查<br/>读取状态与差异"]
+    WORK["相关 Skills<br/>完成授权工作"]
+    IMPACT["改后捕获<br/>全局影响分析"]
+    REVIEW["同步与审查<br/>科学 / 视觉复核"]
+    RESULT["结果与交接<br/>保留真实待办"]
+
+    TASK --> ROUTE --> WORK --> IMPACT --> REVIEW
+    REVIEW -->|"当前任务结束"| RESULT
+    REVIEW -->|"仍有问题"| WORK

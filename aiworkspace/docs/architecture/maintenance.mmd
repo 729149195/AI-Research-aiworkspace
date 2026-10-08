@@ -1,0 +1,16 @@
+flowchart TB
+    UPDATE["上游版本 → 更新预览<br/>核对兼容性与本地差异"]
+    SCOPE{"按文件所有权分流"}
+    TOOLS["框架可更新<br/>引擎 · Skills<br/>空白模板 · 共享指引"]
+    DATA["项目数据受保护<br/>八类目录 + manuscript/<br/>.system/state + runtime"]
+    MERGE["备份与三方比较<br/>保留本地定制"]
+    FINISH["无冲突：应用并验证<br/>保存恢复入口"]
+    CONFLICT["有冲突：暂停自动覆盖<br/>核对后决定"]
+    MIGRATE["需要数据格式迁移？<br/>单独预览与授权<br/>备份及恢复验证"]
+
+    UPDATE --> SCOPE
+    SCOPE -->|"管理清单内"| TOOLS --> MERGE
+    SCOPE -->|"用户材料或本地状态"| DATA
+    MERGE --> FINISH
+    MERGE --> CONFLICT
+    DATA -. "不以默认文件覆盖" .-> MIGRATE

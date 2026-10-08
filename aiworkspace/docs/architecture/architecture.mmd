@@ -1,0 +1,29 @@
+flowchart LR
+    subgraph ENTRY["自然语言入口"]
+        direction TB
+        USER["作者 / 合作者"]
+        AGENT["自己的 Agent<br/>AGENTS.md · 菜单"]
+        USER <-->|"任务与结果"| AGENT
+    end
+
+    subgraph AIW["aiworkspace/"]
+        direction TB
+        TOOLS[".system/ · 通用能力<br/>Skills · 引擎 · 空白模板"]
+        AREAS["八类研究内容<br/>① research　② sources<br/>③ evidence　④ methods<br/>⑤ rules　⑥ figures<br/>⑦ history　⑧ sync"]
+        STATE[".system/state · runtime<br/>本论文状态 · 更新保护"]
+        TOOLS -->|"读取 / 按授权维护"| AREAS
+        AREAS ---|"材料、引用与关系"| STATE
+    end
+
+    MANU["manuscript/ · 正式稿件<br/>Overleaf 原目录与内容"]
+
+    subgraph REMOTE["Overleaf 协作"]
+        direction TB
+        WORKSHOP["Overleaf-Workshop<br/>本地 Replica 与同步"]
+        OVERLEAF["指定的 Overleaf 项目<br/>支持自建服务器"]
+        WORKSHOP <-->|"已授权连接"| OVERLEAF
+    end
+
+    ENTRY -->|"调用"| AIW
+    AIW <-->|"语义核对 / 修改回流"| MANU
+    MANU <-->|"仅稿件范围"| REMOTE
