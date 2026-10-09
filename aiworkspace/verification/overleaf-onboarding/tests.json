@@ -1,0 +1,44 @@
+{
+  "date": "2026-10-09",
+  "base_commit": "1889d4d4572c8ea918fb2f0c6bfcf38cb125514f",
+  "core_engine": "0.6.1 unchanged",
+  "python": "3.13.5",
+  "node": "v22.16.0",
+  "platform": "Linux",
+  "tests": {
+    "python": 20,
+    "node": 24,
+    "total": 44,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "actual_checks": [
+    "Temporary local files; simulated plugin transport, authorization and fault cases",
+    "Actual local VSIX ZIP/XML build and source syntax checks",
+    "User-facing document contains no terminal/configuration homework"
+  ],
+  "not_run": [
+    "Live VS Code install and URI handling",
+    "Authenticated Overleaf-Workshop connection",
+    "Production self-hosted roundtrip",
+    "Full core regression",
+    "Model/agent conversation acceptance",
+    "Single-workspace directory migration"
+  ],
+  "files_sha256": {
+    ".github/workflows/overleaf-assistant.yml": "87a0419cc3a1689e000e721ed0b54e16a30dd0a965dc680e1d0ef85eaec38c3d",
+    "aiworkspace/docs/OVERLEAF.md": "a4f3195f31e1190b25d6aab2f0bf6445258d4c9b7dbe418e2f88bf54cb34fe15",
+    "aiworkspace/docs/OVERLEAF_AGENT.md": "1a82cf5645a56f43ccc157540a8b6e013aa97c91d8fe68a05ef0bc2b0fe45e4a",
+    "aiworkspace/integrations/overleaf-assistant/LICENSE": "5f4f510bc3dd2bdbe58498f44792b4d51757d1bfcc4cde9b079dffe9b603e41b",
+    "aiworkspace/integrations/overleaf-assistant/README.md": "d9a4290a5f7ec4a2ee670e07ff88e203cff1ef03aaea12bfbd170c31cb270fe7",
+    "aiworkspace/integrations/overleaf-assistant/extension.js": "a45a22677f287be23f43267f35d66e48bcfad97c9696d4918c4d9c20de58bf9a",
+    "aiworkspace/integrations/overleaf-assistant/package.json": "2ee47c9d0716169eace5620750b186ef5d3a9b92df841f6cab97d2d9fdc3939e",
+    "aiworkspace/integrations/overleaf-assistant/probe.js": "99b668553baef8879942f0fdfa36102a7045fbc83fa30dc48417b05967231984",
+    "aiworkspace/integrations/overleaf-assistant/probe.test.js": "419f561706909e020cb54ef078a471f19611c66138b91f0598c866ddd689a88e",
+    "aiworkspace/research_workspace/assets/skills/overleaf-sync/SKILL.md": "bd4155d220b8c1c899bdb4e52dc832ce344fbc0983b6c180de5aee75e6e4c8e5",
+    "aiworkspace/scripts/overleaf_agent.py": "1bf55f06684e49e209cb34c22746853f375c00a7729de39ce52819ba0c10a1a2",
+    "aiworkspace/tests/test_overleaf_agent.py": "0fe59abcb54dc7516976432b90c4750a40a47e882828e1ca653be8088ce16d73"
+  },
+  "scope": "New helper and integration only. No core package version or scientific-state schema change."
+}

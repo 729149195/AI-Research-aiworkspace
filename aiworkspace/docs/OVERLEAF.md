@@ -1,84 +1,63 @@
-# 自建 Overleaf 与本地同步（0.3.0）
+# 自建 Overleaf 与本地同步
 
-默认服务器：`https://nankaivisoverleaf.asia/`。可以改为自己的 HTTPS 根网址、项目 ID 和稿件相对目录。账号、token、cookie 不写入 Workspace、Git 仓库或聊天。配置保存在论文项目 `.rw/overleaf.json`，只包含主机、路径、模式和身份来源说明。
+**直接告诉 Agent 要连接哪篇论文。配置、路径处理和连通性检查交给 Agent；你只完成必要的登录和授权。**
 
-## 先选一种同步通道
+不需要打开终端、填写 JSON、拆分项目 ID 或复制命令。本项目的标准远端入口使用 **Overleaf-Workshop**；不使用 computer use 到网页下载论文，不把普通项目链接交给网页下载器，也不自动切换到 Git Bridge。
 
-| 模式 | 条件 | 连接与同步 |
+## 一句话开始
+
+在能够操作本地文件与编辑器的 Agent 中打开论文项目，直接说：
+
+> 请连接实验室 Overleaf 上的这篇论文：[论文项目链接]。复用已有的 Overleaf-Workshop 和登录，保留原稿，由你完成配置并验证双向同步。需要我登录或确认的地方再告诉我。
+
+已有连接时说“检查这篇论文的 Overleaf 同步是否正常”即可。默认自建服务器是 `https://nankaivisoverleaf.asia/`；提供了其他服务器的项目链接，就使用链接里的服务器，不再重复询问。没有指定论文时，只需补充项目名称或链接。
+
+## Agent 应完成的过程
+
+| 阶段 | Agent 做什么 | 你需要做什么 |
 |---|---|---|
-| `workshop`（默认） | 安装第三方 Overleaf Workshop，服务器允许其登录／API／WebSocket | 由扩展管理账号和本地 Replica，同步由活跃编辑器负责 |
-| `git` | 自建 Server Pro 已由管理员启用 Git Bridge，项目菜单有 Git 入口 | Git 专用 token／OS 凭据管理器，框架执行显式同步或前台短周期同步 |
+| 识别项目 | 复用已打开的论文、已有绑定和项目链接，核对目标服务器与项目 | 多个候选论文或目标冲突时选择一次 |
+| 准备插件 | 检查当前编辑器中真实安装的 Overleaf-Workshop，优先复用可用版本 | 缺少插件时确认安装；不要求输入安装命令 |
+| 登录与接入 | 调用真实插件入口，复用登录，选择正确项目并建立／复用本地 Replica | 在本机插件登录；首次插件原生窗口需要确认时按提示确认 |
+| 核对原稿 | 检查插件元数据、主文件、相对目录与现有内容，保留已有修改 | 内容冲突时决定保留或合并方式 |
+| 验证收发 | 执行实际读取、经授权的双向测试及清理，给出结果 | 确认本次测试文件范围；也可以只做只读检查 |
+| 接续写作 | 保存本次检查记录，继续原稿修改和研究沉淀 | 用自然语言提出研究或修改需求 |
 
-Overleaf 原生 Git Bridge 的部署和认证依据 [官方部署文档](https://docs.overleaf.com/on-premises/configuration/overleaf-toolkit/server-pro-only-configuration/git-integration) 与 [Git token 文档](https://docs.overleaf.com/integrations-and-add-ons/git-integration-and-github-synchronization/git-integration/git-integration-authentication-tokens)。不能假定任意 Community Edition 实例自带 Git；管理员许可与开启状态无法由填写网址推断。
+账号、密码、cookie 和 token 都留在本机插件／提供方的登录界面。不要粘贴到对话，也不要写进论文目录。SSO 或验证码所需的本人登录可使用浏览器完成；Agent 不利用网页操作代替插件接入或下载论文。
 
-Overleaf Workshop 是独立社区扩展，实际 ID `iamhyc.overleaf-workshop`；本集成核查版本 0.15.10。它支持自建 Community Edition／Server Pro，登录和 Replica 接口参见 [上游 Wiki](https://github.com/overleaf-workshop/Overleaf-Workshop/blob/master/docs/wiki.md)。上游对不稳定网络中的 Local Replica 有明确稳定性警告，请保留独立版本备份。同一稿件目录只选一个同步引擎，避免插件和 Git 互相覆盖。
+## 文件应该放在哪里
 
-## A. VS Code / Overleaf Workshop
+目标布局下，当前根目录里的 `manuscript/` 直接对应 Overleaf 项目根目录。文件名、相对路径、图片、参考文献以及多文件 LaTeX 组织按原稿保留。`aiworkspace/` 的研究笔记、证据与内部状态不属于上传范围。
 
-以下在**论文项目根目录**、已安装框架的虚拟环境运行：
+已有项目复用其真实绑定，不为这次配置自动迁移目录。**当前发布引擎仍有旧路径，单工作区迁移以实际实现为准；连接功能不能自行搬动论文。** 若只有旧的标记式接入器，应保留已下载的 Replica 并报告原样接入能力待更新，不能为通过检查把原稿合并、插入跟踪标记或另造空白正文。
 
-```bash
-rw overleaf install-plugin
-rw overleaf install-plugin --approve
-rw overleaf configure --server https://nankaivisoverleaf.asia/ --project-id 实际项目ID --directory manuscript/latex/实际目录 --mode workshop --approve
-```
+Overleaf-Workshop 可能根据所选父目录和项目名生成 Replica，已有路径有被覆盖的风险。Agent 要先检查真实插件版本、实际目标与已有文件；不能盲目在非空 `manuscript/` 上初始化。插件生成的 `.overleaf/` 是本地控制信息，不属于论文正文或对外投稿包。
 
-第一行只显示安装命令；第二行通过 VS Code CLI 安装指定版本，不读取账号或自动登录。VSCodium 可加 `--editor codium`，扩展源可用性由本机环境决定。没有编辑器 CLI 时，在扩展面板按 ID 搜索并安装。第三行只保存局部配置和 `workspace/reports/overleaf-setup.md`，不会宣称连接成功。
+## 怎样才算验证通过
 
-在编辑器中完成一次性登录：
+**“插件已安装”“配置已保存”“能看到主文件”是不同阶段，都不能直接当成双向同步通过。**
 
-1. Overleaf Workshop 面板选择 **Add New Server**，填写 `https://nankaivisoverleaf.asia/`，不要追加 `/project`。
-2. 选择服务器登录。普通账号通过扩展的 email/password 界面输入；启用 SSO／CAPTCHA 时先在自己的浏览器登录，再使用扩展 **Login with Cookies**。仅将当前自建服务器的登录 cookie 粘贴到本机扩展登录框；不要发给 AI。Git 专用 token 不能替代浏览器会话 cookie。
-3. 可在网页或扩展中创建 **Upload Project**，上传由下面命令生成的 ZIP；也可选择已有远端项目。项目 ID 从浏览器 `/project/<id>` 取得。
-4. 右键远端项目选 **Open Project Locally...**，选择新的空父目录，例如 `my-paper/manuscript/replicas/`。扩展会在其下创建以远端项目命名的目录。**上游明确说明：同路径已存在时会覆盖。务必避开唯一原稿副本。**
-5. 在本地 Replica 中打开编辑器并确认 Source Control 已启用。首次分别做一个小改动，检查本地→网页、网页→本地，再开始正式协作。不要用 Invisible Mode 代替实时协作。
+Agent 可以使用仓库附带的本地验收助手，通过 Overleaf-Workshop 的文件系统接口做一次短时测试。经你同意后，它只创建一个随机命名、未被正文引用的测试文件：先观察本地到远端，再从插件远端侧修改并观察本地反馈，最后清理并核对原稿。它不修改 `main.tex`；临时文件仍可能留在远端项目历史中。不同意远端测试时，只做只读检查，并明确写“未验证写入”。只读是指验收助手不主动写远端；已经启用的 Workshop 仍可能继续先前授权的同步。
 
-```bash
-rw latex pack --directory manuscript/latex/实际目录 --output ../paper-for-overleaf.zip
-# 上传后，Replica 与当前活跃稿件字节一致时：
-rw overleaf bind-replica --directory manuscript/replicas/实际项目名称
-rw overleaf bind-replica --directory manuscript/replicas/实际项目名称 --approve
-```
+| 结果 | 应怎样向用户说明 |
+|---|---|
+| 只完成插件或本地配置 | 已准备，仍需登录／接入 |
+| 主文件可由插件读取且与本地匹配 | 可读；本轮尚未验证双向传输 |
+| 本地→远端、远端→本地和清理均通过 | 本轮插件文件级双向收发验证通过，并显示检查时间和范围 |
+| 某一步超时、权限不足、原稿变化或清理未完成 | 验证未完成，明确停在哪一步，保留原稿和待处理记录 |
 
-bind-replica 会核对扩展生成的 `.overleaf/settings.json` 中服务器、项目 ID，以及源码内容一致性，不伪造该文件或写入扩展私有登录数据库。存在差异时先人工／Skill 核对，不直接覆盖。尚未绑定研究章节的普通 Replica，可先执行 `rw latex adopt --directory ... --main main.tex --approve --actor ai:session`。
+助手的测试覆盖一次非隐藏二进制文件的收发，不能替代所有 `.tex` 编辑、逐字符协作、忽略规则、所有附件和长期稳定性的验收。开始正式协作时，Agent 还应在已授权的实际改稿中观察正文保存结果；无法取得真实工具回执时，不报告该项已通过。已有检查记录会保留时间；文件、项目绑定变化后需重新检查。
 
-编辑器运行期间，扩展负责云端协作；auto-route 在本轮操作和后续捕获中记录 `.tex` 差异并维护研究图。扩展关闭后没有来自它的实时同步。普通网页聊天也不能监听本地文件。登录完成与稳定双向通信须在用户环境验证。
+## 正常使用与故障恢复
 
-## B. 原生 Git Bridge
+连接后直接说“修改方法部分”“把导师这条意见处理掉”即可。Overleaf-Workshop 管稿件文件同步，auto-route 管研究含义、证据和修改历史。插件窗口关闭、账号过期或网络中断时，Agent 应保留本地修改并说明待恢复状态。
 
-先在项目菜单复制真实 Git URL，并确认服务器管理员已启用该功能。框架可生成默认路径，但界面提供的地址优先：
+不要同时对一个目录启用两个同步引擎。出现双向冲突，先保留两侧内容；恢复时先检查目标与差异，再继续。无权操作编辑器的纯网页聊天或远程命令环境不能代替你的本机插件会话，Agent 要明确当前缺少哪项能力，不把终端命令交给你当作“已完成配置”。
 
-```bash
-rw overleaf configure --server https://nankaivisoverleaf.asia/ --project-id 实际项目ID --directory manuscript/latex/实际目录 --mode git --git-url https://nankaivisoverleaf.asia/git/实际项目ID --approve
-rw overleaf sync --online --token-prompt
-rw overleaf sync --online --token-prompt --approve --actor ai:session
-```
+## 实现与验证范围
 
-token 在 Overleaf 的 Account Settings → Git authentication tokens 中生成。用户名为 `git`；普通账号密码和浏览器 cookie 均不用于该通道。`--token-prompt` 使用不回显输入，只存活于当前进程。长期使用可在本机配置系统钥匙串支持的 Git credential helper；避免明文 `credential.helper store`。环境变量 `RW_OVERLEAF_TOKEN` 也仅供进程读取，不应写进脚本、命令参数、.env 或公开配置。
+用户入口、Agent 执行规范，以及可由 Agent 发起的本地验收助手已经随源码提供。**助手不是第二套同步客户端**：账号和传输仍全部由 Overleaf-Workshop 处理。它按次运行，没有后台服务器，也不读取插件私有账号数据库。
 
-不加 `--approve` 只获取远端对象并预览本地／远端／基线差异，不改正文或远端。初次两边存在不同的同名文件时会停下，不猜覆盖方向。确认后显式选择：
+本轮验证包括本地文件系统、请求与报告校验、模拟插件传输故障和 VSIX 包结构检查。没有在交付环境安装真实 VS Code，也没有你的自建站登录，所以没有声称已经替你完成生产连接、所有宿主全自动配置或真实双向联调。具体范围见 [本轮验证](../verification/overleaf-onboarding/README.md)。
 
-```bash
-rw overleaf sync --online --approve --resolve main.tex=local --actor ai:session
-# 或 --resolve main.tex=remote；删除还需要 --allow-deletions
-```
-
-持续同步在前台运行，默认每 5 秒检查，按 Ctrl+C 停止：
-
-```bash
-rw overleaf watch --online --token-prompt --approve --actor ai:session --interval 5
-```
-
-这是近实时轮询，具有文件级三方合并和冲突暂停；它不提供网页编辑器的逐字符协同协议。无变化不重复提交；从不 force-push。仅上传配置选中的 manuscript 子目录，其他研究原文、状态、记录与 `.rw` 保持本地。仍需由用户检查该子目录中是否含敏感附件或可识别信息。
-
-网络中断后远端是否接受推送不明确时，保留 pending 记录：
-
-```bash
-rw overleaf recover --online
-```
-
-恢复先核对实际远端和本地字节，不覆盖中断之后的新编辑。无法自动恢复时保留两边和 `.rw/overleaf`，依照错误提示人工核对；不要删除基线或强制推送。转投后活跃目录改变，会拒绝沿用旧远端绑定。确认备份和 pending 已处理后，`rw overleaf disconnect --approve` 归档本地同步历史，再配置新的项目。该命令不删除远端项目或正文。
-
-## 验证范围
-
-已测试配置、凭据边界、冲突／恢复逻辑及真实本地 Git bare-repository 收发。未提供自建服务器账号，交付环境也没有完整 VS Code 登录会话，因此未声称已经在 nankaivisoverleaf.asia 完成真实登录和实时联调。无需将账号发给 AI；按上述本地登录步骤完成最后一段连接验收。
+技术操作仅供 Agent／维护者阅读：[Overleaf 执行与验收手册](OVERLEAF_AGENT.md)。普通用户继续使用本页的自然语言入口。

@@ -1,0 +1,41 @@
+name: Overleaf conversational onboarding
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'aiworkspace/integrations/overleaf-assistant/**'
+      - 'aiworkspace/scripts/overleaf_agent.py'
+      - 'aiworkspace/tests/test_overleaf_agent.py'
+      - 'aiworkspace/docs/OVERLEAF*.md'
+      - 'aiworkspace/research_workspace/assets/skills/overleaf-sync/SKILL.md'
+      - '.github/workflows/overleaf-assistant.yml'
+  pull_request:
+    paths:
+      - 'aiworkspace/integrations/overleaf-assistant/**'
+      - 'aiworkspace/scripts/overleaf_agent.py'
+      - 'aiworkspace/tests/test_overleaf_agent.py'
+      - 'aiworkspace/docs/OVERLEAF*.md'
+      - 'aiworkspace/research_workspace/assets/skills/overleaf-sync/SKILL.md'
+      - '.github/workflows/overleaf-assistant.yml'
+permissions:
+  contents: read
+jobs:
+  local-contracts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    strategy:
+      matrix:
+        python: ['3.11', '3.13']
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Local request, distribution and documentation tests
+        run: python -m unittest discover -s aiworkspace/tests -p test_overleaf_agent.py -v
+      - name: Simulated plugin transport and filesystem tests
+        run: node --test aiworkspace/integrations/overleaf-assistant/probe.test.js
+      - name: Build local VSIX without installing an editor
+        run: python aiworkspace/scripts/overleaf_agent.py build --output "$RUNNER_TEMP/overleaf-assistant.vsix"

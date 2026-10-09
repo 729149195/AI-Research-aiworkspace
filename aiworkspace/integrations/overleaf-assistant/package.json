@@ -1,0 +1,17 @@
+{
+  "name": "overleaf-assistant",
+  "displayName": "AI Workspace: Overleaf Connection Check",
+  "description": "Agent-triggered checks through Overleaf-Workshop; no account storage or second sync engine.",
+  "version": "0.1.0",
+  "publisher": "aiworkspace-local",
+  "license": "MIT",
+  "engines": {"vscode": "^1.85.0"},
+  "categories": ["Other"],
+  "main": "./extension.js",
+  "activationEvents": ["onUri"],
+  "extensionKind": ["workspace"],
+  "capabilities": {"untrustedWorkspaces": {"supported": false}},
+  "contributes": {"commands": [
+    {"command": "aiworkspace.overleaf.check", "title": "AI Workspace: Check Overleaf Connection"}
+  ]}
+}
