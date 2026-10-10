@@ -17,7 +17,7 @@ AI Research Workspace 将研究材料、论证关系、方法运行、图表来�
 
 **唯一的 `aiworkspace/` 保存八类研究状态；与它并列的 `manuscript/` 保存正式稿件。** Agent 是自然语言入口，Skills 负责科研过程，Overleaf-Workshop 负责稿件文件与远端协作。
 
-> **实现状态：** 下图展示已确定的单工作区目标架构。当前 `0.6.1` 引擎仍使用旧的 `workspace/` 路径；源码路径迁移尚未完成。本次更新发布说明与图文件，不移动论文或重建状态。旧项目应保持原位，详见文末[兼容状态](#compatibility)。
+> **实现状态：** 下图展示已确定的单工作区目标架构。当前 `0.6.1` 引擎仍使用旧的 `workspace/` 路径；源码路径迁移尚未完成。`aiworkspace/rules/` 已有可阅读、可填写的基础／团队／项目规则，其自动引擎接入尚待完成。不要依据图示移动论文或重建状态。旧项目应保持原位，详见文末[兼容状态](#compatibility)。
 
 ![AI Workspace 目标架构：Agent 调用唯一工作区，八类研究状态与稿件双向核对，Overleaf-Workshop 只同步稿件](aiworkspace/docs/architecture/architecture.svg)
 
@@ -79,11 +79,11 @@ project-root/
 
 | 状态 | 作者补充入口 | 内容与长期维护职责 |
 |---|---|---|
-| **① Research & Logic** | `research/research-brief.md`、`research/idea-evaluation.md`、`research/argument-map.md` | 问题、假设、核心贡献、整篇论证、章节职责、Claim 和逻辑缺口 |
+| **① Research & Logic** | `research/research-brief.md`、`research/idea-evaluation.md`、`research/argument-map.md` | 问题、假设、核心贡献、整篇论证、章节职责、Claim 和邏辑缺口 |
 | **② Sources & Literature** | `sources/reading-notes.md`，配套文献与搜索记录 | 检索范围、关键词、比较对象、阅读判断、来源等级与文献关系 |
 | **③ Evidence** | `evidence/evidence-notes.md`，配套证据矩阵 | 原文位置、数据／实验结果、适用条件、支持／反驳／限定关系和核验状态 |
 | **④ Method & Analysis** | `methods/method-plan.md`；`methods/data/`、`methods/code/`、`methods/results/` | 研究设计、数据来源、样本单位、模型、参数、运行和可复现结果 |
-| **⑤ Rules** | `rules/project-policy.md`，配套期刊规范和术语表 | 导师、学校、期刊、伦理、AI、隐私、引用、文风；记录来源、适用范围和版本 |
+| **⑤ Rules** | [基础规则](aiworkspace/rules/base.md)、[团队规则](aiworkspace/rules/team.md)、[单篇规则](aiworkspace/rules/project.md) | 导师、学校、期刊、伦理、AI、隐私、引用、文风；记录来源、适用范围和版本 |
 | **⑥ Figures & Tables** | `figures/figure-plan.md`，配套图表子目录 | 每张图表的目的、数据、论点、编码、设计理由、图源、工具、图注与版本 |
 | **⑦ Decisions & History** | `history/decisions.md`，配套讨论和评审记录 | 备选方案、AI 意见、作者／导师选择、理由、谁做了什么、是否执行及遗留问题 |
 | **⑧ Sync State** | `sync/handoff.md`；其他状态由系统维护 | 交接、暂不修改的范围、未同步差异、双向冲突、全局影响及待复核事项 |
@@ -95,6 +95,16 @@ project-root/
 Decisions & History 提供上下文，AI 建议、偏好和未定方案不能自动成为硬性事实。报告按用途归到对应研究区，避免形成另一个混杂的资料堆。来源发现、字面匹配、文件哈希和运行成功也不能代替科学核验。
 
 Idea Evaluation 保留用户提供模板的原有页序与问题，包括方法的新意和收益、相关工作的批判性比较、可视化编码／布局／交互、分析任务、操作步骤、设计理由与替代方案，以及结果、图表、评估、局限和剩余任务。[原模板的 Markdown 转录](aiworkspace/research_workspace/assets/templates/idea-evaluation.original.md)可供核对；已有结果与预期结果分别记录。
+
+## 基础规则与团队内部要求
+
+**团队共同要求写在 [aiworkspace/rules/team.md](aiworkspace/rules/team.md)；只适用于本篇的要求写在 [project.md](aiworkspace/rules/project.md)。[base.md](aiworkspace/rules/base.md) 已有十二项默认科研约定**，覆盖来源与证据、整篇论证、可复现方法、学术语言、图表、隐私、Overleaf-Workshop、独立审查与更新保护。team.md 同时提供默认协作起点和待补充栏目，无需先填满才能开始。
+
+> 请读取 aiworkspace/rules 的基础、团队和本篇规则。把导师这条要求补到团队规则，注明来源和适用范围，再检查这篇论文需要调整哪些地方。
+
+规则的完整填写说明见 [rules/README.md](aiworkspace/rules/README.md)。尚未提供的内部政策保持待补充，不假定获团队批准。冲突按来源和适用范围核对，不按文件顺序静默覆盖。内部规定使用私有团队副本或 Git 忽略的 `*.local.md`，不要提交账号、保密材料或参与者信息。
+
+**本次完成规则文件与导航；自动任务包读取、规则变更的状态失效和全局路由尚未接入新路径。** 使用时明确让 Agent 读这些规则，已有 `workspace/rules/` 中的要求保留并核对，不能因出现新目录就删掉旧规则。规则已存档、Agent 已阅读和实际已复核分别说明。
 
 <a id="quickstart"></a>
 ## 开始使用
@@ -223,14 +233,15 @@ Agent 先读当前状态，再处理授权范围内的工作，最后检查相�
 <a id="compatibility"></a>
 ## 兼容状态与迁移要求
 
-代码核对基线为 `7422139c8e2c5bd803f569d907959df5e182ed0d`（引擎 `0.6.1`），核对日期 **2026-10-08**。本次是首页与图资产修复，未修改引擎或研究 Schema。
+本次规则内容与入口基于 `0d47c6b9d1d962197c38ae6ed3e4b6c516b551c1` 核对，日期 **2026-10-10**。引擎仍为 `0.6.1`，研究 Schema 未改变；本轮仅发布规则文档、Git 忽略与首页导航。
 
 | 范围 | 当前状态 | 必须保留的边界 |
 |---|---|---|
 | 菜单、研究节点、提案、既有写作／绘图与审核 | 源码已存在，各次验证范围另有记录 | 本次文档检查不等同于完整功能重测 |
+| 基础／团队／项目规则 | `aiworkspace/rules/` 已有默认内容与填写入口；自动加载／失效／路由仍待接入 | 按请求读取并实际复核；旧规则不删除，内部内容不公开 |
 | 唯一 `aiworkspace/` 与 `.system/` 结构 | **目标已确定，代码迁移待完成**；现有引擎仍读取 `workspace/state.json` | 不手工改名、不重建旧论文，不生成两套并行研究状态 |
 | 同根 ZIP、原样镜像、八类填写导航 | 前序独立补丁有实现，尚未整合到当前 `main` 与上述目标结构 | 检查实际安装版本，不无条件叠加补丁 |
-| Workshop-only 接入 | 当前代码含插件引导／绑定，也仍含旧 Git 通道和旧目录假设 | 本页规定的用户流程使用插件；相关代码与入口尚需统一，禁止静默回退 |
+| Workshop-only 接入 | 已发布自然语言引导与本地验收助手；旧底层仍含 Git 通道及目录假设 | 用户流程使用插件，禁止静默回退；真实认证与收发需在用户环境验收 |
 | 登录、真实双向通信、模型效果 | 本次未联调 | 单独在用户环境验收，不能凭图示宣称已完成 |
 
 迁移要完整保留稿件、八类材料、已填写模板、任务、审批与同步基线，并核对旧新路径和回滚。上述链接中的旧命令需匹配实际版本使用。

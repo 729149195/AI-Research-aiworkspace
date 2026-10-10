@@ -22,3 +22,6 @@ dist/
 /.rw/
 /workspace/
 /manuscript/
+
+# Optional private policies; shared starter rules remain tracked.
+/aiworkspace/rules/*.local.md
