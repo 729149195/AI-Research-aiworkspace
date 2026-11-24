@@ -472,6 +472,7 @@ class CEHttpSession:
         if status != 200 or '/login' in urllib.parse.urlsplit(final_url).path:
             raise WorkspaceError('Overleaf CE session expired; run overleaf login --online.')
         html = body.decode('utf-8', errors='replace')
+        self.csrf = extract_csrf(html)
         blob = extract_meta_json(html, 'ol-prefetchedProjectsBlob')
         projects = blob.get('projects', []) if isinstance(blob, dict) else []
         out = []
@@ -487,6 +488,34 @@ class CEHttpSession:
                 'trashed': bool(item.get('trashed', False)),
             })
         return out
+
+    def create_project(self, name: str, *, template: str = 'none') -> dict[str, Any]:
+        clean = name.strip()
+        require(bool(clean) and len(clean) <= 200 and not any(ord(c) < 32 for c in clean),
+                'Provide a valid Overleaf project name (1-200 printable characters).')
+        require(template in ('none', 'example'), 'Unsupported Overleaf project template.')
+        status, final_url, _, body = self.request('GET', '/project')
+        if status != 200 or '/login' in urllib.parse.urlsplit(final_url).path:
+            raise WorkspaceError('Overleaf CE session expired; run overleaf login --online.')
+        csrf = extract_csrf(body.decode('utf-8', errors='replace'))
+        self.csrf = csrf
+        st, _, _, resp_body = self.request(
+            'POST',
+            '/project/new',
+            json_body={'_csrf': csrf, 'projectName': clean, 'template': template},
+            headers={'X-Csrf-Token': csrf, 'Referer': self.server + '/project'},
+        )
+        require(st in (200, 201), f'Failed to create Overleaf CE project (HTTP {st}).')
+        parsed = json.loads(resp_body.decode('utf-8'))
+        pid = str(parsed.get('project_id') or parsed.get('_id') or '')
+        require(bool(pid), 'Overleaf server did not return a project_id.')
+        return {
+            'created': True,
+            'server': self.server,
+            'project_id': pid,
+            'name': clean,
+            'url': f'{self.server}/project/{pid}',
+        }
 
 
 # ---------------------------------------------------------------------------
@@ -743,6 +772,15 @@ def list_ce_projects(store: Store, server: str, *, online: bool = False) -> dict
     session = load_session(store, server)
     projects = session.list_projects()
     return {'server': session.server, 'count': len(projects), 'projects': projects}
+
+
+def create_ce_project(store: Store, server: str, name: str, *, online: bool = False, approve: bool = False) -> dict[str, Any]:
+    require(online, 'Creating an Overleaf CE project requires --online.')
+    if not approve:
+        return {'created': False, 'server': _normalize_server(server), 'name': name.strip(),
+                'note': 'Preview only; pass --approve to create a new remote Overleaf CE project.'}
+    session = load_session(store, server)
+    return session.create_project(name)
 
 
 # ---------------------------------------------------------------------------

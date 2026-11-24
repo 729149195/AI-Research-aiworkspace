@@ -30,6 +30,7 @@ def add_commands(sub):
     q=ss.add_parser('login',help='Authenticate built-in Overleaf CE session (stores cookie only under .rw/, never password)');q.add_argument('--server',default='https://nankaivisoverleaf.asia/');q.add_argument('--email');q.add_argument('--cookie-env',action='store_true',help='Read session cookie from RW_OVERLEAF_COOKIE env var');online(q)
     ss.add_parser('logout',help='Remove saved local Overleaf CE session cookie')
     q=ss.add_parser('projects',help='List accessible projects on the Overleaf CE server');q.add_argument('--server');online(q)
+    q=ss.add_parser('create',help='Create a new blank project on the Overleaf CE server');q.add_argument('--name',required=True);q.add_argument('--server');online(q);approve(q)
     q=ss.add_parser('compile',help='Trigger remote Overleaf CE compilation and save PDF/log to .rw/builds/');q.add_argument('--root-doc');online(q)
     q=ss.add_parser('verify',help='Verify live Overleaf CE connectivity (read-only or --roundtrip --approve)');q.add_argument('--roundtrip',action='store_true');q.add_argument('--main');online(q);approve(q)
     q=ss.add_parser('install-plugin');q.add_argument('--editor',choices=['code','codium'],default='code');approve(q)
@@ -85,6 +86,13 @@ def execute_publication(a):
                 cfg_path = safe_path(s.root, overleaf.CONFIG, governed=False)
                 server = json.loads(read_text(cfg_path))['server'] if cfg_path.exists() else overleaf.DEFAULT_SERVER
             return list_ce_projects(s, server, online=a.online), 0
+        if a.action=='create':
+            from .overleaf_ce import create_ce_project
+            server = a.server
+            if not server:
+                cfg_path = safe_path(s.root, overleaf.CONFIG, governed=False)
+                server = json.loads(read_text(cfg_path))['server'] if cfg_path.exists() else overleaf.DEFAULT_SERVER
+            return create_ce_project(s, server, a.name, online=a.online, approve=a.approve), 0
         if a.action=='compile':
             result = overleaf.compile_remote(s, online=a.online, root_doc=a.root_doc)
             return result, 0 if result.get('compiled') else 1

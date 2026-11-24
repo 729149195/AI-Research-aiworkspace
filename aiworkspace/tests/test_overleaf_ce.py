@@ -403,11 +403,30 @@ class OverleafCEIntegrationCase(unittest.TestCase):
             ['overleaf', 'login', '--online', '--server', 'https://nankaivisoverleaf.asia/'],
             ['overleaf', 'logout'],
             ['overleaf', 'projects', '--online'],
+            ['overleaf', 'create', '--online', '--name', 'New Paper', '--approve'],
             ['overleaf', 'compile', '--online'],
             ['overleaf', 'verify', '--online', '--roundtrip', '--approve'],
         ):
             parsed = p.parse_args(argv)
             self.assertEqual(parsed.command, 'overleaf')
+
+    def test_create_project_preview_and_apply(self):
+        s = Store(self.root)
+        prev = ce.create_ce_project(s, 'https://lab.example', 'My CG&A Paper', online=True, approve=False)
+        self.assertFalse(prev['created'])
+        sess = ce.CEHttpSession('https://lab.example', cookies=[{'name': 'overleaf.sid', 'value': 'v1'}])
+        def fake_req(method, path, *, data=None, json_body=None, headers=None, timeout=30, max_bytes=32 * 1024 * 1024):
+            if method == 'GET' and path == '/project':
+                return 200, 'https://lab.example/project', {}, b'<meta name="ol-csrfToken" content="tok1">'
+            if method == 'POST' and path == '/project/new':
+                self.assertEqual(json_body['projectName'], 'My CG&A Paper')
+                return 200, 'https://lab.example/project/new', {}, b'{"project_id":"newid999"}'
+            raise AssertionError((method, path))
+        sess.request = fake_req  # type: ignore[method-assign]
+        res = sess.create_project('My CG&A Paper')
+        self.assertTrue(res['created'])
+        self.assertEqual(res['project_id'], 'newid999')
+        self.assertEqual(res['url'], 'https://lab.example/project/newid999')
 
 
 if __name__ == '__main__':
