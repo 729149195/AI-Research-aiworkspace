@@ -2,7 +2,22 @@
 
 用户说明见 [OVERLEAF.md](OVERLEAF.md)。本页接管旧 AGENT_PLAYBOOK 中的 Overleaf 片段及旧引擎生成的命令式 setup guide；不要将旧说明作为终端任务交给用户。本页的命令、路径与请求 ID 由 Agent 操作，不能作为用户作业。当前用户指定 **Overleaf-Workshop** 为标准接入通道，禁止 computer use 网页下载、认证 HTTP 下载、读取浏览器 cookie 数据库或自动回退 Git。既有 Git 用户的源码保留，但不能未经确认更换其连接。
 
-## 1. 先复用实际环境
+## 0. 内置 Overleaf CE 直连模式（`mode=ce`，零第三方插件依赖）
+
+当目标服务器为自建 **Overleaf Community Edition**（例如 `https://nankaivisoverleaf.asia/`）且用户希望完全由 `aiworkspace` 内置完成、不依赖 Cursor / VS Code / `Overleaf-Workshop` 时，使用内置 `ce` 模式（源码在 `research_workspace/overleaf_ce.py`）：
+
+- **前置依赖**：仅需在框架独立 `.venv` 中安装可选依赖 `websocket-client>=1.6,<2`（见 `pyproject.toml` `[overleaf-ce]`），不影响核心零依赖特性。
+- **配置与认证**：
+  - `rw --project STUDY overleaf configure --server https://nankaivisoverleaf.asia/ --project-id ID --directory manuscript/<subdir> --mode ce --actor ai:session --approve`
+  - `rw --project STUDY overleaf login --online --server https://nankaivisoverleaf.asia/`（通过交互输入或进程环境变量 `RW_OVERLEAF_EMAIL` / `RW_OVERLEAF_PASSWORD`，遇 CAPTCHA/SSO 时改用 `--cookie-env` 读取 `RW_OVERLEAF_COOKIE`；**绝不**将密码写入配置、命令行参数或仓库；本地仅在 `.rw/overleaf/ce-session.json` 以 `0600` 权限保存会话 Cookie）。
+- **同步、编译与真实连通验收**：
+  - 预览与同步：`rw --project STUDY overleaf sync --online` → 确认后 `--approve --actor ...`（文本走实时 Socket.IO 0.9 + UTF-16 OT 更新，二进制走 `/upload`，保留三方合并、冲突暂停、删除保护和 `recover` 恢复日志）。
+  - 远程编译：`rw --project STUDY overleaf compile --online`（触发 Overleaf 远端编译并将 `output.pdf` 与 `output.log` 存至 `.rw/builds/`）。
+  - 连通验收：`rw --project STUDY overleaf verify --online`（只读 `joinProject` + `joinDoc` 哈希校验）或经确认后 `--roundtrip --approve`（上传/读回/更新/删除临时 1×1 PNG 探针，核对 `local_to_remote`、`remote_to_local`、`cleanup` 及本地原稿前后哈希一致，结果存 `.rw/overleaf/ce-verify.json`）。
+
+---
+
+## 1. 先复用实际环境（Overleaf-Workshop 通道）
 
 读取当前明确选择的项目与已有非秘密连接配置。已有工作目录和绑定优先，不扫描用户家目录，不自动迁移旧论文。缺少目标时只问论文链接或名称；从常规 HTTPS `/project/ID` 链接解析服务器和 ID，拒绝带密码、查询 token 和共享密钥的链接。默认自建服务器为 https://nankaivisoverleaf.asia/。
 

@@ -48,15 +48,17 @@ def checked_git_url(server: str,project_id: str,url: str|None=None)->str:
 def config(store: Store)->dict:
     c=json.loads(read_text(safe_path(store.root,CONFIG,governed=False)))
     server_url(c['server']);checked_git_url(c['server'],c['project_id'],c.get('git_url'))
-    require(c.get('mode') in ('git','workshop') and c.get('directory','').startswith('manuscript/'),'Invalid Overleaf configuration.')
+    require(c.get('mode') in ('ce','git','workshop') and c.get('directory','').startswith('manuscript/'),'Invalid Overleaf configuration.')
     return c
 
 
 def configure(store: Store,actor: str,*,server=DEFAULT_SERVER,project_id: str,directory: str,mode='workshop',git_url=None,approve=False)->dict:
-    server=server_url(server);require(mode in ('workshop','git'),'Choose workshop or git.')
+    server=server_url(server);require(mode in ('ce','workshop','git'),'Choose ce, workshop or git.')
     require(directory.startswith('manuscript/') and safe_path(store.root,directory).is_dir(),'Select one existing manuscript subtree, not the whole research workspace.')
+    cred_note=('Session cookie in .rw/overleaf/ce-session.json via overleaf login --online; raw passwords are never stored'
+               if mode=='ce' else 'Git credential helper or RW_OVERLEAF_TOKEN; Workshop login belongs to the extension')
     value={'version':1,'server':server,'project_id':project_id,'git_url':checked_git_url(server,project_id,git_url),
-           'directory':directory,'mode':mode,'configured_by':actor,'at':now(),'credential':'Git credential helper or RW_OVERLEAF_TOKEN; Workshop login belongs to the extension',
+           'directory':directory,'mode':mode,'configured_by':actor,'at':now(),'credential':cred_note,
            'live_connection_verified':False}
     old_path=safe_path(store.root,CONFIG,governed=False)
     if old_path.exists():
@@ -67,9 +69,27 @@ def configure(store: Store,actor: str,*,server=DEFAULT_SERVER,project_id: str,di
     atomic_write(old_path,pretty(value))
     try:old_path.chmod(0o600)
     except OSError:pass
-    guide=workshop_guide(value)
+    guide=ce_guide(value) if mode=='ce' else workshop_guide(value)
     atomic_write(safe_path(store.root,'workspace/reports/overleaf-setup.md'),guide)
     return {'configuration':value,'applied':True,'guide':'workspace/reports/overleaf-setup.md'}
+
+
+def ce_guide(c: dict)->str:
+    return f'''# Overleaf built-in CE setup — {c['server']}
+
+Mode: `ce` (built-in Overleaf Community Edition HTTP + Socket.IO/OT client; no third-party editor plugin required).
+Project: `{c['project_id']}`. Local paper subtree: `{c['directory']}`.
+
+## Workflow (handled by agent or CLI)
+
+1. Authenticate once with `rw overleaf login --online --server {c['server']}` (interactive prompt or process-local `RW_OVERLEAF_EMAIL`/`RW_OVERLEAF_PASSWORD`, or `RW_OVERLEAF_COOKIE` if the server uses SSO/CAPTCHA). Only the session cookie is stored under `.rw/overleaf/ce-session.json` (0600, git-ignored); raw passwords are never saved.
+2. Preview pull/push diff with `rw overleaf sync --online`, then apply with `rw overleaf sync --online --approve --actor YOUR_NAME`.
+3. Verify live connectivity with `rw overleaf verify --online` (read-only) or `rw overleaf verify --online --roundtrip --approve` (disposable 1x1 PNG probe with automatic cleanup).
+4. Trigger remote compilation and fetch `output.pdf`/`output.log` into `.rw/builds/` with `rw overleaf compile --online`.
+5. For foreground polling, use `rw overleaf watch --online --approve --actor YOUR_NAME --interval 5`.
+
+Only `{c['directory']}` is synchronized. `workspace/`, history, raw research directories and `.rw/` are strictly outside the upload boundary. Conflicts and deletions pause by default.
+'''
 
 
 def workshop_guide(c: dict)->str:
@@ -248,17 +268,24 @@ def finish_pending(store:Store,*,expected_remote:str|None=None)->dict:
     return {'synchronized':True,'receipt':record['id'],'remote_commit':record['remote_commit'],'changed_files':record['changes']}
 
 
+def _transport_for(store:Store,c:dict):
+    if c['mode']=='ce':
+        from .overleaf_ce import CETransport
+        return CETransport(store,c)
+    return GitTransport(store,c)
+
+
 def synchronize(store:Store,actor='local-user',*,online=False,approve=False,resolutions=None,allow_deletions=False,transport=None)->dict:
-    require(online,'Overleaf requests require --online.');c=config(store);require(c['mode']=='git','Workshop owns synchronization in workshop mode; do not run a second sync engine.')
+    require(online,'Overleaf requests require --online.');c=config(store);require(c['mode'] in ('git','ce'),'Workshop owns synchronization in workshop mode; do not run a second sync engine.')
     require(not safe_path(store.root,PENDING,governed=False).exists(),'Interrupted synchronization: run overleaf recover first.')
     active=store.state['project'].get('latex')
     require(not active or active['directory']==c['directory'],'Active template changed. Reconfigure the remote target explicitly before uploading.')
-    channel=transport or GitTransport(store,c);remote,remote_commit=channel.read();local=local_files(store,c)
+    channel=transport or _transport_for(store,c);remote,remote_commit=channel.read();local=local_files(store,c)
     path=safe_path(store.root,BASE,governed=False)
     previous=json.loads(read_text(path)) if path.exists() else {'files':{}}
     base={n:object_bytes(store,h) for n,h in previous['files'].items()}
     merged=merge_files(base,local,remote,resolutions=resolutions,allow_deletions=allow_deletions)
-    report={k:v for k,v in merged.items() if k!='files'};report.update(synchronized=False,remote_commit=remote_commit,first_sync=not path.exists(),scope=c['directory'])
+    report={k:v for k,v in merged.items() if k!='files'};report.update(synchronized=False,remote_commit=remote_commit,first_sync=not path.exists(),scope=c['directory'],mode=c['mode'])
     if not approve or merged['conflicts']:return report
     if not merged['changes'] and path.exists():return {**report,'synchronized':True,'unchanged':True}
     with project_lock(store.root):
@@ -271,6 +298,7 @@ def synchronize(store:Store,actor='local-user',*,online=False,approve=False,reso
         except Exception:
             # Do not assume a failed network return means no push happened.
             record['status']='remote-outcome-unknown';atomic_write(safe_path(store.root,PENDING,governed=False),pretty(record));raise
+        record['after']={n:put_object(store,b) for n,b in after.items()}
         record.update(remote_commit=commit,status='remote-committed');atomic_write(safe_path(store.root,PENDING,governed=False),pretty(record))
         result=finish_pending(store,expected_remote=commit)
     try:
@@ -281,12 +309,25 @@ def synchronize(store:Store,actor='local-user',*,online=False,approve=False,reso
 
 
 def recover_sync(store:Store,*,online=False,transport=None)->dict:
-    require(online,'Recovery validates the current remote; use --online.');c=config(store);channel=transport or GitTransport(store,c)
+    require(online,'Recovery validates the current remote; use --online.');c=config(store);channel=transport or _transport_for(store,c)
     remote,commit=channel.read();path=safe_path(store.root,PENDING,governed=False);record=json.loads(read_text(path))
     # Recover an uncertain push only when remote bytes exactly equal the intended result.
     require({n:sha(b) for n,b in remote.items()}==record['after'],'Remote content differs from pending sync; preserve both copies and resolve explicitly.')
     record['remote_commit']=commit;atomic_write(path,pretty(record))
     with project_lock(store.root):return finish_pending(store,expected_remote=commit)
+
+
+def compile_remote(store:Store,*,online=False,root_doc:str|None=None,transport=None)->dict:
+    require(online,'Remote Overleaf compilation requires --online.')
+    c=config(store);require(c['mode']=='ce','Built-in remote compilation requires mode=ce.')
+    ch=transport or _transport_for(store,c)
+    return ch.compile_remote(root_doc=root_doc)
+
+
+def verify_connection(store:Store,*,online=False,roundtrip=False,approve=False,main:str|None=None,transport=None)->dict:
+    from .overleaf_ce import verify_ce
+    c=config(store)
+    return verify_ce(store,c,online=online,roundtrip=roundtrip,approve=approve,main=main,transport=transport)
 
 
 def watch(store:Store,actor: str,*,online=False,approve=False,interval=5,cycles=0)->dict:

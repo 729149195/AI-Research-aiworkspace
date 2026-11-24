@@ -2,7 +2,11 @@
 
 **直接告诉 Agent 要连接哪篇论文。配置、路径处理和连通性检查交给 Agent；你只完成必要的登录和授权。**
 
-不需要打开终端、填写 JSON、拆分项目 ID 或复制命令。本项目的标准远端入口使用 **Overleaf-Workshop**；不使用 computer use 到网页下载论文，不把普通项目链接交给网页下载器，也不自动切换到 Git Bridge。
+不需要打开终端、填写 JSON、拆分项目 ID 或复制命令。本项目支持两种自建 Overleaf 接入方式：
+- **内置 Overleaf CE 直连（推荐，零第三方编辑器依赖）**：直接通过 `aiworkspace` 内置的 Overleaf Community Edition 实时协议完成拉取、双向三方合并同步、远程编译取 PDF 与连通验收，不依赖 Cursor、VS Code 或任何编辑器插件。
+- **Overleaf-Workshop（可选编辑器插件通道）**：如果你习惯在编辑器内使用插件维护 Local Replica，也可继续复用已安装的 `Overleaf-Workshop`。
+
+两种方式均不使用 computer use 到网页抓取，也不会未经确认自动切换到 Git Bridge。
 
 ## 一句话开始
 

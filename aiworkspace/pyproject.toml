@@ -15,6 +15,7 @@ dependencies = []
 [project.optional-dependencies]
 figures = ["matplotlib>=3.8,<4"]
 diagrams = ["CairoSVG>=2.7,<3", "fonttools>=4.40,<5"]
+overleaf-ce = ["websocket-client>=1.6,<2"]
 
 [project.scripts]
 rw = "research_workspace.cli:main"
