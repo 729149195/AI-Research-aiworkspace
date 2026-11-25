@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checked_at": "2026-10-08",
+  "checked_at": "2026-11-25",
   "renderer": {
     "mermaid": "11.12.2",
     "chromium": "144.0.7559.96",
@@ -9,14 +9,22 @@
     "output": "Standalone SVG text, local white background; no external resources or embedded fonts."
   },
   "files": {
-    "architecture.mmd": "4dd2818799aac93007c7e0a76f2b95d043a4669d55b8a5e88930db7734d3b481",
-    "architecture.svg": "c6a7765696084f719664a655124d1209457ba4443e9240bd50d78e802281a2ba",
+    "architecture.mmd": "3808da5ab6e935871b81da36709923ed3f310ba05e02d385b4d4be1e7977ef40",
+    "architecture.svg": "bbccae38371f73f4b7a49a8c1fda8859c4bc734e1d83d935faa6fa22864ebc45",
     "maintenance.mmd": "da37a392fbcb992a83626a464748a678bd677accc5a6148e50775a9a3bc316af",
     "maintenance.svg": "f51c7713d8b16ade12303edbbc1df715140b5dfa7ad047e74a6990c19b7efd82",
     "workflow.mmd": "f3d65660dfc0dd68522dc63b10b62910a97e28f94b4a1504e1574e25ce3069cf",
     "workflow.svg": "72b1f0d3ad911d794b1047a11c958e06ae12be1fc80efd842485a33e99bc9cb2"
   },
   "validation": {
+    "change": "CE text labels only; existing SVG geometry retained",
+    "sha256_source_and_svg_checked": true,
+    "mermaid_rerender": "not_run",
+    "browser_img_loads": "not_run",
+    "live_github_browser": "not_run",
+    "research_code_changed": false
+  },
+  "historical_validation_2026_10_08": {
     "parsed_mermaid": 3,
     "browser_img_loads": 3,
     "browser_page_errors": 0,

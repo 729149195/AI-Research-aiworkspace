@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-11-25 — Built-in Overleaf CE onboarding (engine 0.6.1)
+
+- Document the built-in CE implementation from `6f76f48` and remote blank-project creation from `e357aad`: new CE connections default to `mode=ce` with the optional `overleaf-ce` Python dependency. No VS Code, Cursor, Overleaf-Workshop or Git Bridge is required.
+- Align the repository homepage, architecture labels, user and agent onboarding, distributed paper instructions, rules and Skill guidance. Preserve existing Workshop/Git bindings as explicit compatibility paths; preserve the current `workspace/` layout and manuscript-subtree boundary.
+- Document local credential handling, project creation/first pull, preview/approval, conflict recovery, opt-in foreground watch, scoped binary verification and remote compilation. Existing protocol/transport tests use simulated servers; this documentation update does not establish authenticated production CE, real model sessions or full regression/CI results. No engine/Schema version bump.
+
 ## 0.6.1 — Content-first VIS/HCI paper figures / 2026-09-30
 
 - Correct the academic-figure default: inspect real paper figures and captions, then show concrete objects, encodings, transformations and interaction feedback through a consistent worked example. Generic graph templates remain an optional route.

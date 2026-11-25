@@ -1,6 +1,6 @@
 # 本地 Overleaf 验收助手
 
-此目录是由 Agent 构建与安装的可选 VS Code 辅助扩展。用户入口见 [自然语言接入](../../docs/OVERLEAF.md)，技术操作见 [Agent 手册](../../docs/OVERLEAF_AGENT.md)。
+此目录是旧 Workshop 通道的兼容组件：由 Agent 按明确选择构建与安装的可选 VS Code 辅助扩展。新自建 CE 项目直接使用 AI Workspace 内置传输与验收，无需此组件或 VS Code。用户入口见 [自然语言接入](../../docs/OVERLEAF.md)，技术操作见 [Agent 手册](../../docs/OVERLEAF_AGENT.md)。
 
 它按次复用 **Overleaf-Workshop** 的 VS Code 文件系统提供者检查项目身份、主文件匹配、一个临时二进制文件的双向传播、清理与原稿完整性。它不持有账号、不调用 Overleaf HTTP API、不承担持续同步、不启动后台服务器、不绕过原生登录或授权。只读检查也会单独提示，且不报告写入通过。
 
