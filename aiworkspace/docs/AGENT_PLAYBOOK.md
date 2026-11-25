@@ -35,7 +35,7 @@
 | 3 文献 | researcher / knowledge-evidence；浏览需明确查询范围和隐私。默认只导入未核验候选。已有原文、反证和定位保留。 |
 | 4 想法 | idea-evaluation / logic-methodology；读取已填工作表，比较方案并保留未知；不编造结果。 |
 | 5 分析图表 | logic-methodology / figure-visualization；先查数据和实际方法，审查代码并取得执行许可，再 run。图表必须来自真实结果。 |
-| 6 Overleaf | overleaf-sync；复用已确认服务器与目录，询问必要项目链接；插件安装、登录和上传分别确定。账号仅在本机登录；不要求聊天粘贴 token。 |
+| 6 Overleaf | overleaf-sync；新自建 CE 项目默认使用内置 mode=ce，准备独立 Python 环境的 overleaf-ce 可选依赖，登录、列出或创建远端项目、配置选定稿件子目录、预览并经授权同步、验收和远程编译。无需安装 VS Code/Cursor/Workshop。旧绑定仅按明确要求保留或迁移，账号仅在本机安全登录；不要求聊天粘贴凭据。操作以 [OVERLEAF_AGENT.md](OVERLEAF_AGENT.md) 第 0 节为准。 |
 | 7 转投 | venue-setup → venue-transfer；先取得新模板与规则，预览到新目录的迁移，保留旧稿，编译／检查后再切换活跃稿件。不沿用旧项目上传授权。 |
 | 8 审查 | reviewer / rules-compliance；先执行 review，再独立检查真实材料。只给实际范围内的结论；有问题先列修复。打包不等于直接提交到投稿网站。 |
 | 9 进度 | 读取 status、route status 与已有 history/report；默认不创建新的任务，不把历史审核当成当前有效审查。 |

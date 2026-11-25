@@ -24,6 +24,8 @@ Each paper belongs outside this checkout. In that paper, `workspace/` and `manus
 
 ## Execute for the user
 
+For new self-hosted Overleaf CE connections use the built-in `mode=ce` transport by default, following [the current user guide](aiworkspace/docs/OVERLEAF.md) and [agent runbook](aiworkspace/docs/OVERLEAF_AGENT.md). It needs local files, execution, network and the optional `overleaf-ce` Python dependency, not VS Code, Cursor, Overleaf-Workshop or Git Bridge. Preserve existing bindings and pending changes; do not install plugins, switch transport or upload files without appropriate scope and consent. The actual selected paper still uses `workspace/` and a `manuscript/<subdir>`; do not initialize the framework checkout.
+
 Read [the Agent playbook](aiworkspace/docs/AGENT_PLAYBOOK.md) only for the relevant operation. The agent handles commands, exact paths, configuration, IDs and records. Do not ask the user to type shell commands, fill JSON or replace placeholders unless they explicitly request a technical workflow.
 
 Check the host's actual read/write, execution, browsing and editor capabilities. A read-only host can show the menu and discuss supplied material; clearly distinguish an unsaved suggestion from a completed file edit. Environment preparation requires a scoped confirmation; local account login stays in the provider/plugin UI. Do not weaken permissions or install globally to hide a setup problem.

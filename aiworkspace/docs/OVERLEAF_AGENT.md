@@ -1,25 +1,39 @@
 # Overleaf：Agent 执行与真实验收手册
 
-用户说明见 [OVERLEAF.md](OVERLEAF.md)。本页接管旧 AGENT_PLAYBOOK 中的 Overleaf 片段及旧引擎生成的命令式 setup guide；不要将旧说明作为终端任务交给用户。本页的命令、路径与请求 ID 由 Agent 操作，不能作为用户作业。当前用户指定 **Overleaf-Workshop** 为标准接入通道，禁止 computer use 网页下载、认证 HTTP 下载、读取浏览器 cookie 数据库或自动回退 Git。既有 Git 用户的源码保留，但不能未经确认更换其连接。
+用户说明见 [OVERLEAF.md](OVERLEAF.md)。本页接管旧 AGENT_PLAYBOOK 和旧生成说明。**新自建 CE 项目默认使用内置 `mode=ce`，不安装或调用 VS Code、Cursor、Overleaf-Workshop 或 Git Bridge。** 后面的 Workshop 专用步骤只适用于用户明确选择的旧兼容通道。密码/cookie 不进入聊天、命令参数、论文或 Git；禁止 computer use 抓取网页、读取私有浏览器凭据库及未经确认自动切换传输。内置 CE 经授权使用自身 HTTPS 和 Socket.IO/OT 协议。
 
-## 0. 内置 Overleaf CE 直连模式（`mode=ce`，零第三方插件依赖）
+## 0. 内置 Overleaf CE 直连（默认流程）
 
-当目标服务器为自建 **Overleaf Community Edition**（例如 `https://nankaivisoverleaf.asia/`）且用户希望完全由 `aiworkspace` 内置完成、不依赖 Cursor / VS Code / `Overleaf-Workshop` 时，使用内置 `ce` 模式（源码在 `research_workspace/overleaf_ce.py`）：
+### 0.1 环境和论文根目录
 
-- **前置依赖**：仅需在框架独立 `.venv` 中安装可选依赖 `websocket-client>=1.6,<2`（见 `pyproject.toml` `[overleaf-ce]`），不影响核心零依赖特性。
-- **配置与认证**：
-  - `rw --project STUDY overleaf configure --server https://nankaivisoverleaf.asia/ --project-id ID --directory manuscript/<subdir> --mode ce --actor ai:session --approve`
-  - `rw --project STUDY overleaf login --online --server https://nankaivisoverleaf.asia/`（通过交互输入或进程环境变量 `RW_OVERLEAF_EMAIL` / `RW_OVERLEAF_PASSWORD`，遇 CAPTCHA/SSO 时改用 `--cookie-env` 读取 `RW_OVERLEAF_COOKIE`；**绝不**将密码写入配置、命令行参数或仓库；本地仅在 `.rw/overleaf/ce-session.json` 以 `0600` 权限保存会话 Cookie）。
-- **同步、编译与真实连通验收**：
-  - 预览与同步：`rw --project STUDY overleaf sync --online` → 确认后 `--approve --actor ...`（文本走实时 Socket.IO 0.9 + UTF-16 OT 更新，二进制走 `/upload`，保留三方合并、冲突暂停、删除保护和 `recover` 恢复日志）。
-  - 远程编译：`rw --project STUDY overleaf compile --online`（触发 Overleaf 远端编译并将 `output.pdf` 与 `output.log` 存至 `.rw/builds/`）。
-  - 连通验收：`rw --project STUDY overleaf verify --online`（只读 `joinProject` + `joinDoc` 哈希校验）或经确认后 `--roundtrip --approve`（上传/读回/更新/删除临时 1×1 PNG 探针，核对 `local_to_remote`、`remote_to_local`、`cleanup` 及本地原稿前后哈希一致，结果存 `.rw/overleaf/ce-verify.json`）。
+- 确认 Agent 实际具备本地文件、命令和网络能力。无需编辑器控制。复用框架独立 Python 3.11+ 虚拟环境；从 `aiworkspace/pyproject.toml` 安装 `overleaf-ce` 可选依赖 `websocket-client>=1.6,<2`。例如经批准执行 `PYTHON -m pip install -e "FRAMEWORK/aiworkspace[overleaf-ce]"`，用实际虚拟环境解释器与源码路径替换占位。禁止全局安装和修改全局安全设置。现有环境优先复用；由 Agent 操作。
+- 在框架目录外创建或复用实际论文根目录 STUDY，已有论文禁止重新 init。新论文用 `rw init STUDY --name NAME --author AUTHOR`（名称作者由实际用户提供），然后安装/更新该宿主对应的研究 Skills。当前引擎仍读取 `workspace/state.json`；连接要求现存的 `manuscript/<subdir>`，首次拉取远端优先选择新建空目录。已有 active LaTeX 绑定须与同步目录一致。只同步明确选定的受支持稿件文件，不上传 workspace、.rw 或研究数据，不因旧标记式 adopt 而修改原稿结构。
+
+### 0.2 登录、项目选择与创建
+
+- 从 HTTPS 项目链接解析服务器和项目 ID，拒绝带密码、共享 token、查询串的链接。默认服务器 `https://nankaivisoverleaf.asia/`。所有命令使用实际虚拟环境中的 rw 和明确的 `--project STUDY`，不用用户替换命令占位符。
+- `rw --project STUDY overleaf login --online --server SERVER`：本人在本机交互提示输入邮箱、隐藏密码，或使用进程局部 `RW_OVERLEAF_EMAIL`/`RW_OVERLEAF_PASSWORD` 安全环境。SSO/CAPTCHA 不绕过，可让本人正常登录后以安全的本机环境变量 `RW_OVERLEAF_COOKIE` 并加 `--cookie-env` 接入。不得把秘密写进聊天、日志、命令参数或代码；不得读取浏览器密码/cookie 库。仅在 `.rw/overleaf/ce-session.json` 保存会话 cookie，尽量设置 0600 权限。过期重新认证；`overleaf logout` 清除本机会话文件，不保证服务端会话同时失效。
+- `rw --project STUDY overleaf projects --online --server SERVER` 列出已认证项目。无目标项目时询问名称或链接，只有用户需要新项目才用 `rw --project STUDY overleaf create --online --server SERVER --name NAME` 预览，明确授权后追加 `--approve`，使用返回的真实 project_id/URL。不得从名字猜 ID 或重复创建。
+- `rw --project STUDY overleaf configure --server SERVER --project-id ID --directory manuscript/SUBDIR --mode ce --actor ai:session` 预览；确认后加 `--approve`。已有连接复用真实配置；绑定不同服务器/项目/目录/传输时先审阅基线、未完成同步和备份，暂停旧引擎，明确授权后才解除旧绑定。不能同时运行两个同步引擎，不能手工伪造元数据。
+
+### 0.3 首次拉取、同步与恢复
+
+- `rw --project STUDY overleaf sync --online` 读取实际远端并预览合并计划；按实际 changes、scope、conflicts 向用户说明范围后，批准才执行 `rw --project STUDY overleaf sync --online --approve --actor ai:session`。本地空子目录且远端已有原稿时，首次同步拉取受支持文件。双方都有文件或本地有未同步改动时，先备份并核对差异；首次无共同基线的同名不同内容属于冲突。
+- 内置 CE 使用 HTTPS、Socket.IO 0.9 / UTF-16 OT 更新文档、二进制上传。同步按三方合并基线执行，冲突停写，默认阻止删除；`--resolve path=local|remote` 与 `--allow-deletions` 仅在明确审阅且授权的具体差异中使用。中断先 `rw --project STUDY overleaf recover --online` 检查远端与待处理记录，若不一致保留两侧并解决冲突，禁止盲目重试或手改验证标记。
+- 本地保存后的日常操作需再次调用 sync。持续同步仅在用户明确批准范围后启动 `rw --project STUDY overleaf watch --online --approve --actor ai:session --interval 5` 前台轮询，可 Ctrl+C 停止、可通过 `--cycles` 限定次数；不宣称安装即运行、无后台时持续同步。同步完成后使用 auto-route 捕获科研影响。
+
+### 0.4 验收和编译
+
+- `rw --project STUDY overleaf verify --online` 执行真实只读 joinProject/joinDoc（可指定 `--main`）；观察项目 ID、实际主文件及 `local_main_matches`（若本地存在）。只读状态 readable_via_ce 不等于写入通过；`overleaf status` 仅报告本机配置及最近验收记录，不主动联网。
+- 明确同意临时远端写入与删除后，`rw --project STUDY overleaf verify --online --roundtrip --approve` 验证随机 1×1 PNG 的上传读回、覆盖后再次读回及清理，并确认本地原稿哈希未变。要求实际报告 metadata_matched、local_to_remote、remote_to_local、cleanup 与 unchanged manuscript hashes；报告保存在 `.rw/overleaf/ce-verify.json`。该探针的 remote_to_local 指远端字节被本地客户端读回，不独立验证另一合作者编辑传播到磁盘；正式协作应另在授权范围内实际观察正文双向变更。临时文件可能留在项目历史，失败时保留报告与测试文件名，核对后再申请清理。
+- 同步后 `rw --project STUDY overleaf compile --online` 触发远端编译（必要时 `--root-doc` 指定实际主文件）。按真实回执检查 compiled、pdf、log；下载的 PDF/日志保存在 `.rw/builds/<build_id>/`，日志可能未返回。检查 PDF 与日志再报告编译情况。
+- 登录、只读、同步、探针与编译分别记录目标、时间、范围、结果和阻塞原因。本次文档更新未执行真实服务器联调或完整软件回归；源码包含模拟协议/传输测试，不能替代实际自建服务器的 HTTPS、Socket.IO、权限及编译验收。
 
 ---
 
-## 1. 先复用实际环境（Overleaf-Workshop 通道）
+## 1. 先复用实际环境（Overleaf-Workshop 兼容通道）
 
-读取当前明确选择的项目与已有非秘密连接配置。已有工作目录和绑定优先，不扫描用户家目录，不自动迁移旧论文。缺少目标时只问论文链接或名称；从常规 HTTPS `/project/ID` 链接解析服务器和 ID，拒绝带密码、查询 token 和共享密钥的链接。默认自建服务器为 https://nankaivisoverleaf.asia/。
+以下第 1–5 节仅用于用户明确保留或选择 Workshop 的情况；新 CE 项目执行第 0 节。读取当前明确选择的项目与已有非秘密连接配置。已有工作目录和绑定优先，不扫描用户家目录，不自动迁移旧论文。缺少目标时只问论文链接或名称；从常规 HTTPS `/project/ID` 链接解析服务器和 ID，拒绝带密码、查询 token 和共享密钥的链接。默认自建服务器为 https://nankaivisoverleaf.asia/。
 
 检查宿主实际是否支持本地文件、进程、编辑器命令、插件窗口及 URL handler。纯网页聊天和只连接远程 SSH 的进程不能控制本机 VS Code。必要时让用户只打开正确的本地窗口／完成授权，不让用户输入命令来弥补工具缺口。
 
@@ -71,7 +85,7 @@ python aiworkspace/scripts/overleaf_agent.py --project /实际论文根目录 st
 
 ## 5. 与现有框架的边界
 
-本次不迁移旧的 workspace/ 路径，也不更改研究 Schema、稿件或 Git 连接算法。辅助请求与检查报告暂存当前已忽略的 `.rw/overleaf-agent/`，将来只由正式迁移器移入单工作区运行区。不要用“配置已应用”或旧生成说明替代这个验收流程，也不要修改 `live_connection_verified` 的布尔字段来伪造验证。
+Workshop 验收助手的历史发布不迁移旧的 workspace/ 路径，也不更改研究 Schema、稿件或 Git 连接算法。辅助请求与检查报告暂存当前已忽略的 `.rw/overleaf-agent/`，将来只由正式迁移器移入单工作区运行区。不要用“配置已应用”或旧生成说明替代这个验收流程，也不要修改 `live_connection_verified` 的布尔字段来伪造验证。
 
 纯 wheel 安装不一定包含 integrations 与 scripts；应从同版本源码 checkout 构建助手，或明确报告缺少配套材料，不搜索并安装来历不明的扩展。后续通过 Git 增量更新源码、升级已登记的 Skill；本地助手更新需要重新构建并经授权安装，不自动覆盖用户插件设置。
 

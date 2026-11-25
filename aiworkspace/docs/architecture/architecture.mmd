@@ -19,9 +19,9 @@ flowchart LR
 
     subgraph REMOTE["Overleaf 协作"]
         direction TB
-        WORKSHOP["Overleaf-Workshop<br/>本地 Replica 与同步"]
+        CE["内置 Overleaf CE<br/>HTTPS / OT 同步"]
         OVERLEAF["指定的 Overleaf 项目<br/>支持自建服务器"]
-        WORKSHOP <-->|"已授权连接"| OVERLEAF
+        CE <-->|"已授权连接"| OVERLEAF
     end
 
     ENTRY -->|"调用"| AIW

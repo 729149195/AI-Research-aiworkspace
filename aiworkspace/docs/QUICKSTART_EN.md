@@ -71,7 +71,7 @@ Rollback protects subsequent local edits and restores managed assets only. Engin
 
 ## Verification and limitations
 
-Run `python aiworkspace/scripts/run_tests.py`, `python aiworkspace/scripts/smoke_root_update.py`, and `python aiworkspace/scripts/check_docs.py`. Read [Delivery](../DELIVERY.md) for actual results and limitations. Native sync is Markdown-only; full Word/LaTeX/Overleaf round trips, authenticated approvals and real-time collaborative storage are not implemented. External API mode is opt-in and was tested with mocks, not a paid live provider. Machine integrity checks do not certify scientific validity or publication readiness.
+Run `python aiworkspace/scripts/run_tests.py`, `python aiworkspace/scripts/smoke_root_update.py`, and `python aiworkspace/scripts/check_docs.py`. Read [Delivery](../DELIVERY.md) for actual results and limitations. Native research-state synchronization has Markdown and adopted-LaTeX constraints; arbitrary Word/LaTeX round trips and authenticated human approvals are not supported. The current built-in Overleaf CE file transport supports independent connection, remote project creation, three-way file synchronization, remote compilation and scoped connection verification. No VS Code, Cursor, Overleaf-Workshop or Git Bridge is required for a new CE connection. See [Overleaf setup](OVERLEAF.md); actual self-hosted authentication, text collaboration and long-term reliability require live validation. External API mode is opt-in and was tested with mocks, not a paid live provider. Machine integrity checks do not certify scientific validity or publication readiness.
 
 See [Architecture](ARCHITECTURE.md), [Schema](SCHEMA.md), [Skills](SKILLS.md), [Contributing](../CONTRIBUTING.md) and [Security](../SECURITY.md).
 

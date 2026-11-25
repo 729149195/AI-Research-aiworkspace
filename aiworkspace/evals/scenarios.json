@@ -194,9 +194,9 @@
       "skill": "overleaf-sync",
       "prompt": "在自建 Overleaf 上自动同步我的论文，服务器版本未知，本地和网页同时改了 main.tex。",
       "expected": [
-        "区分 Workshop 与需开启的 Git Bridge",
-        "本机登录不收集聊天密码或 cookie",
-        "仅上传选定稿件目录",
+        "新 CE 连接默认使用内置传输，无需 VS Code、Cursor、Workshop 或 Git Bridge；保留已有绑定且不自动迁移",
+        "本机安全登录，不收集聊天密码或 cookie；只经授权安装可选依赖",
+        "核对真实远端项目，首次拉取先预览；仅上传选定稿件目录",
         "保留双向冲突而不覆盖",
         "真实未登录时不报告联调成功"
       ],

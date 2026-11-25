@@ -15,15 +15,15 @@ AI Research Workspace 将研究材料、论证关系、方法运行、图表来�
 <a id="architecture"></a>
 ## 整体架构
 
-**唯一的 `aiworkspace/` 保存八类研究状态；与它并列的 `manuscript/` 保存正式稿件。** Agent 是自然语言入口，Skills 负责科研过程，Overleaf-Workshop 负责稿件文件与远端协作。
+**唯一的 `aiworkspace/` 保存八类研究状态；与它并列的 `manuscript/` 保存正式稿件。** Agent 是自然语言入口，Skills 负责科研过程，AI Workspace 内置 Overleaf CE 直连引擎负责稿件文件与远端协作。自建 Community Edition 可独立连接，无需 VS Code、Cursor 或 Overleaf-Workshop。
 
 > **实现状态：** 下图展示已确定的单工作区目标架构。当前 `0.6.1` 引擎仍使用旧的 `workspace/` 路径；源码路径迁移尚未完成。`aiworkspace/rules/` 已有可阅读、可填写的基础／团队／项目规则，其自动引擎接入尚待完成。不要依据图示移动论文或重建状态。旧项目应保持原位，详见文末[兼容状态](#compatibility)。
 
-![AI Workspace 目标架构：Agent 调用唯一工作区，八类研究状态与稿件双向核对，Overleaf-Workshop 只同步稿件](aiworkspace/docs/architecture/architecture.svg)
+![AI Workspace 目标架构：Agent 调用唯一工作区，八类研究状态与稿件双向核对，内置 CE 直连引擎只同步选定稿件](aiworkspace/docs/architecture/architecture.svg)
 
 [放大总架构图](aiworkspace/docs/architecture/architecture.svg) · [可编辑 Mermaid 源码](aiworkspace/docs/architecture/architecture.mmd)
 
-**两种同步各有职责。** Manuscript Sync 核对研究含义与稿件表达；Overleaf-Workshop 同步本地稿件文件与指定远端。文件同步后，仍需检查相关论点、证据、数字和结论。
+**两种同步各有职责。** Manuscript Sync 核对研究含义与稿件表达；内置 CE 引擎同步本地选定稿件子目录与指定远端。文件同步后，仍需检查相关论点、证据、数字和结论。
 
 <a id="layout"></a>
 ## 目录与职责
@@ -70,7 +70,7 @@ project-root/
 
 **根 README 解释整个项目，`aiworkspace/README.md` 引导当前论文的工作。** `.system/` 是内部配套，不构成另一个工作区。它的通用引擎与本论文状态虽然位于同一目录下，更新权限仍需分别管理。
 
-`manuscript/` 沿用原稿的文件名、章节、图像、参考文献和相对路径。原样导入协议要求不插入追踪标记、不合并章节、不用空 Markdown 替代已有论文；后续授权编辑直接修改这份工作副本。插件维护的 `.overleaf/` 是本地连接元数据，不属于投稿内容。该导入协议与当前旧引擎的差异见兼容表。
+`manuscript/` 沿用原稿的文件名、章节、图像、参考文献和相对路径。原样导入协议要求不插入追踪标记、不合并章节、不用空 Markdown 替代已有论文；后续授权编辑直接修改这份工作副本。当前内置 CE 连接使用本机 `.rw/` 中的配置、会话与同步基线；旧 Workshop 插件的 `.overleaf/` 仅为兼容路径的本地元数据。两者均不属于投稿内容。该导入协议与当前旧引擎的差异见兼容表。
 
 <a id="research-areas"></a>
 ## 八类研究状态：补什么、放哪里
@@ -98,7 +98,7 @@ Idea Evaluation 保留用户提供模板的原有页序与问题，包括方法�
 
 ## 基础规则与团队内部要求
 
-**团队共同要求写在 [aiworkspace/rules/team.md](aiworkspace/rules/team.md)；只适用于本篇的要求写在 [project.md](aiworkspace/rules/project.md)。[base.md](aiworkspace/rules/base.md) 已有十二项默认科研约定**，覆盖来源与证据、整篇论证、可复现方法、学术语言、图表、隐私、Overleaf-Workshop、独立审查与更新保护。team.md 同时提供默认协作起点和待补充栏目，无需先填满才能开始。
+**团队共同要求写在 [aiworkspace/rules/team.md](aiworkspace/rules/team.md)；只适用于本篇的要求写在 [project.md](aiworkspace/rules/project.md)。[base.md](aiworkspace/rules/base.md) 已有十二项默认科研约定**，覆盖来源与证据、整篇论证、可复现方法、学术语言、图表、隐私、Overleaf CE 直连与原稿保护、独立审查与更新保护。team.md 同时提供默认协作起点和待补充栏目，无需先填满才能开始。
 
 > 请读取 aiworkspace/rules 的基础、团队和本篇规则。把导师这条要求补到团队规则，注明来源和适用范围，再检查这篇论文需要调整哪些地方。
 
@@ -133,7 +133,7 @@ Idea Evaluation 保留用户提供模板的原有页序与问题，包括方法�
 | **3** | 找文献／整理证据：原始来源、引用、支持与反证 |
 | **4** | 讨论想法／检查逻辑：Idea Evaluation、贡献与方案比较 |
 | **5** | 方法、数据与科研绘图：数据图、方法图、编码解释与交互叙事 |
-| **6** | 连接／同步 Overleaf：通过 Overleaf-Workshop 接入指定项目 |
+| **6** | 连接／同步 Overleaf：内置 CE 直连，可新建远端项目 |
 | **7** | 转投期刊／会议：目标规范、模板迁移与原稿保护 |
 | **8** | 审查／准备投稿：问题检查、逐条回复与质量门 |
 | **9** | 查看进度／待办：接续真实未完成的工作 |
@@ -156,15 +156,17 @@ Agent 复用已知信息，整理 Idea Evaluation 和必要规则。目标会议
 
 这是统一的导入目标：在当前根目录整理 `manuscript/`，只读保留原 ZIP，并记录原始文件。多个主文件、多个候选稿件或已有内容冲突时才询问。导入后读取真正的摘要、方法、结果和引用，整理待确认的研究状态；遇到特殊宏或缺失文件，保留原稿并指出适配事项。**同根导入和原样镜像仍需完成与当前引擎的整合，见兼容表。**
 
-### 接续指定的 Overleaf 项目
+### 连接／新建自建 Overleaf 项目（默认内置 CE 直连）
 
-> 这是项目链接。用 Overleaf-Workshop 连接，复用已有登录，把稿件接到当前项目，继续写。
+> 这是我的 Overleaf 项目链接：[论文项目链接]。使用 AI Workspace 内置 CE 直连，保留原稿，帮我完成登录、首次拉取、同步验收和远程编译。需要我确认时再问我。
 
-用户级远端流程统一使用 **Overleaf-Workshop**，复用插件、服务器设置和本机登录。自建地址可使用 `https://nankaivisoverleaf.asia/`。插件选择指定项目并建立／复用 Local Replica，Agent 核对主机、项目身份、目录和真实文件。
+> 我还没有远端项目。请在实验室 Overleaf 创建一篇名为“我的论文”的空白项目，连接到独立的本地论文工作区。
 
-**不使用 computer use 操作网页下载，不在插件失败后静默改用网页抓取、认证 HTTP 下载或 Git Bridge。** 用户主动提供的 ZIP 保留为独立离线入口。密码、token、cookie 只在本机安全登录界面处理。
+**不需要安装 VS Code、Cursor、Overleaf-Workshop 或 Git Bridge。** 打开具有本地文件和命令执行能力的 Agent（例如 Codex 独立客户端或 Claude Code），按 [自建 Overleaf 逐步配置教程](aiworkspace/docs/OVERLEAF.md) 操作。自建默认服务器为 `https://nankaivisoverleaf.asia/`；使用其他实验室时以实际项目 HTTPS 链接为准。Agent 准备 Python 3.11+ 和独立虚拟环境中的 `overleaf-ce` 可选依赖，处理项目 ID、登录及配置，用户只负责安全登录和必要授权。大模型由所选 Agent 提供，不在 Overleaf 服务器安装。
 
-按[插件上游说明](https://github.com/overleaf-workshop/Overleaf-Workshop/blob/master/docs/wiki.md)和实际版本检查副本路径；不覆盖唯一原稿，不伪造插件元数据，不同时运行两个同步引擎。首次用双方可核对的小改动验证真实收发。编辑器关闭或网络异常时不承诺实时同步；缺少编辑器控制能力时明确停在待接入状态。
+内置传输通过 HTTPS 与 Socket.IO/OT 读取和更新稿件，支持首次拉取、双向三方合并、冲突暂停、远端新建、远程 LaTeX 编译及一次性连接验收。已有远端稿件优先拉取到空的 `manuscript/<subdir>`，保留目录、图片及引用。先预览后确认；上传、删除、双向冲突单独授权。只同步选定稿件的受支持文件，研究笔记和 `.rw/` 不上传。实际 CE 版本、权限和网络需联调。
+
+保存本地稿件后可要求 Agent 同步并检查网页版与编译结果。默认按次执行；经授权可启动前台轮询，停止、关闭进程或断网后不承诺持续同步。已有 Workshop／Git Bridge 绑定继续保留，可按 [兼容说明](aiworkspace/docs/OVERLEAF.md) 显式选择；迁移前备份并核对差异，同一稿件只运行一个同步引擎。不要让 Agent 读取私人浏览器凭据库、抓取网页或静默切换通道。
 
 ### 日常改稿、分析与绘图
 
@@ -223,17 +225,17 @@ Agent 先读当前状态，再处理授权范围内的工作，最后检查相�
 | 自然语言使用与内部操作 | [入门](aiworkspace/docs/START_WITH_AGENT.md) · [Codex](aiworkspace/docs/CODEX.md) · [Agent 操作手册](aiworkspace/docs/AGENT_PLAYBOOK.md) |
 | 研究状态与自动沉淀 | [现有数据结构](aiworkspace/docs/SCHEMA.md) · [Auto-route](aiworkspace/docs/AUTO_ROUTE.md) · [Skills](aiworkspace/docs/SKILLS.md) |
 | 学术图与写作 | [数据图／写作](aiworkspace/docs/RESEARCH_STUDIO.md) · [VIS/HCI 图版](aiworkspace/docs/VIS_HCI_FIGURES.md) · [节点图](aiworkspace/docs/RESEARCH_DIAGRAMS.md) |
-| 投稿与协作 | [模板与年度规则](aiworkspace/docs/PUBLICATION.md) · [转投](aiworkspace/docs/RESUBMISSION.md) · [现有 Overleaf 接口](aiworkspace/docs/OVERLEAF.md) |
+| 投稿与协作 | [模板与年度规则](aiworkspace/docs/PUBLICATION.md) · [转投](aiworkspace/docs/RESUBMISSION.md) · [内置 CE 直连教程](aiworkspace/docs/OVERLEAF.md) |
 | 开发、安全与许可 | [贡献指南](aiworkspace/CONTRIBUTING.md) · [安全说明](aiworkspace/SECURITY.md) · [MIT 许可及例外](aiworkspace/LICENSE) |
 
-现有框架包括 15 个 Skills。核心 Python 引擎与绘图、SVG 导出、Graphviz、TeX 和编辑器插件分别准备，按实际任务授权安装。复杂 LaTeX、截图密集图版和专业科学插画可能需要额外工具。定时文献搜索需要真实调度能力，未配置时不会运行。软件测试不认证研究有效性、真实模型写作质量或投稿合规。
+现有框架包括 15 个 Skills。核心 Python 引擎与绘图、SVG 导出、Graphviz、TeX、内置 CE 的 websocket-client 可选依赖分别准备，按实际任务授权安装；编辑器插件仅供已有 Workshop 绑定选择。复杂 LaTeX、截图密集图版和专业科学插画可能需要额外工具。定时文献搜索需要真实调度能力，未配置时不会运行。软件测试不认证研究有效性、真实模型写作质量或投稿合规。
 
 建议或问题报告应说明任务、脱敏输入、预期结果及环境；不要上传未发表论文、个人数据或账号凭据。原创代码、Skills 和文档采用仓库 MIT 许可；用户提供的 Idea Evaluation 原文及其近似改编工作表不在该授权范围内，第三方模板和素材保留各自权利。
 
 <a id="compatibility"></a>
 ## 兼容状态与迁移要求
 
-本次规则内容与入口基于 `0d47c6b9d1d962197c38ae6ed3e4b6c516b551c1` 核对，日期 **2026-10-10**。引擎仍为 `0.6.1`，研究 Schema 未改变；本轮仅发布规则文档、Git 忽略与首页导航。
+规则文档与单工作区迁移状态沿用 2026-10-10 的记录；2026-11-24 的 `6f76f48`、`e357aad` 增加内置 CE 传输和远端项目创建。当前包版本仍为 `0.6.1`，研究 Schema 未改变；2026-11-25 的说明更新以这些已合入 main 的源码为准，不改变引擎版本或目录迁移状态。
 
 | 范围 | 当前状态 | 必须保留的边界 |
 |---|---|---|
@@ -241,8 +243,8 @@ Agent 先读当前状态，再处理授权范围内的工作，最后检查相�
 | 基础／团队／项目规则 | `aiworkspace/rules/` 已有默认内容与填写入口；自动加载／失效／路由仍待接入 | 按请求读取并实际复核；旧规则不删除，内部内容不公开 |
 | 唯一 `aiworkspace/` 与 `.system/` 结构 | **目标已确定，代码迁移待完成**；现有引擎仍读取 `workspace/state.json` | 不手工改名、不重建旧论文，不生成两套并行研究状态 |
 | 同根 ZIP、原样镜像、八类填写导航 | 前序独立补丁有实现，尚未整合到当前 `main` 与上述目标结构 | 检查实际安装版本，不无条件叠加补丁 |
-| Workshop-only 接入 | 已发布自然语言引导与本地验收助手；旧底层仍含 Git 通道及目录假设 | 用户流程使用插件，禁止静默回退；真实认证与收发需在用户环境验收 |
-| 登录、真实双向通信、模型效果 | 本次未联调 | 单独在用户环境验收，不能凭图示宣称已完成 |
+| 内置 Overleaf CE 直连 | CLI 默认 `mode=ce`；内置认证、远端创建、双向同步、编译、验收已实现，配有模拟协议/传输测试 | 不需编辑器插件；已有 Workshop/Git 绑定保留；实际服务器认证与收发需单独验收 |
+| 登录、真实双向通信、模型效果 | 本次文档更新未联调 | 按用户环境实际验收，文件探针、正文同步、远程编译分别记录 |
 
 迁移要完整保留稿件、八类材料、已填写模板、任务、审批与同步基线，并核对旧新路径和回滚。上述链接中的旧命令需匹配实际版本使用。
 

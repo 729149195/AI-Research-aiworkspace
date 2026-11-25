@@ -4,7 +4,7 @@
 
 | 文件名 | 图的职责 |
 |---|---|
-| `architecture` | 唯一 aiworkspace、八类研究内容、稿件与 Overleaf-Workshop 的目标关系 |
+| `architecture` | 唯一 aiworkspace、八类研究内容、稿件与内置 Overleaf CE 直连的目标关系 |
 | `workflow` | 改前检查、执行、捕获、影响分析、审查与交接 |
 | `maintenance` | 可更新工具与受保护论文数据的边界 |
 
@@ -25,4 +25,4 @@
 - [仓库内图片与相对链接](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
 - [Mermaid 图表支持](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams)
 
-本次发布前实际完成三图本地 Mermaid 解析和导出、以 img 嵌入的浏览器检查以及 390px 页面宽度检查。未执行真实 GitHub 浏览器会话或完整科研回归；不据此声称研究目录迁移、Overleaf 认证或云端 CI 已完成。
+2026-10-08 的历史版本完成三图本地 Mermaid 解析和导出、以 img 嵌入的浏览器检查以及 390px 页面宽度检查。2026-11-25 的 CE 文档更新同步替换 Mermaid 与现有 SVG 的短文本标签，保留几何结构并重算哈希；本轮未重新运行 Mermaid 导出或浏览器渲染检查。未执行真实 Overleaf 联调或完整科研回归。

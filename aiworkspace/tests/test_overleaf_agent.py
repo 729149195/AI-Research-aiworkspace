@@ -105,9 +105,13 @@ class OverleafAgentCase(unittest.TestCase):
         for forbidden in ['```bash','```python','pip install','rw overleaf configure','RW_OVERLEAF_TOKEN']:
             self.assertNotIn(forbidden,text)
         self.assertIn('自然语言',text);self.assertIn('Overleaf-Workshop',text)
+        self.assertIn('新项目默认使用 AI Workspace 内置', text)
+        self.assertIn('无需 VS Code、Cursor、Overleaf-Workshop 或 Git Bridge', text)
+        self.assertIn('远端新建项目', text)
+        self.assertNotIn('复用已有的 Overleaf-Workshop 和登录', text)
     def test_agent_policy_requires_real_results(self):
         text=(PACKAGE/'docs/OVERLEAF_AGENT.md').read_text()
-        for required in ['remote_to_local','local_to_remote','cleanup','computer use','缓存']:
+        for required in ['remote_to_local','local_to_remote','cleanup','computer use','缓存','mode=ce','overleaf create','overleaf watch','overleaf compile']:
             self.assertIn(required,text)
 
 if __name__=='__main__':unittest.main()
